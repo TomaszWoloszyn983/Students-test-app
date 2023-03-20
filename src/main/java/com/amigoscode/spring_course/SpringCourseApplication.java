@@ -15,7 +15,6 @@ public class SpringCourseApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringCourseApplication.class, args);
 
-
 //		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("context.xml");
 //		DataSource ds = (DataSource)applicationContext.getBean("dataSource");
 //		JdbcTemplate jt = new JdbcTemplate(ds);
