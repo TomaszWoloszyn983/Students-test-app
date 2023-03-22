@@ -1,6 +1,8 @@
 package com.amigoscode.spring_course;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,8 +20,18 @@ public class StudentController {
     }
 
     @GetMapping
-    public List<Student> getStudents(){
+    public List<Student> getStudent(){
         return studentService.getStudents();
+    }
+
+    @RequestMapping("/allStudents")
+    @GetMapping
+    public String allStudents(Model model){
+        var template = "src/main/resources/templates/studentsPage.html";
+//        List<Student> students =  studentService.getStudents();
+//        model.addAttribute("students", students);
+        model.addAttribute("stud", "cos tamcotr asdfasdf");
+        return "studentsPage";
     }
 
     @PostMapping

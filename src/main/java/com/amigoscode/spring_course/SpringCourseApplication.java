@@ -15,6 +15,11 @@ public class SpringCourseApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringCourseApplication.class, args);
 
+
+			/*
+			The code below create connection to my database using JDBC.
+			Currently the application uses Hibernate to connect to the database.
+			*/
 //		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("context.xml");
 //		DataSource ds = (DataSource)applicationContext.getBean("dataSource");
 //		JdbcTemplate jt = new JdbcTemplate(ds);
