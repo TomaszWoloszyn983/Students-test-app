@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
-@RestController
+@Controller
 @RequestMapping(path = "api/v1/student")
 public class StudentController {
 
@@ -27,10 +27,11 @@ public class StudentController {
     @RequestMapping("/allStudents")
     @GetMapping
     public String allStudents(Model model){
-        var template = "src/main/resources/templates/studentsPage.html";
-//        List<Student> students =  studentService.getStudents();
-//        model.addAttribute("students", students);
-        model.addAttribute("stud", "cos tamcotr asdfasdf");
+        List<Student> students =  studentService.getStudents();
+        model.addAttribute("students", students);
+        for (Student name: students){
+            System.out.println("Student name: "+name.getName());
+        }
         return "studentsPage";
     }
 
