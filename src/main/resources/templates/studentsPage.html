@@ -11,22 +11,41 @@
     </header>
     <div>
         <!--/*@thymesVar id="student" type="com.amigoscode.spring_course.Student"*/-->
-        <form action="#" method="post" th:action="@{/addStudents}" th:object="${student}" >
+<!--        <form action="#" method="post" th:action="@{/addStudents}" th:object="${student}" >-->
+        <form th:action="register" th:method="post" th:object="${studentForm}" >
             <fieldset>
                 <legend>Add New Student</legend>
-                <label>Name
-<!--                    <input type="text" th:field="*{name}" />-->
-                    <input type="text" th:field="${student.name}" />
+                <label for="name-box">Name
+                    <input type="text" id="name-box" th:field="*{name}" name="name">
                 </label>
             </fieldset>
+            <fieldset>
+                <label>Email
+                    <input type="text" th:field="*{email}">
+                </label>
+            </fieldset>
+            <fieldset>
+                <label for="date-box">Date Of Birth
+                    <input type="date" id="date-box" name="date"
+                           th:date="${#temporals.format(localDate, 'yyyy-MM-dd')}"
+                           th:field="*{dob}">
+                </label>
+            </fieldset>
+            <button type="submit">Submit</button>
         </form>
     </div>
+
+    <!--  Message  -->
+    <div>
+        <h3 th:test="${message}">message</h3>
+    </div>
+
     <section>
         <tr th:each="student: ${students}">
             <td th:text="${student.getId()}" />
             <td th:text="${student.getName()}" />
             <td th:text="${student.getEmail()}" />
-            <td th:text="${student.getAge()}" />
+            <td th:text="${student.getDob()}" />
         </tr>
     </section>
 </body>

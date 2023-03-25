@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 
@@ -24,20 +26,49 @@ public class StudentController {
         return studentService.getStudents();
     }
 
+//    @RequestMapping("/allStudents")
+//    @GetMapping
+//    public String allStudents(Model model){
+//        List<Student> students =  studentService.getStudents();
+//        model.addAttribute("students", students);
+//        for (Student name: students){
+//            System.out.println("Student name: "+name.getName());
+//        }
+//        return "studentsPage";
+//    }
+
     @RequestMapping("/allStudents")
     @GetMapping
     public String allStudents(Model model){
         List<Student> students =  studentService.getStudents();
         model.addAttribute("students", students);
+        model.addAttribute("studentForm", new Student());
         for (Student name: students){
             System.out.println("Student name: "+name.getName());
         }
         return "studentsPage";
     }
 
-    @PostMapping
-    public void registerNewStudent(@RequestBody Student student){
-        studentService.addNewStudent(student);
+//    @PostMapping
+//    public void registerNewStudent(@RequestBody Student student){
+//        studentService.addNewStudent(student);
+//    }
+
+    @PostMapping("/register")
+    public String registerNewStudent(@ModelAttribute Student student, Model model) throws IllegalArgumentException{
+        try{
+            System.out.println("Requested student: "+student);
+            System.out.println("Requested students dob is: "+student.getDob());
+            model.addAttribute("studentForm", new Student());
+            model.addAttribute("standardDate", new Date());
+            studentService.addNewStudent(student);
+            System.out.println("New student "+student+" added!");
+            model.addAttribute("message", "New Student successfully added!");
+            return "studentsPage";
+        }catch(IllegalArgumentException e){
+            System.out.println("Parse attempt failed for value");
+        }
+        return "StudentPage";
     }
 
     @DeleteMapping(path = "{studentId}")

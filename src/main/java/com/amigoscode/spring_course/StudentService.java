@@ -18,10 +18,10 @@ public class StudentService {
 
     public List<Student> getStudents(){
         List<Student> list = studentRepository.findAll();
-        System.out.println("\n\n List of all students:");
-        for(Student student : list){
-            System.out.println(student);
-        }
+//        System.out.println("\n\n List of all students:");
+//        for(Student student : list){
+//            System.out.println(student);
+//        }
         return studentRepository.findAll();
     }
 
