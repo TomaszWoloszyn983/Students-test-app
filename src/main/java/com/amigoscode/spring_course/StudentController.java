@@ -57,8 +57,6 @@ public class StudentController {
     @PostMapping("/register")
     public String registerNewStudent(@ModelAttribute Student student, Model model) throws IllegalArgumentException{
         try{
-            System.out.println("Requested student: "+student);
-            System.out.println("Requested students dob is: "+student.getDob());
             model.addAttribute("studentForm", new Student());
             model.addAttribute("standardDate", new Date());
             studentService.addNewStudent(student);

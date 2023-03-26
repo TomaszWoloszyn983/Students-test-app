@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
+
 import javax.sql.DataSource;
 
 
@@ -14,7 +15,6 @@ public class SpringCourseApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringCourseApplication.class, args);
-
 
 			/*
 			The code below create connection to my database using JDBC.

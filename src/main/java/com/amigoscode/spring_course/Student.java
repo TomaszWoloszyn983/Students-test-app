@@ -1,6 +1,10 @@
 package com.amigoscode.spring_course;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
+import org.thymeleaf.spring5.ISpringTemplateEngine;
+import org.thymeleaf.spring5.SpringTemplateEngine;
+import org.thymeleaf.templateresolver.ITemplateResolver;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -116,7 +120,7 @@ class Student implements Serializable {
     }
 
     public void setDob(LocalDate dob) {
-        this.dob = Student.this.dob;
+        this.dob = dob;
     }
 
     public LocalDate setDob(String dob) {
@@ -152,5 +156,13 @@ class Student implements Serializable {
                 ", dob=" + dob +
                 ", age=" + getAge() +
                 '}';
+    }
+
+    private ISpringTemplateEngine templateEngine(ITemplateResolver templateResolver) {
+        SpringTemplateEngine engine = new SpringTemplateEngine();
+        engine.addDialect(new Java8TimeDialect());
+        engine.setTemplateResolver(templateResolver);
+        System.out.println("\nTemplate Engine Method in action!!!");
+        return engine;
     }
 }
