@@ -11,7 +11,7 @@ import java.util.List;
 
 
 @Controller
-@RequestMapping(path = "api/v1/student")
+@RequestMapping(path = "/student")
 public class StudentController {
 
     private final StudentService studentService;
@@ -43,9 +43,6 @@ public class StudentController {
         List<Student> students =  studentService.getStudents();
         model.addAttribute("students", students);
         model.addAttribute("studentForm", new Student());
-        for (Student name: students){
-            System.out.println("Student name: "+name.getName());
-        }
         return "studentsPage";
     }
 
@@ -60,13 +57,16 @@ public class StudentController {
             model.addAttribute("studentForm", new Student());
             model.addAttribute("standardDate", new Date());
             studentService.addNewStudent(student);
-            System.out.println("New student "+student+" added!");
-            model.addAttribute("message", "New Student successfully added!");
-            return "studentsPage";
+
+            String message = "Student "+ student +" successfully added.";
+            System.out.println(message);
+            model.addAttribute("message", message);
+
+            return "register";
         }catch(IllegalArgumentException e){
             System.out.println("Parse attempt failed for value");
         }
-        return "StudentPage";
+        return "register";
     }
 
     @DeleteMapping(path = "{studentId}")

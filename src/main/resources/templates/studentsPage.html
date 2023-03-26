@@ -31,7 +31,7 @@
                            th:field="*{dob}">
                 </label>
             </fieldset>
-            <button type="submit">Submit</button>
+            <button class="btn btn-secondary mx-auto" type="submit">Submit</button>
         </form>
     </div>
 
@@ -40,13 +40,20 @@
         <h3 th:test="${message}">message</h3>
     </div>
 
-    <section>
-        <tr th:each="student: ${students}">
-            <td th:text="${student.getId()}" />
-            <td th:text="${student.getName()}" />
-            <td th:text="${student.getEmail()}" />
-            <td th:text="${student.getDob()}" />
-        </tr>
-    </section>
+    <table>
+        <thead>
+            <tr th:if="${students.empty}">
+                <td colspan="2" >No Students in the database</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="student: ${students}">
+                <td><span th:text="${student.getId()}"> Id </span></td>
+                <td><span th:text="${student.getName()}"> Name </span></td>
+                <td><span th:text="${student.getEmail()}"> Email </span></td>
+                <td><span th:text="${student.getAge()}"> Age </span></td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>
