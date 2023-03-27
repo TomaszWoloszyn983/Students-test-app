@@ -33,7 +33,9 @@
                                th:field="*{dob}">
                     </label>
                 </fieldset>
-                <button class="btn btn-secondary mx-auto" type="submit">Submit</button>
+                <button class="btn btn-secondary mx-2 mt-3" type="submit">Submit</button>
+                <button class="btn btn-secondary mx-2 mt-3" type="reset"
+                        name="reset" th:value="Reset">Reset</button>
             </form>
         </div>
     </div>
@@ -43,31 +45,38 @@
         <h3 th:test="${message}">message</h3>
     </div>
 
-    <table class="row p-2 border border-dark my-3">
+    <table class="row p-2 border border-dark my-3 table table-stripe">
         <div class="col-12">
-            <thead class="row text-center">
-                <tr class="" th:if="${students.empty}">
+            <thead class="text-center">
+                <tr class="row" th:if="${students.empty}">
                     <td class="text-center" colspan="2" >No Students in the database</td>
+                </tr>
+                <tr class="row">
+                    <th scope="col" class="col-1 col-md-1">#</th>
+                    <th scope="col" class="col-5 col-md-3">Name</th>
+                    <th scope="col" class="col-5 col-md-3">Email</th>
+                    <th scope="col" class="col-1 col-md-1">Age</th>
+                    <th scope="col" class="d-none d-md-inline col-md-4">Functions</th>
                 </tr>
             </thead>
             <tbody>
                 <tr class="row border-bottom" th:each="student: ${students}">
-                    <td class="col-1 col-md-1 px-auto">
+                    <td class="col-1 col-md-1">
                         <span th:text="${student.getId()}"> Id </span>
                     </td>
-                    <td class="col-5 col-md-3 px-auto">
+                    <td class="col-5 col-md-3">
                         <span th:text="${student.getName()}"> Name </span>
                     </td>
-                    <td class="col-5 col-md-3 px-auto">
+                    <td class="col-5 col-md-3">
                         <span th:text="${student.getEmail()}"> Email </span>
                     </td>
-                    <td class="col-1 col-md-1 px-auto">
+                    <td class="col-1 col-md-1">
                         <span th:text="${student.getAge()}"> Age </span>
                     </td>
-                    <td class="col-12 col-md-4 px-auto">
+                    <td class="col-12 col-md-4">
                         <div class="row mx-3">
-                            <a class="col btn btn-primary px-auto mx-1" href="">Edit</a>
-                            <a class="col btn btn-danger px-auto mx-1" href="">Delete</a>
+                            <a class="col btn btn-primary btn-sm px-auto mx-1" href="">Edit</a>
+                            <a class="col btn btn-danger btn-sm px-auto mx-1" href="">Delete</a>
                         </div>
                     </td>
                 </tr>
