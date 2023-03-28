@@ -71,18 +71,22 @@ public class StudentController {
 
     @GetMapping("/delete/{studentId}")
     public String deleteStudent(@PathVariable("studentId") Long studentId){
-        System.out.println("Controller Deleting student ");
         this.studentService.deleteStudent(studentId);
-        return "delete";
+        return "redirect:/student/allStudents";
     }
 
-    @PutMapping(path = "{studentId}")
-    public void updateStudent(
+    @GetMapping(path = "/updateStudent/{studentId}")
+    public String updateStudent(
+        @ModelAttribute Student student,
         @PathVariable("studentId") Long studentId,
-        @RequestParam(required = false) String name,
-        @RequestParam(required = false) String email
-    ){
-        studentService.updateStudent(studentId, name, email);
+//        @RequestParam(required = false) String name,
+//        @RequestParam(required = false) String email
+        Model model){
+            model.addAttribute("studentForm", new Student());
+            model.addAttribute("standardDate", new Date());
+            studentService.addNewStudent(student);
+            studentService.updateStudent(studentId, student.getName(), student.getEmail());
+    return "updateStudent";
     }
 
 }
