@@ -61,7 +61,6 @@ public class StudentController {
             String message = "Student "+ student +" successfully added.";
             System.out.println(message);
             model.addAttribute("message", message);
-
             return "register";
         }catch(IllegalArgumentException e){
             System.out.println("Parse attempt failed for value");
@@ -82,10 +81,14 @@ public class StudentController {
 //        @RequestParam(required = false) String name,
 //        @RequestParam(required = false) String email
         Model model){
-            model.addAttribute("studentForm", new Student());
-            model.addAttribute("standardDate", new Date());
-            studentService.addNewStudent(student);
-            studentService.updateStudent(studentId, student.getName(), student.getEmail());
+            Student studentToUpdate = studentService.findStudentById(studentId);
+            System.out.println("Update "+studentToUpdate.getName()+"!");
+            studentService.updateStudent(studentId,
+                                        studentToUpdate.getName(),
+                                        studentToUpdate.getEmail(),
+                                        studentToUpdate.getDob());
+            model.addAttribute("studentForm", studentToUpdate);
+//            model.addAttribute("standardDate", new Date());
     return "updateStudent";
     }
 

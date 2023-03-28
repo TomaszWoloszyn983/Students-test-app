@@ -3,6 +3,7 @@ package com.amigoscode.spring_course;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -54,7 +55,7 @@ public class StudentService {
     }
 
     @Transactional
-    public void updateStudent(Long studentId, String name, String email) {
+    public void updateStudent(Long studentId, String name, String email, LocalDate date) {
         Student student = studentRepository.findById(studentId)
                 .orElseThrow(() -> new IllegalStateException(
                         "Student with id "+studentId+" does not exist!"
@@ -76,5 +77,14 @@ public class StudentService {
             }
             student.setEmail(email);
         };
+        student.setDob(date);
+    }
+
+    public Student findStudentById(Long studentId){
+        Student student = studentRepository.findById(studentId)
+                .orElseThrow(() -> new IllegalStateException(
+                        "Student with id "+studentId+" does not exist!"
+                ));
+        return student;
     }
 }
