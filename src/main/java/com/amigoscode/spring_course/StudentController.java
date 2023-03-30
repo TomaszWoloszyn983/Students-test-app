@@ -68,6 +68,13 @@ public class StudentController {
         return "register";
     }
 
+    @PostMapping("/updateStudent/saveStudent")
+    public String saveStudent(@ModelAttribute("student") Student student){
+        studentService.saveStudent((student));
+        System.out.println("Save student "+student.getName());
+        return "redirect:/student/allStudents";
+    }
+
     @GetMapping("/delete/{studentId}")
     public String deleteStudent(@PathVariable("studentId") Long studentId){
         this.studentService.deleteStudent(studentId);
@@ -77,18 +84,18 @@ public class StudentController {
     @GetMapping(path = "/updateStudent/{studentId}")
     public String updateStudent(
         @ModelAttribute Student student,
-        @PathVariable("studentId") Long studentId,
-//        @RequestParam(required = false) String name,
-//        @RequestParam(required = false) String email
+        @PathVariable(value = "studentId") Long studentId,
         Model model){
+            System.out.println("Controller Student runs on student by id "+studentId+" type of "+studentId.getClass().getName());
             Student studentToUpdate = studentService.findStudentById(studentId);
-            System.out.println("Update "+studentToUpdate.getName()+"!");
+            System.out.println("Update "+studentToUpdate.getName() +" dob: "+studentToUpdate.getDob());
             studentService.updateStudent(studentId,
                                         studentToUpdate.getName(),
                                         studentToUpdate.getEmail(),
                                         studentToUpdate.getDob());
             model.addAttribute("studentForm", studentToUpdate);
 //            model.addAttribute("standardDate", new Date());
+        System.out.println("Controller Student done "+student.getName());
     return "updateStudent";
     }
 

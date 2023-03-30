@@ -19,15 +19,10 @@ public class StudentService {
 
     public List<Student> getStudents(){
         List<Student> list = studentRepository.findAll();
-//        System.out.println("\n\n List of all students:");
-//        for(Student student : list){
-//            System.out.println(student);
-//        }
         return studentRepository.findAll();
     }
 
     public void addNewStudent(Student student) {
-        getStudents();
         Optional<Student> studentOptional = studentRepository
                 .findStudentByEmail(student.getEmail());
         if (studentOptional.isPresent()){
@@ -40,10 +35,6 @@ public class StudentService {
 
     public void deleteStudent(Long studentId) {
         List<Student> list = studentRepository.findAll();
-        System.out.println("\n\n List of all students:");
-        for(Student student : list){
-            System.out.println(student);
-        }
         boolean exists = studentRepository.existsById(studentId);
         if (!exists){
             throw new IllegalStateException(
@@ -54,8 +45,13 @@ public class StudentService {
         studentRepository.deleteById(studentId);
     }
 
+    public void saveStudent(Student student){
+        this.studentRepository.save(student);
+    }
+
     @Transactional
     public void updateStudent(Long studentId, String name, String email, LocalDate date) {
+        System.out.println("Odpalamy serice update student");
         Student student = studentRepository.findById(studentId)
                 .orElseThrow(() -> new IllegalStateException(
                         "Student with id "+studentId+" does not exist!"
@@ -77,14 +73,18 @@ public class StudentService {
             }
             student.setEmail(email);
         };
+        System.out.println("Service update student done");
         student.setDob(date);
+        this.studentRepository.save(student);
     }
 
     public Student findStudentById(Long studentId){
+        System.out.println("Odpalamy service find student by id");
         Student student = studentRepository.findById(studentId)
                 .orElseThrow(() -> new IllegalStateException(
                         "Student with id "+studentId+" does not exist!"
                 ));
+        System.out.println("Student: "+studentId+" found.");
         return student;
     }
 }

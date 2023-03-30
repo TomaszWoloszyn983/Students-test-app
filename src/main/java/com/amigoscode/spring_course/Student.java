@@ -130,7 +130,6 @@ class Student implements Serializable {
     }
 
     public Integer getAge() {
-        System.out.println();
         if (this.dob == null){
             this.dob = LocalDate.now();
             System.out.println("Date of birth is null!");

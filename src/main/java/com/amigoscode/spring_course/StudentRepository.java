@@ -14,5 +14,7 @@ public interface StudentRepository
     Optional<Student> findStudentByEmail(String email);
 
     @Query("SELECT s FROM Student s WHERE s.id = ?1")
-    Optional<Student> findStudentById(Long id);
+    Optional<Student> findStudentById(Long studentId);
+
+
 }
