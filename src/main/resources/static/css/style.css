@@ -1,0 +1,13 @@
+html{
+    height: 100%;
+}
+
+.my-form-label{
+    min-width: 100px;
+    text-align: right;
+    padding: 5px, 10px, 5px, 10px;
+}
+form > input {
+    min-width: 180px;
+}
+

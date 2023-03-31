@@ -26,16 +26,6 @@ public class StudentController {
         return studentService.getStudents();
     }
 
-//    @RequestMapping("/allStudents")
-//    @GetMapping
-//    public String allStudents(Model model){
-//        List<Student> students =  studentService.getStudents();
-//        model.addAttribute("students", students);
-//        for (Student name: students){
-//            System.out.println("Student name: "+name.getName());
-//        }
-//        return "studentsPage";
-//    }
 
     @RequestMapping("/allStudents")
     @GetMapping
@@ -46,10 +36,6 @@ public class StudentController {
         return "studentsPage";
     }
 
-//    @PostMapping
-//    public void registerNewStudent(@RequestBody Student student){
-//        studentService.addNewStudent(student);
-//    }
 
     @PostMapping("/register")
     public String registerNewStudent(@ModelAttribute Student student, Model model) throws IllegalArgumentException{
