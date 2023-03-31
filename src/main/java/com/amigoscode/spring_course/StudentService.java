@@ -45,13 +45,9 @@ public class StudentService {
         studentRepository.deleteById(studentId);
     }
 
-    public void saveStudent(Student student){
-        this.studentRepository.save(student);
-    }
 
     @Transactional
     public void updateStudent(Long studentId, String name, String email, LocalDate date) {
-        System.out.println("Odpalamy serice update student");
         Student student = studentRepository.findById(studentId)
                 .orElseThrow(() -> new IllegalStateException(
                         "Student with id "+studentId+" does not exist!"
@@ -73,9 +69,7 @@ public class StudentService {
             }
             student.setEmail(email);
         };
-        System.out.println("Service update student done");
         student.setDob(date);
-        this.studentRepository.save(student);
     }
 
     public Student findStudentById(Long studentId){
@@ -84,7 +78,7 @@ public class StudentService {
                 .orElseThrow(() -> new IllegalStateException(
                         "Student with id "+studentId+" does not exist!"
                 ));
-        System.out.println("Student: "+studentId+" found.");
+        System.out.println("Student: "+studentId+" found. Name: "+student.getName());
         return student;
     }
 }

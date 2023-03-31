@@ -68,10 +68,14 @@ public class StudentController {
         return "register";
     }
 
-    @PostMapping("/updateStudent/saveStudent")
-    public String saveStudent(@ModelAttribute("student") Student student){
-        studentService.saveStudent((student));
-        System.out.println("Save student "+student.getName());
+    @PostMapping("/updateStudent/{studentId}/submitChanges")
+    public String submitChanges(
+            @PathVariable(value = "studentId") Long studentId,
+            @ModelAttribute("student") Student student){
+
+        Student studentToUpdate = studentService.findStudentById(studentId);
+        studentService.updateStudent(studentId, student.getName(), student.getEmail(), student.getDob());
+
         return "redirect:/student/allStudents";
     }
 
@@ -82,20 +86,12 @@ public class StudentController {
     }
 
     @GetMapping(path = "/updateStudent/{studentId}")
-    public String updateStudent(
-        @ModelAttribute Student student,
-        @PathVariable(value = "studentId") Long studentId,
-        Model model){
-            System.out.println("Controller Student runs on student by id "+studentId+" type of "+studentId.getClass().getName());
+    public String updateStudent(@PathVariable(value = "studentId")
+                                Long studentId, Model model){
+
             Student studentToUpdate = studentService.findStudentById(studentId);
-            System.out.println("Update "+studentToUpdate.getName() +" dob: "+studentToUpdate.getDob());
-            studentService.updateStudent(studentId,
-                                        studentToUpdate.getName(),
-                                        studentToUpdate.getEmail(),
-                                        studentToUpdate.getDob());
-            model.addAttribute("studentForm", studentToUpdate);
-//            model.addAttribute("standardDate", new Date());
-        System.out.println("Controller Student done "+student.getName());
+            model.addAttribute("student", studentToUpdate);
+
     return "updateStudent";
     }
 

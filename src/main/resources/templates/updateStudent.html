@@ -14,11 +14,11 @@
         <div class="col">
             <!--/*@thymesVar id="student" type="com.amigoscode.spring_course.Student"*/-->
             <!--        <form action="#" method="post" th:action="@{/addStudents}" th:object="${student}" >-->
-            <form class="mx-auto" action="#" th:action="saveStudent" th:method="post" th:object="${studentForm}" >
+            <form class="mx-auto" action="#" th:action="@{/student/updateStudent/{id}/submitChanges(id=${student.getId()})}" th:method="post" th:object="${student}" >
                 <fieldset>
                     <legend>Update Student</legend>
                     <label for="name-box">Name
-                        <input type="hidden" th:field="*{name}" name="name">
+<!--                        <input type="hidden" th:field="*{name}" name="name">-->
                         <input type="text" id="name-box" th:field="*{name}" name="name">
                     </label>
                 </fieldset>
