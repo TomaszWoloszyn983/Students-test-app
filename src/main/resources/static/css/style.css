@@ -2,6 +2,9 @@ html{
     height: 100%;
 }
 
+
+/* Forms */
+
 .my-form-label{
     min-width: 100px;
     text-align: right;
@@ -9,5 +12,9 @@ html{
 }
 form > input {
     min-width: 180px;
+}
+
+.my-form-button {
+    min-width: 100px;
 }
 

@@ -13,7 +13,7 @@ import java.time.Period;
 
 @Entity
 @Table
-class Student implements Serializable {
+public class Student implements Serializable {
     @Id
     @SequenceGenerator(
             name = "student_sequence",
