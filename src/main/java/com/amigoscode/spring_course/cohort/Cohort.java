@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 /**
+ * Cohort class will contain a list of students signed into an instance of this class.
  *
  */
 public class Cohort {
@@ -20,6 +21,11 @@ public class Cohort {
         this.id = id;
         this.name = name;
         this.studentsList = studentsList;
+        this.startDate = startDate;
+    }
+
+    public Cohort(String name, LocalDate startDate) {
+        this.name = name;
         this.startDate = startDate;
     }
 
