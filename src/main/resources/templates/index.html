@@ -12,21 +12,62 @@
 </head>
 <body class="row mx-0 px-0 ">
     <div class="col base-header">
-        <div class="row">
-            <header class="col-12 mx-0 px-0 border">
-                <h1 class="mx-auto text-center">Charles Xavier's School For Gifted Students</h1>
+        <div class="row mx-0 px-0 ">
+
+            <!-- Main Title -->
+            <header class="col-12 border">
+                <h1 class="mx-auto text-center my-5 py-2">Charles Xavier's School For Gifted Students</h1>
             </header>
-            <nav class="col-12 mx-0">
-                <div class="row my-navbar mx-auto border">
-                    <a href="#" class="col-md-3 d-md-block"></a>
-                    <a href="/student/allStudents" class="col-3 btn btn-secondary"
-                        th:href="@{/student/allStudents}">
-                        Students List
-                    </a>
-                    <a href="#" class="col-3 btn btn-secondary">Classes</a>
-                    <a href="#" class="col-md-3 d-md-block"></a>
+           
+            <!-- Navigation bar -->
+            <nav class="navbar navbar-expand-sm navbar-light bg-light">
+
+                <!-- Mobile navbar dropdown button -->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/student/allStudents"
+                                th:href="@{/student/allStudents}">
+                                Students List
+                            </a>
+                        </li>
+                        <li class="nav-item active">
+                            <a href="#" class="nav-link">Classes</a>
+                        </li>
+                        <li class="border">
+                            <div class="border">
+                                <form class="form-inline my-2 my-lg-0 row mx-0 px-0 d-inline" id="search-btn">
+                                    <input class="form-control col-4" type="search" placeholder="Search" aria-label="Search">
+                                    <a class="btn btn-outline-success my-2 my-sm-0 col-4" type="submit">Search</a>
+                                </form>
+                            </div>
+                        </li>
+                    </ul>
+                </button>
+
+                <!-- Main navbar -->
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/student/allStudents"
+                                th:href="@{/student/allStudents}">
+                                Students List
+                            </a>
+                        </li>
+                        <li class="nav-item active">
+                            <a href="#" class="nav-link">Classes</a>
+                        </li>
+                        <li>
+                            <form class="form-inline my-2 my-lg-0">
+                                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                                <a class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</a>
+                            </form>
+                        </li>
+                    </ul>
                 </div>
             </nav>
+
+            
             <main class="col-12 px-0 mx-0">
                 <P>Nothing here yet</P>
             </main>
