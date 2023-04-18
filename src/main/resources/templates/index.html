@@ -8,60 +8,41 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/static/css/style.css" th:href="@{/css/style.css}" type="text/css">
+    <link rel="stylesheet" href="../static/styles/style.css" th:href="@{/styles/style.css}" type="text/css">
 </head>
 <body class="row mx-0 px-0 ">
     <div class="col base-header">
         <div class="row mx-0 px-0 ">
 
             <!-- Main Title -->
-            <header class="col-12 border">
-                <h1 class="mx-auto text-center my-5 py-2">Charles Xavier's School For Gifted Students</h1>
+            <header class="col-12 border my-main-title">
+                <h1 class="mx-auto text-center my-5 py-2 my-main-title">Charles Xavier's School For Gifted Students</h1>
             </header>
            
             <!-- Navigation bar -->
-            <nav class="navbar navbar-expand-sm navbar-light bg-light">
-
-                <!-- Mobile navbar dropdown button -->
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/student/allStudents"
-                                th:href="@{/student/allStudents}">
-                                Students List
-                            </a>
-                        </li>
-                        <li class="nav-item active">
-                            <a href="#" class="nav-link">Classes</a>
-                        </li>
-                        <li class="border">
-                            <div class="border">
-                                <form class="form-inline my-2 my-lg-0 row mx-0 px-0 d-inline" id="search-btn">
-                                    <input class="form-control col-4" type="search" placeholder="Search" aria-label="Search">
-                                    <a class="btn btn-outline-success my-2 my-sm-0 col-4" type="submit">Search</a>
-                                </form>
-                            </div>
-                        </li>
-                    </ul>
-                </button>
+            <nav class="row mx-0 px-0 navbar navbar-expand-sm navbar-light bg-light">
 
                 <!-- Main navbar -->
-                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                        <li class="nav-item">
+                <div class="container navbar my-navbar px-0" id="navbarTogglerDemo02">
+                    <ul class="row mx-0 px-0 my-navbar navbar-nav">
+                        <li class="col-2 nav-item my-nav-button">
                             <a class="nav-link" href="/student/allStudents"
                                 th:href="@{/student/allStudents}">
                                 Students List
                             </a>
                         </li>
-                        <li class="nav-item active">
-                            <a href="#" class="nav-link">Classes</a>
+                        <li class="col-2 nav-item active my-nav-button">
+                            <a href="#" class="nav-link my-nav-button">Classes</a>
                         </li>
-                        <li>
-                            <form class="form-inline my-2 my-lg-0">
-                                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                                <a class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</a>
-                            </form>
+                        
+                        <li class="col-4 my-nav-button">
+                            <div class="nav-link my-nav-button"></div>
+                        </li>
+                        <li class="col-4">
+                            <div class="input-group">
+                                <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                                <button type="button" class="btn btn-outline-primary">search</button>
+                              </div>
                         </li>
                     </ul>
                 </div>

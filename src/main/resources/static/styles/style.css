@@ -1,5 +1,6 @@
 html{
     height: 100%;
+    background-color: #f7e982;
 }
 
 /* Header and Navbar */
@@ -12,17 +13,38 @@ html{
     height: 100vh;
 }
 
+.my-main-title {
+    color: yellow;
+    background-color: rgb(84, 84, 129);
+}
+
 
 /* Navigation Bar */
 .my-navbar {
     width: 100%;
     height: fit-content;
     padding: 5px 0;
+    background-color: rgb(206, 206, 255);
 
 }
 .my-navbar > a, .my-navbar > div{
     min-width: 200px;
     height: fit-content;
+}
+.my-nav-button{
+    width: 20%;
+}
+.nav-link{
+    /* background-color: red; */
+}
+#classes-button {
+    color: red;
+    background-color: blue;
+}
+
+.classes-button{
+    color: green;
+    background-color: yellow;
 }
 
 
