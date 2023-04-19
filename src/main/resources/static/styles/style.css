@@ -5,11 +5,11 @@ html{
 
 /* Header and Navbar */
 .base-header {
-    background-image: url("media/images/main_img_classroom.jpg");
+    background-image: url("../images/main_img_classroom.jpg");
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
-    min-height: 550px;
+    min-height: 750px;
     height: 100vh;
 }
 
