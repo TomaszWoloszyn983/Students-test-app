@@ -22,6 +22,7 @@ public class StudentService {
         return studentRepository.findAll();
     }
 
+    //    This function can be only accessed by admin
     public void addNewStudent(Student student) {
         Optional<Student> studentOptional = studentRepository
                 .findStudentByEmail(student.getEmail());
@@ -33,6 +34,7 @@ public class StudentService {
         System.out.println("New Student: "+student+" added!");
     }
 
+    //    This function can be only accessed by admin
     public void deleteStudent(Long studentId) {
         List<Student> list = studentRepository.findAll();
         boolean exists = studentRepository.existsById(studentId);
@@ -45,7 +47,7 @@ public class StudentService {
         studentRepository.deleteById(studentId);
     }
 
-
+//    This function can be only accessed by user
     @Transactional
     public void updateStudent(Long studentId, String name, String email, LocalDate date) {
         Student student = studentRepository.findById(studentId)

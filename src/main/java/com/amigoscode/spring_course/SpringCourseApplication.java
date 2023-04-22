@@ -1,11 +1,15 @@
 package com.amigoscode.spring_course;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.keycloak.adapters.springsecurity.authentication.KeycloakLogoutHandler;
+import org.springframework.web.client.RestTemplate;
 
 import javax.sql.DataSource;
 
@@ -48,4 +52,5 @@ public class SpringCourseApplication {
 
 //		System.out.println((String)o);
 	}
+
 }
