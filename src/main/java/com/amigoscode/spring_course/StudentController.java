@@ -31,7 +31,7 @@ public class StudentController {
     @RequestMapping("/login")
     @GetMapping
     public String login(){
-        return "login.html";
+        return "index";
     }
 
 

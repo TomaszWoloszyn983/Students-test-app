@@ -17,13 +17,21 @@
             <!-- Main Title -->
             <header class="col-12 border my-main-title">
                 <div class="row p-2 mx-2">
-                    <a class="offset-9 offset-md-6 btn login-buttons" href="#">Register</a>
-                    <a class="offset-9 offset-md-0 btn login-buttons" href="/login">Login</a>
-                    <a class="offset-9 offset-md-0 btn login-buttons" href="/logout"
-                       sec:authorize="hasRole('USER')">Logout
-                    </a>
+                    <div class="text-right">
+                        <a class="float-end btn login-buttons right" href="/logout"
+                           sec:authorize="hasRole('USER')">Logout
+                        </a>
+                        <a class="float-end btn login-buttons" th:href="@{/login}"
+                           sec:authorize="!hasRole('USER')">Login
+                        </a>
+                        <a class="float-end btn login-buttons" href="#"
+                           sec:authorize="!hasRole('USER')">Register
+                        </a>
+                    </div>
                 </div>
-                    <h1 class="mx-auto text-center my-5 py-2 my-main-title">Charles Xavier's School For Gifted Students</h1>
+                    <h1 class="mx-auto text-center my-5 py-2 my-main-title">
+                        Charles Xavier's School For Gifted Students
+                    </h1>
             </header>
            
             <!-- Navigation bar -->
@@ -39,7 +47,7 @@
                             </a>
                         </li>
                         <li class="col-2 nav-item active my-nav-button">
-                            <a href="#" class="nav-link  ">Classes</a>
+                            <a href="#" class="nav-link">Classes</a>
                         </li>
                         
                         <li class="col-4 my-nav-button">
@@ -47,7 +55,8 @@
                         </li>
                         <li class="col-12 col-md-4">
                             <div class="input-group">
-                                <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                                <input type="search" class="form-control rounded" placeholder="Search"
+                                       aria-label="Search" aria-describedby="search-addon"/>
                                 <button type="button" class="btn btn-outline-primary">search</button>
                               </div>
                         </li>
@@ -58,7 +67,6 @@
             
             <main class="col-12 px-0 mx-0">
                 <P>Nothing here yet</P>
-                <!-- <img src="../static/images/main_img_classroom.jpg" class="img-fluid" alt="Responsive image"> -->
             </main>
         </div>
     </div>
