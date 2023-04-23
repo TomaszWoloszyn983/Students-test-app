@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
@@ -19,6 +20,11 @@ import org.springframework.security.web.authentication.session.RegisterSessionAu
 import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
 import org.springframework.web.client.RestTemplate;
 
+@EnableGlobalMethodSecurity(
+        jsr250Enabled = true,
+        securedEnabled = true,
+        prePostEnabled = true
+)
 @KeycloakConfiguration
 class SecurityConfiguration extends KeycloakWebSecurityConfigurerAdapter {
 
@@ -41,12 +47,12 @@ class SecurityConfiguration extends KeycloakWebSecurityConfigurerAdapter {
     protected void configure(final HttpSecurity http) throws Exception {
         super.configure(http);
         http.authorizeRequests()
-                .antMatchers("/student/*")
+                .antMatchers("/login")
                 .hasRole("USER")
-                .antMatchers("/student/updateStudent/*")
-                .hasRole("ADMIN")
-                .antMatchers("/student/delete/*")
-                .hasRole("ADMIN")
+//                .antMatchers("/student/updateStudent/*")
+//                .hasRole("ADMIN")
+//                .antMatchers("/student/delete/*")
+//                .hasRole("ADMIN")
                 .anyRequest()
                 .permitAll();
     }

@@ -1,11 +1,13 @@
 package com.amigoscode.spring_course;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
+import javax.annotation.security.RolesAllowed;
 import java.util.Date;
 import java.util.List;
 
@@ -26,6 +28,12 @@ public class StudentController {
         return studentService.getStudents();
     }
 
+    @RequestMapping("/login")
+    @GetMapping
+    public String login(){
+        return "login.html";
+    }
+
 
     @RequestMapping("/allStudents")
     @GetMapping
@@ -38,20 +46,24 @@ public class StudentController {
 
 
     @PostMapping("/register")
-    public String registerNewStudent(@ModelAttribute Student student, Model model) throws IllegalArgumentException{
-        try{
-            model.addAttribute("studentForm", new Student());
-            model.addAttribute("standardDate", new Date());
-            studentService.addNewStudent(student);
+    public String registerNewStudent(@ModelAttribute Student student, Model model,
+                                     Authentication auth) throws IllegalArgumentException{
+        if (auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))){
+            try{
+                model.addAttribute("studentForm", new Student());
+                model.addAttribute("standardDate", new Date());
+                studentService.addNewStudent(student);
 
-            String message = "Student "+ student +" successfully added.";
-            System.out.println(message);
-            model.addAttribute("message", message);
+                String message = "Student "+ student +" successfully added.";
+                System.out.println(message);
+                model.addAttribute("message", message);
+                return "register";
+            }catch(IllegalArgumentException e){
+                System.out.println("Parse attempt failed for value");
+            }
             return "register";
-        }catch(IllegalArgumentException e){
-            System.out.println("Parse attempt failed for value");
         }
-        return "register";
+        return "index";
     }
 
     @PostMapping("/updateStudent/{studentId}/submitChanges")
@@ -65,6 +77,7 @@ public class StudentController {
         return "redirect:/student/allStudents";
     }
 
+    @Secured("ROLE_ADMIN")
     @GetMapping("/delete/{studentId}")
     public String deleteStudent(@PathVariable("studentId") Long studentId){
         this.studentService.deleteStudent(studentId);
@@ -72,6 +85,7 @@ public class StudentController {
         return "redirect:/student/allStudents";
     }
 
+    @RolesAllowed({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping(path = "/updateStudent/{studentId}")
     public String updateStudent(@PathVariable(value = "studentId")
                                 Long studentId, Model model){
