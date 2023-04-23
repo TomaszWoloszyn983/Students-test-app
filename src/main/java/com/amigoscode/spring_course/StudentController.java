@@ -68,6 +68,7 @@ public class StudentController {
     @GetMapping("/delete/{studentId}")
     public String deleteStudent(@PathVariable("studentId") Long studentId){
         this.studentService.deleteStudent(studentId);
+        System.out.println("Student Service. Delete student by id "+studentId);
         return "redirect:/student/allStudents";
     }
 

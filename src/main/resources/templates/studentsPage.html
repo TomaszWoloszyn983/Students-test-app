@@ -85,7 +85,7 @@
                                 Edit
                             </a>
                             <a class="col btn btn-danger btn-sm px-auto mx-1"
-                               th:href="@{/student/allStudents}">
+                               th:href="@{/student/delete/{id}(id=${student.getId()})}">
                                Delete
                             </a>
                         </div>
