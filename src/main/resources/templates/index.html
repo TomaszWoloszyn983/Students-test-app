@@ -24,13 +24,14 @@
 <!--            Login/ Logout buttons-->
                 <div class="row p-2 mx-2">
                     <div class="text-right">
-                        <a class="float-end btn login-buttons right" href="/student/logout"
+                        <a class="float-end btn login-buttons right" href="/logout"
                            sec:authorize="hasRole('USER')">Logout
                         </a>
                         <a class="float-end btn login-buttons" th:href="@{/student/login}" href="/student/login"
                            sec:authorize="!hasRole('USER')">Login
                         </a>
-                        <a class="float-end btn login-buttons" href="#"
+                        <a class="float-end btn login-buttons"
+                           th:href="@{/student/register}" href="/student/register"
                            sec:authorize="!hasRole('USER')">Register
                         </a>
                     </div>

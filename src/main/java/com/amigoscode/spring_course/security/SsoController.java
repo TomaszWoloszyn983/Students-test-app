@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 public class SsoController {
     private KeycloakDeployment KeycloakSecurityContextUtils;
 
-    @GetMapping("/student/logout")
+    @GetMapping("/logout")
     String logout(HttpServletRequest request) throws ServletException {
         request.logout();
         System.out.println("\n\nYou have logged out");
