@@ -2,21 +2,22 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/styles/style.css" th:href="@{/styles/style.css}" type="text/css">
     <title>Login</title>
 </head>
 <body>
     <div class="container">
         <div class="row">
             <div class="col">
-                <h1 class="mx-auto my-5">WELCOME TO OUR SCHOOL</h1>
+                <h1 class="mx-auto my-5">CONGRATULATIONS</h1>
             </div>
             <div class="col">
                 <div id="kc-header-wrapper" class="${properties.kcHeaderWrapperClass!}">
-                    You have logged in!
+                    You have logged OUT!
                 </div>
             </div>
         </div>
-        <div class="row text-right">
+        <div class="row text-right login-buttons">
             <a class="offset-9 offset-md-11 col-3 col-md-1 btn btn-secondary"
                th:href="@{/}">
                 Home Page

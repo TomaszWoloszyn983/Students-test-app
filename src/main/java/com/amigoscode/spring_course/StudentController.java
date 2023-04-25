@@ -28,10 +28,9 @@ public class StudentController {
         return studentService.getStudents();
     }
 
-    @RequestMapping("/login")
-    @GetMapping
+    @GetMapping("/login")
     public String login(){
-        return "index";
+        return "login";
     }
 
 
@@ -77,6 +76,10 @@ public class StudentController {
         return "redirect:/student/allStudents";
     }
 
+    /*
+         Delete student function is secured and allowed only to users
+         logged in as admins
+     */
     @Secured("ROLE_ADMIN")
     @GetMapping("/delete/{studentId}")
     public String deleteStudent(@PathVariable("studentId") Long studentId){
@@ -85,6 +88,10 @@ public class StudentController {
         return "redirect:/student/allStudents";
     }
 
+    /*
+        Update student information is allowed to any logged in users.
+        It should be allowed only to one user and admins.
+     */
     @RolesAllowed({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping(path = "/updateStudent/{studentId}")
     public String updateStudent(@PathVariable(value = "studentId")

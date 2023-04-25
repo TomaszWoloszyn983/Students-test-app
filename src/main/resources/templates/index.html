@@ -16,12 +16,18 @@
 
             <!-- Main Title -->
             <header class="col-12 border my-main-title">
+<!--            title-->
+                <h1 class="mx-auto text-center my-5 py-2 my-main-title">
+                    Charles Xavier's School For Gifted Students
+                </h1>
+
+<!--            Login/ Logout buttons-->
                 <div class="row p-2 mx-2">
                     <div class="text-right">
-                        <a class="float-end btn login-buttons right" href="/logout"
+                        <a class="float-end btn login-buttons right" href="/student/logout"
                            sec:authorize="hasRole('USER')">Logout
                         </a>
-                        <a class="float-end btn login-buttons" th:href="@{/login}"
+                        <a class="float-end btn login-buttons" th:href="@{/student/login}" href="/student/login"
                            sec:authorize="!hasRole('USER')">Login
                         </a>
                         <a class="float-end btn login-buttons" href="#"
@@ -29,9 +35,6 @@
                         </a>
                     </div>
                 </div>
-                    <h1 class="mx-auto text-center my-5 py-2 my-main-title">
-                        Charles Xavier's School For Gifted Students
-                    </h1>
             </header>
            
             <!-- Navigation bar -->
@@ -58,7 +61,7 @@
                                 <input type="search" class="form-control rounded" placeholder="Search"
                                        aria-label="Search" aria-describedby="search-addon"/>
                                 <button type="button" class="btn btn-outline-primary">search</button>
-                              </div>
+                            </div>
                         </li>
                     </ul>
                 </div>

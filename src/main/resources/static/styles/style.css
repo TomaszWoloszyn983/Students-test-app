@@ -83,3 +83,9 @@ form > input {
     min-width: 100px;
 }
 
+.add-student-form {
+    width: 450px;
+    margin: auto;
+    padding: auto;
+}
+
