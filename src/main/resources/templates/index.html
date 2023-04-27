@@ -15,7 +15,7 @@
         <div class="row mx-0 px-0 ">
 
             <!-- Main Title -->
-            <header class="col-12 border my-main-title">
+            <header class="col-12 my-headed">
 <!--            title-->
                 <h1 class="mx-auto text-center my-5 py-2 my-main-title">
                     Charles Xavier's School For Gifted Students
@@ -31,7 +31,7 @@
                            sec:authorize="!hasRole('USER')">Login
                         </a>
                         <a class="float-end btn login-buttons"
-                           th:href="@{/student/register}" href="/student/register"
+                           href="http://localhost:8280/auth/realms/Students/login-actions/registration?client_id=student-client&tab_id=oneeutlzrA0"
                            sec:authorize="!hasRole('USER')">Register
                         </a>
                     </div>
@@ -39,19 +39,19 @@
             </header>
            
             <!-- Navigation bar -->
-            <nav class="row mx-0 px-0 navbar navbar-expand-sm navbar-light bg-light">
+            <nav class="row mx-0 px-0 navbar navbar-expand-sm navbar-light bg-light rounded-2">
 
                 <!-- Main navbar -->
-                <div class="container navbar my-navbar px-0" id="navbarTogglerDemo02">
+                <div class="container navbar px-0" id="navbarTogglerDemo02">
                     <ul class="row mx-0 px-0 my-navbar navbar-nav">
                         <li class="col-2 nav-item my-nav-button">
-                            <a class="nav-link" href="/student/allStudents"
+                            <a class="nav-link rounded-2" href="/student/allStudents"
                                 th:href="@{/student/allStudents}">
                                 Students List
                             </a>
                         </li>
                         <li class="col-2 nav-item active my-nav-button">
-                            <a href="#" class="nav-link">Classes</a>
+                            <a href="#" class="nav-link rounded-2">Classes</a>
                         </li>
                         
                         <li class="col-4 my-nav-button">
@@ -69,11 +69,71 @@
             </nav>
 
             
-            <main class="col-12 px-0 mx-0">
-                <P>Nothing here yet</P>
+            <main class="col-12 px-0 mx-0 main-content">
+
+                <h1 class="text-center py-5 mt-3 text-white">
+                    Who Are We
+                </h1>
+
+                <article class="p-0 p-md-2 home-page-article rounded-3">
+                    <P class="mx-1 mx-sm-3 mt-4 home-page-text">
+                        The Charles Xavier School is a fictional school for gifted youngsters
+                        in the Marvel Comics universe, which was founded by Professor Charles Xavier.
+                        The school is located in North Salem, New York, and serves as a training
+                        ground and safe haven for young mutants.
+
+                        The school was first introduced in X-Men #1 in 1963 and has since become
+                        a significant location in the X-Men franchise. In the comics, the school has
+                        been destroyed and rebuilt several times, but it always remains a place of
+                        refuge and education for young mutants who are trying to come to terms with
+                        their powers and learn how to use them for good.
+
+                        The Charles Xavier School has been depicted in various forms of media,
+                        including the X-Men films and television series. In these adaptations,
+                        the school is often shown as a large mansion with high-tech facilities and
+                        hidden underground levels. The X-Men use the school as their headquarters,
+                        and it serves as a base of operations for their missions to protect mutants
+                        and humans alike.
+                    </P>    
+                    <P class="mx-1 mx-sm-3 px-2  home-page-text">
+                        Over the years, many mutant teams have been associated with the Charles
+                        Xavier School, and many of their members have attended the school at some
+                        point. Here are some of the most notable mutant teams that have been associated
+                        with the Charles Xavier School in the comics:
+                    </P>
+                    <P class="mx-1 mx-sm-3 mt-4 home-page-text">
+                        The original X-Men: The first group of X-Men, which consisted of Cyclops,
+                        Jean Grey, Beast, Angel, and Iceman, were all students of Professor Xavier
+                        and attended the Charles Xavier School.
+                    </P>
+                    <P class="mx-1 mx-sm-3 mt-4 home-page-text">
+                        The New Mutants: This team was created in the 1980s and consisted of young
+                        mutants who were being trained by Professor Xavier and the X-Men. Members of
+                        the New Mutants included Cannonball, Sunspot, Wolfsbane, Mirage, and Karma.
+                    </P>
+                    <P class="mx-1 mx-sm-3 mt-4 home-page-text">
+                        Generation X: This team was created in the 1990s and consisted of young
+                        mutants who were being trained by Banshee and Emma Frost at the Massachusetts
+                        Academy, which was a branch of the Charles Xavier School.
+                        Members of Generation X included Jubilee, Husk, M, and Skin.
+                    </P>
+                    <P class="mx-1 mx-sm-3 mt-4 home-page-text">
+                        X-Force: This team was created in the 1990s and consisted of mutants who were
+                        more willing to use force and violence to protect mutantkind. Many members of
+                        X-Force had connections to the Charles Xavier School, including Cable, who was
+                        a former student of Professor Xavier, and Cannonball, who was a former member
+                        of the New Mutants.
+                    </P>
+                    <P class="mx-1 mx-sm-3 mt-4 p-2 home-page-text">
+                        The X-Men: Of course, the X-Men themselves have always been associated with
+                        the Charles Xavier School, and many of their members have attended the school
+                        at some point. Members of the X-Men who have attended the Charles Xavier School
+                        include Storm, Wolverine, Colossus, Rogue, and many others.
+                    </P>
+                </article>
             </main>
         </div>
     </div>
-
+    
 </body>
 </html>

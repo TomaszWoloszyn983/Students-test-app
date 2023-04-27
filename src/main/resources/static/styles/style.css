@@ -1,6 +1,12 @@
 html{
     height: 100%;
-    background-color: #f7e982;
+    background-color: #493e36b4;
+    background-image: url("../images/main_img_classroom.jpg");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 750px;
+    height: 100vh;
 }
 
 /* Header and Navbar */
@@ -25,14 +31,14 @@ html{
 }
 .login-buttons :hover{
     color: blue;
-    background-color: rgb(84, 84, 129);
+    background-color: #000;
     border-width: 1px;
     border-color: blue;
 }
 
 .my-main-title {
-    color: yellow;
-    background-color: rgb(84, 84, 129);
+    color: #493e36b4;
+    font-style: italic;
 }
 
 
@@ -40,8 +46,7 @@ html{
 .my-navbar {
     width: 100%;
     height: fit-content;
-    padding: 5px 0;
-    background-color: rgb(206, 206, 255);
+    /* background-color: #1b0d0d88; */
 
 }
 .my-navbar > a, .my-navbar > div{
@@ -50,9 +55,11 @@ html{
 }
 .my-nav-button{
     width: 20%;
+    background-color: #fff;
 }
 .my-nav-button :hover{
-    background-color: rgb(145, 145, 255);;
+    background-color: #493e36b4;
+    color: #fff;
 }
 .nav-link{
     /* background-color: red; */
@@ -65,6 +72,22 @@ html{
 .classes-button{
     color: green;
     background-color: yellow;
+}
+
+/* Home Page content */
+.main-content {
+    margin-right: 11rem;
+    margin-left: 10rem;
+    padding: 10px, 15px;
+}
+
+.home-page-article{
+    background-color: rgba(0, 0, 0, 0.514);
+}
+
+.home-page-text {
+    color: white;
+
 }
 
 
@@ -89,3 +112,11 @@ form > input {
     padding: auto;
 }
 
+@media (min-width: 1200px) {
+    html{
+        margin-left: 150px;
+        margin-right: 150px;
+    }
+    .base-header {
+    }
+}

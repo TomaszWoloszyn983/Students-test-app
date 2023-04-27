@@ -33,6 +33,14 @@ public class StudentController {
         return "login";
     }
 
+    @GetMapping("/register")
+    public String register(){
+        return "register";
+    }
+    @GetMapping("/student/login")
+    public String register_success(){
+        return "register";
+    }
 
     @RequestMapping("/allStudents")
     @GetMapping
@@ -102,5 +110,4 @@ public class StudentController {
 
     return "updateStudent";
     }
-
 }
