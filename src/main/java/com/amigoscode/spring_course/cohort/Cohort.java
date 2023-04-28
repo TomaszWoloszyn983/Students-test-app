@@ -29,7 +29,6 @@ public class Cohort implements Serializable {
     private Long id;
 
 
-
     private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cohort")
     private Set<Student> students;

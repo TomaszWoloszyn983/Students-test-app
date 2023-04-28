@@ -5,6 +5,7 @@ import com.amigoscode.spring_course.StudentService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CohortService {
@@ -18,5 +19,17 @@ public class CohortService {
     public List<Cohort> getCohorts(){
         List<Cohort> list = cohortRepository.findAll();
         return cohortRepository.findAll();
+    }
+
+    //    This function can be only accessed by admin
+    public void addNewCohort(Cohort cohort) {
+        Optional<Cohort> cohortOptional = cohortRepository
+                .findCohortByName(cohort.getName());
+        if (cohortOptional.isPresent()){
+            throw new IllegalStateException("email taken!!!");
+        }
+        cohortRepository.save(cohort);
+
+        System.out.println("New Cohort: "+cohort+" added!");
     }
 }
