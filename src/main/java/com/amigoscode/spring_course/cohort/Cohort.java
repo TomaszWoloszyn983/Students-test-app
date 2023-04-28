@@ -1,26 +1,47 @@
 package com.amigoscode.spring_course.cohort;
 
 import com.amigoscode.spring_course.Student;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Cohort class will contain a list of students signed into an instance of this class.
  *
  */
-public class Cohort {
+@Entity
+@Table(name="cohorts")
+public class Cohort implements Serializable {
+    @Id
+    @SequenceGenerator(
+            name = "cohort_sequence",
+            sequenceName = "cohort_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "cohort_sequence"
+    )
     private Long id;
+
+
+
     private String name;
-    private List<Student> studentsList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cohort")
+    private Set<Student> students;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
 
     public Cohort(){}
 
-    public Cohort(Long id, String name, List<Student> studentsList, LocalDate startDate) {
+    public Cohort(Long id, String name, Set<Student> studentsList, LocalDate startDate) {
         this.id = id;
         this.name = name;
-        this.studentsList = studentsList;
+        this.students = studentsList;
         this.startDate = startDate;
     }
 
@@ -29,29 +50,35 @@ public class Cohort {
         this.startDate = startDate;
     }
 
-    Long getId() {
+    public Long getId() {
         return id;
     }
 
     public String getName() {
         return name;
     }
-    void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public List<Student> getStudentsList() {
-        return studentsList;
+    public Set<Student> getStudentsList() {
+        return students;
     }
-    void setStudentsList(List<Student> studentsList) {
-        this.studentsList = studentsList;
+    public void setStudentsList(Set<Student> studentsList) {
+        this.students = studentsList;
     }
 
-    LocalDate getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
-    void setStartDate(LocalDate startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
+    }
+    public Set<Student> getStudents() {
+        return students;
+    }
+    public void setStudents(Set<Student> students) {
+        this.students = students;
     }
 }
 

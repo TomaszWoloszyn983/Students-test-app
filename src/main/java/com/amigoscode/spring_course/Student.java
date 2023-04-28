@@ -1,5 +1,6 @@
 package com.amigoscode.spring_course;
 
+import com.amigoscode.spring_course.cohort.Cohort;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 import org.thymeleaf.spring5.ISpringTemplateEngine;
@@ -33,6 +34,11 @@ public class Student implements Serializable {
     private Integer age;
     @Transient
     private String tempDate;
+    @ManyToOne
+    @JoinColumn()
+    private Cohort cohort;
+
+
 
     public Student(){}
 
@@ -136,6 +142,10 @@ public class Student implements Serializable {
             return 0;
         }
         return Period.between(this.dob, LocalDate.now()).getYears();
+    }
+
+    public Cohort getCohort() {
+        return cohort;
     }
 
 //    public String getAge() {
