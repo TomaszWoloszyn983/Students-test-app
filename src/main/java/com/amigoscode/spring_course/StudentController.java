@@ -55,7 +55,8 @@ public class StudentController {
     @PostMapping("/register")
     public String registerNewStudent(@ModelAttribute Student student, Model model,
                                      Authentication auth) throws IllegalArgumentException{
-        if (auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))){
+        if (auth.getAuthorities().stream().anyMatch(a -> a.getAuthority()
+                                                        .equals("ROLE_ADMIN"))){
             try{
                 model.addAttribute("studentForm", new Student());
                 model.addAttribute("standardDate", new Date());
@@ -77,10 +78,9 @@ public class StudentController {
     public String submitChanges(
             @PathVariable(value = "studentId") Long studentId,
             @ModelAttribute("student") Student student){
-
         Student studentToUpdate = studentService.findStudentById(studentId);
-        studentService.updateStudent(studentId, student.getName(), student.getEmail(), student.getDob());
-
+        studentService.updateStudent(studentId, student.getName(),
+                                     student.getEmail(), student.getDob());
         return "redirect:/student/allStudents";
     }
 
@@ -104,10 +104,8 @@ public class StudentController {
     @GetMapping(path = "/updateStudent/{studentId}")
     public String updateStudent(@PathVariable(value = "studentId")
                                 Long studentId, Model model){
-
             Student studentToUpdate = studentService.findStudentById(studentId);
             model.addAttribute("student", studentToUpdate);
-
     return "updateStudent";
     }
 }

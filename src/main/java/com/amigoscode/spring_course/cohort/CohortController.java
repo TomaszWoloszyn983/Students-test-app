@@ -8,12 +8,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Date;
 import java.util.List;
 
 @Controller
-@RequestMapping(path = "/cohort")
+@RequestMapping(path = "/cohorts")
 public class CohortController {
 
     private final CohortService cohortService;
@@ -27,7 +28,21 @@ public class CohortController {
         return cohortService.getCohorts();
     }
 
-    @PostMapping("/add")
+    @GetMapping("/all")
+    public ModelAndView cohortPage(Model model){
+        System.out.println("\nDisplay Classes Page!");
+
+        List<Cohort> cohorts =  cohortService.getCohorts();
+        System.out.println("Classes List: "+cohorts);
+        model.addAttribute("cohorts", cohorts);
+        model.addAttribute("cohortForm", new Cohort());
+        ModelAndView modelAndView = new ModelAndView("cohort/cohortsPage");
+        modelAndView.addObject("message", "This is an example message.");
+        return modelAndView;
+//        return "cohort/cohortsPage";
+    }
+
+    @PostMapping("/addCohort")
     public String registerNewCohort(@ModelAttribute Cohort cohort, Model model,
                                      Authentication auth) throws IllegalArgumentException{
 //        Authentication temporarily removed

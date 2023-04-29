@@ -1,7 +1,5 @@
 package com.amigoscode.spring_course.cohort;
 
-import com.amigoscode.spring_course.Student;
-import com.amigoscode.spring_course.StudentService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
