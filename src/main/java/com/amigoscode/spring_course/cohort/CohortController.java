@@ -37,13 +37,12 @@ public class CohortController {
         model.addAttribute("cohorts", cohorts);
         model.addAttribute("cohortForm", new Cohort());
         ModelAndView modelAndView = new ModelAndView("cohort/cohortsPage");
-        modelAndView.addObject("message", "This is an example message.");
+        modelAndView.addObject("noClasses", "This is an example message.");
         return modelAndView;
-//        return "cohort/cohortsPage";
     }
 
     @PostMapping("/addCohort")
-    public String registerNewCohort(@ModelAttribute Cohort cohort, Model model,
+    public String addNewCohort(@ModelAttribute Cohort cohort, Model model,
                                      Authentication auth) throws IllegalArgumentException{
 //        Authentication temporarily removed
 //        if (auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))){
