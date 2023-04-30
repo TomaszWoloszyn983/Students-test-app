@@ -80,6 +80,6 @@ public class CohortController {
         System.out.println("Submitting changes in "+cohortToUpdate.getName());
         cohortService.updateCohort(cohortId, cohort.getName(),
                 cohort.getStartDate());
-        return "redirect:/cohort/cohortsPage";
+        return "redirect:/cohorts/all";
     }
 }

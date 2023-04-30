@@ -13,7 +13,6 @@
     <div class="row p-2 border border-dark my-3">
         <div class="col">
             <!--/*@thymesVar id="cohort" type="com.amigoscode.spring_course.Cohort"*/-->
-            <!--        <form action="#" method="post" th:action="@{/addStudents}" th:object="${student}" >-->
             <form class="mx-auto" action="#"
                          th:action="@{/cohorts/updateCohort/{id}/submitChanges(id=${cohort.getId()})}"
                          th:method="post" th:object="${cohort}">
