@@ -57,6 +57,25 @@ public class CohortService {
         cohort.setStartDate(date);
     }
 
+    /**
+     * I guess that methods as existsById and deleteById are
+     * inherited from JpaRepository interface and passed through
+     * CohortRepository that extends JpaRepository
+     *
+     * @param cohortId
+     */
+    public void deleteCohort(Long cohortId) {
+        List<Cohort> list = cohortRepository.findAll();
+        boolean exists = cohortRepository.existsById(cohortId);
+        if (!exists){
+            throw new IllegalStateException(
+                    "Class with id "+cohortId+" does not exist!"
+            );
+        }
+        System.out.println("Delete Class by id: "+cohortId);
+        cohortRepository.deleteById(cohortId);
+    }
+
     public Cohort findCohortById(Long cohortId){
         System.out.println("Odpalamy service find cohort by id");
         Cohort cohort = cohortRepository.findById(cohortId)

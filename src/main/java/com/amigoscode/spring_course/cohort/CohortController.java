@@ -82,4 +82,12 @@ public class CohortController {
                 cohort.getStartDate());
         return "redirect:/cohorts/all";
     }
+
+    @GetMapping("/delete/{cohortId}")
+    public String deleteCohort(@PathVariable("cohortId") Long cohortId){
+        this.cohortService.deleteCohort(cohortId);
+        System.out.println("Delete Class by id "+cohortId);
+        return "redirect:/cohorts/all";
+    }
+
 }
