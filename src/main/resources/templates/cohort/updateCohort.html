@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <title>Update Class</title>
+</head>
+<body>
+    <header>
+        <h1>Update Class</h1>
+    </header>
+    <!--  Message  -->
+    <div class="row p-2 border border-dark my-3">
+        <div class="col">
+            <!--/*@thymesVar id="cohort" type="com.amigoscode.spring_course.Cohort"*/-->
+            <!--        <form action="#" method="post" th:action="@{/addStudents}" th:object="${student}" >-->
+            <form class="mx-auto" action="#"
+                         th:action="@{/cohorts/updateCohort/{id}/submitChanges(id=${cohort.getId()})}"
+                         th:method="post" th:object="${cohort}">
+                <fieldset>
+                    <legend>Update Class</legend>
+                    <label for="name-box">Name
+<!--                        <input type="hidden" th:field="*{name}" name="name">-->
+                        <input type="text" id="name-box" th:field="*{name}" name="name">
+                    </label>
+                </fieldset>
+                <fieldset>
+                    <label for="date-box">Start Date
+                        <input type="date" id="date-box" name="date"
+                               th:date="${#temporals.format(localDate, 'yyyy-MM-dd')}"
+                               th:field="*{startDate}">
+                    </label>
+                </fieldset>
+                <button class="btn btn-secondary mx-2 mt-3" type="submit">Submit</button>
+                <button class="btn btn-danger mx-2 mt-3" type="cancel"
+                        name="cancel" th:href="@{/cohorts/all}">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

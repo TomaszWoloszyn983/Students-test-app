@@ -4,12 +4,10 @@ import com.amigoscode.spring_course.Student;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.Date;
 import java.util.List;
 
@@ -51,15 +49,37 @@ public class CohortController {
                 model.addAttribute("standardDate", new Date());
                 cohortService.addNewCohort(cohort);
 
-                String message = "Cohort "+ cohort +" successfully added.";
+                String message = "Cohort "+ cohort.getName() +" successfully added.";
                 System.out.println(message);
                 model.addAttribute("message", message);
                 return "register";
             }catch(IllegalArgumentException e){
                 System.out.println("Parse attempt failed for value");
             }
-            return "register";
+            return "cohort/cohortsPage";
 //        }
 //        return "index";
+    }
+
+//    @RolesAllowed({"ROLE_USER", "ROLE_ADMIN"})
+    @GetMapping(path = "/updateCohort/{cohortId}")
+    public String updateCohort(@PathVariable(value = "cohortId")
+                                        Long cohortId, Model model){
+        Cohort cohortToUpdate = cohortService.findCohortById(cohortId);
+        System.out.println("Update information about "+cohortToUpdate.getName());
+        model.addAttribute("cohort", cohortToUpdate);
+        return "cohort/updateCohort";
+    }
+
+    @PostMapping("/updateCohort/{cohortId}/submitChanges")
+    public String submitChanges(
+            @PathVariable(value = "cohortId") Long cohortId,
+            @ModelAttribute("cohort") Cohort cohort){
+        System.out.println("Trying to submit changes.");
+        Cohort cohortToUpdate = cohortService.findCohortById(cohortId);
+        System.out.println("Submitting changes in "+cohortToUpdate.getName());
+        cohortService.updateCohort(cohortId, cohort.getName(),
+                cohort.getStartDate());
+        return "redirect:/cohort/cohortsPage";
     }
 }
