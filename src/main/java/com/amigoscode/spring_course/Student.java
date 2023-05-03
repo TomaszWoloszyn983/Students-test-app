@@ -148,7 +148,10 @@ public class Student implements Serializable {
         return cohort;
     }
 
-//    public String getAge() {
+    void setCohort(Cohort cohort) {
+        this.cohort = cohort;
+    }
+    //    public String getAge() {
 //        this.tempDate = LocalDate.parse(dob);
 //        int age = Period.between(this.dob, LocalDate.now()).getYears();
 //        String strDate = Integer.toString(age);
@@ -164,6 +167,7 @@ public class Student implements Serializable {
                 ", email='" + email + '\'' +
                 ", dob=" + dob +
                 ", age=" + getAge() +
+                ", cohort=" + getCohort() +
                 '}';
     }
 

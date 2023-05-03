@@ -1,13 +1,13 @@
 package com.amigoscode.spring_course.cohort;
 
 import com.amigoscode.spring_course.Student;
+import com.amigoscode.spring_course.StudentService;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.annotation.security.RolesAllowed;
 import java.util.Date;
 import java.util.List;
 
@@ -16,10 +16,15 @@ import java.util.List;
 public class CohortController {
 
     private final CohortService cohortService;
+    private final StudentService studentService;
 
-    public CohortController(CohortService cohortService){
+    public CohortController(CohortService cohortService, StudentService studentService){
         this.cohortService = cohortService;
+        this.studentService = studentService;
     }
+//    public StudentController(StudentService studentService){
+//        this.studentService = studentService;
+//    }
 
     @GetMapping
     public List<Cohort> getCohorts(){
@@ -31,9 +36,11 @@ public class CohortController {
         System.out.println("\nDisplay Classes Page!");
 
         List<Cohort> cohorts =  cohortService.getCohorts();
+        List<Student> students =  studentService.getStudents();
         System.out.println("Classes List: "+cohorts);
         model.addAttribute("cohorts", cohorts);
         model.addAttribute("cohortForm", new Cohort());
+        model.addAttribute("students", students);
         ModelAndView modelAndView = new ModelAndView("cohort/cohortsPage");
         modelAndView.addObject("noClasses", "This is an example message.");
         return modelAndView;
@@ -52,7 +59,7 @@ public class CohortController {
                 String message = "Cohort "+ cohort.getName() +" successfully added.";
                 System.out.println(message);
                 model.addAttribute("message", message);
-                return "register";
+                return "redirect:/cohorts/all";
             }catch(IllegalArgumentException e){
                 System.out.println("Parse attempt failed for value");
             }
@@ -90,4 +97,14 @@ public class CohortController {
         return "redirect:/cohorts/all";
     }
 
+    @PostMapping("/addToCohort/{cohortId}")
+    public String addToCohort(
+            @PathVariable("cohortId") Long cohortId,
+            @RequestParam("student") Long student,
+            Model model){
+        List<Student> students =  studentService.getStudents();
+        System.out.println("\n\n!!!\nAdd Student: "+student+"\nto class no."+cohortId);
+        model.addAttribute("students", students);
+        return "redirect:/cohorts/all";
+    }
 }
