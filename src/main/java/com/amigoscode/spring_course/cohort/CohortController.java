@@ -97,14 +97,34 @@ public class CohortController {
         return "redirect:/cohorts/all";
     }
 
+    /**
+     * Receive data from cohortPage form.
+     * Receive id of cohort that we want to add a student to
+     * and receive id of the Student that is to be added to the cohort.
+     *
+     * Pass the data to the CohortService to add a student to cohort
+     * and to StudentService to update the Students cohort variable.
+     *
+     * @param cohortId
+     * @param studentId
+     * @param model
+     * @return
+     */
     @PostMapping("/addToCohort/{cohortId}")
     public String addToCohort(
             @PathVariable("cohortId") Long cohortId,
-            @RequestParam("student") Long student,
+            @RequestParam("student") Long studentId,
             Model model){
         List<Student> students =  studentService.getStudents();
-        System.out.println("\n\n!!!\nAdd Student: "+student+"\nto class no."+cohortId);
+
+        System.out.println("\n\n!!!\nAdd Student: "+studentId+"\nto class no."+cohortId);
         model.addAttribute("students", students);
+
+        cohortService.addToCohort(cohortId, studentId);
+        studentService.addStudentToCohort(studentId, cohortId);
+
+        System.out.println("Test: ");
+
         return "redirect:/cohorts/all";
     }
 }

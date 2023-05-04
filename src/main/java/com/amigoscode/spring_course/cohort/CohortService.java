@@ -20,10 +20,11 @@ public class CohortService {
     * addStudent to a class function for identifying students
     * to be added to a class.
     * */
-//    private final StudentRepository studentRepository;
+    private final StudentRepository studentRepository;
 
-    public CohortService(CohortRepository cohortRepository){
+    public CohortService(CohortRepository cohortRepository, StudentRepository studentRepository){
         this.cohortRepository = cohortRepository;
+        this.studentRepository = studentRepository;
     }
 
     public List<Cohort> getCohorts(){
@@ -84,5 +85,44 @@ public class CohortService {
                 ));
         System.out.println("Class: "+cohortId+" found. Name: "+cohort.getName());
         return cohort;
+    }
+
+    /**
+     * Finds cohort by Id.
+     * Finds Student by Id
+     * Adds the Student to the cohorts Students List
+     *
+     * @param cohortId
+     * @param studentId
+     */
+    public void addToCohort(Long cohortId, Long studentId){
+        List<Cohort> list = cohortRepository.findAll();
+        Cohort cohort;
+        boolean exists = cohortRepository.existsById(cohortId);
+        if (!exists){
+            throw new IllegalStateException(
+                    "Class with id "+cohortId+" does not exist!"
+            );
+        }else{
+            cohort = findCohortById(cohortId);
+        }
+
+        List<Student> studentsList = studentRepository.findAll();
+        boolean existsStudent = studentRepository.existsById(studentId);
+        if (!existsStudent){
+            throw new IllegalStateException(
+                    "Student with id "+studentId+" does not exist!"
+            );
+        }
+        Student student = studentRepository.findById(studentId)
+                .orElseThrow(() -> new IllegalStateException(
+                        "Student with id "+studentId+" does not exist!"
+                ));
+
+        System.out.println("New Student was added to "+cohort.getName()
+                + " Students List");
+        cohort.addStudentToList(student);
+        System.out.println(cohort.getName() +" has following students "
+                +cohort.getStudentsList());
     }
 }

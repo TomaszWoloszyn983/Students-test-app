@@ -28,7 +28,6 @@ public class Cohort implements Serializable {
     )
     private Long id;
 
-
     private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cohort")
     private Set<Student> students;
@@ -78,6 +77,10 @@ public class Cohort implements Serializable {
     }
     public void setStudents(Set<Student> students) {
         this.students = students;
+    }
+
+    public void addStudentToList(Student student){
+        this.students.add(student);
     }
 }
 
