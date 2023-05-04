@@ -171,6 +171,14 @@ public class Student implements Serializable {
                 '}';
     }
 
+    public String getCohortsName(){
+        if(cohort.getName() == null){
+            return "Freelancer";
+        }else {
+            return cohort.getName();
+        }
+    }
+
     private ISpringTemplateEngine templateEngine(ITemplateResolver templateResolver) {
         SpringTemplateEngine engine = new SpringTemplateEngine();
         engine.addDialect(new Java8TimeDialect());

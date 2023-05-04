@@ -64,6 +64,7 @@
                     <th scope="col" class="col-5 col-md-3">Name</th>
                     <th scope="col" class="col-5 col-md-3">Email</th>
                     <th scope="col" class="col-1 col-md-1">Age</th>
+                    <th scope="col" class="col-1 col-md-1">Group</th>
                     <th scope="col" class="d-none d-md-inline col-md-4"
                         sec:authorize="hasRole('ADMIN')">Functions
                     </th>
@@ -74,14 +75,17 @@
                     <td class="col-1 col-md-1">
                         <span th:text="${student.getId()}"> Id </span>
                     </td>
-                    <td class="col-5 col-md-3">
+                    <td class="col-4 col-md-3">
                         <span th:text="${student.getName()}"> Name </span>
                     </td>
-                    <td class="col-5 col-md-3">
+                    <td class="col-4 col-md-3">
                         <span th:text="${student.getEmail()}"> Email </span>
                     </td>
                     <td class="col-1 col-md-1">
                         <span th:text="${student.getAge()}"> Age </span>
+                    </td>
+                    <td class="col-2 col-md-1">
+                        <span th:text="${student.getCohort()}"> Group </span>
                     </td>
                     <td class="col-12 col-md-4" sec:authorize="hasRole('ADMIN')">
                         <div class="row mx-3">

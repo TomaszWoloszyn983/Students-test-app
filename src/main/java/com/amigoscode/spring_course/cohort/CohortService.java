@@ -95,6 +95,7 @@ public class CohortService {
      * @param cohortId
      * @param studentId
      */
+    @Transactional
     public void addToCohort(Long cohortId, Long studentId){
         List<Cohort> list = cohortRepository.findAll();
         Cohort cohort;

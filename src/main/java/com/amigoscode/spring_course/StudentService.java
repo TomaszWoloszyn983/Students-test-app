@@ -97,6 +97,7 @@ public class StudentService {
      * @param studentId
      * @param cohortId
      */
+    @Transactional
     public void addStudentToCohort(Long studentId, Long cohortId){
         List<Student> list = studentRepository.findAll();
         boolean exists = studentRepository.existsById(studentId);
