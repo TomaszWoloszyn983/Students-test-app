@@ -161,14 +161,7 @@ public class Student implements Serializable {
 
     @Override
     public String toString() {
-        return "\nStudent{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", dob=" + dob +
-                ", age=" + getAge() +
-                ", cohort=" + getCohort() +
-                '}';
+        return "" + name;
     }
 
     public String getCohortsName(){

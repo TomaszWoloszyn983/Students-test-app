@@ -83,7 +83,12 @@ public class Cohort implements Serializable {
         this.students.add(student);
     }
 
-//    public String getstudentsName(){
+    @Override
+    public String toString() {
+        return "" + name;
+    }
+
+    //    public String getstudentsName(){
 //        if(student.getName() == null){
 //            return "Freelancer";
 //        }else {

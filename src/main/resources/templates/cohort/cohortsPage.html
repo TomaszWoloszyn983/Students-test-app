@@ -52,7 +52,15 @@
                             <span th:text="${cohort.getStartDate()}"> Start Date </span>
                         </td>
                         <td class="col-7 col-md-1">
-                            <span th:text="${cohort.getStudents()}"> Students </span>
+                            <table>
+                                <tr class="row border-bottom" th:each="student: ${students}">
+                                    <td th:if="${student.getCohort() == cohort}">
+                                        <span 
+                                            th:text="${student.getName()}">Test
+                                        </span>
+                                    </td>
+                                </tr>
+                            </table>
                         </td>
                         <!-- Admin Buttons: Add, Edit, Delete -->
                         <td class="col-12 col-md-4">
