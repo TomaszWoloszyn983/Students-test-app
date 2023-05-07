@@ -72,10 +72,7 @@ html{
     margin: auto;
 }
 .admin-btn-container{
-    width: fit-content;
     max-width: 500px;
-    padding: auto;
-    margin: auto;
 }
 
 #classes-button {
@@ -128,9 +125,7 @@ form > input {
 
 /* Medium size screeen */
 @media (min-width: 768px) {
-    /* Buttons */
     .admin-btn-container{
-        width: fit-content;
         max-width: none;
     }
 }
