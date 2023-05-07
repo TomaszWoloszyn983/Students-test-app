@@ -64,6 +64,20 @@ html{
 .nav-link{
     /* background-color: red; */
 }
+
+/* Buttons */
+.admin-buttons{
+    width: 150px;
+    padding: auto;
+    margin: auto;
+}
+.admin-btn-container{
+    width: fit-content;
+    max-width: 500px;
+    padding: auto;
+    margin: auto;
+}
+
 #classes-button {
     color: red;
     background-color: blue;
@@ -112,11 +126,19 @@ form > input {
     padding: auto;
 }
 
+/* Medium size screeen */
+@media (min-width: 768px) {
+    /* Buttons */
+    .admin-btn-container{
+        width: fit-content;
+        max-width: none;
+    }
+}
+
+/* Large Screen */
 @media (min-width: 1200px) {
     html{
         margin-left: 150px;
         margin-right: 150px;
-    }
-    .base-header {
     }
 }
