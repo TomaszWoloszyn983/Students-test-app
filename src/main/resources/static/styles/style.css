@@ -68,11 +68,11 @@ html{
 /* Buttons */
 .admin-buttons{
     width: 150px;
-    padding: auto;
+    /* padding: auto; */
     margin: auto;
 }
 .admin-btn-container{
-    max-width: 500px;
+    max-width: 353px;
 }
 
 #classes-button {
@@ -126,7 +126,7 @@ form > input {
 /* Medium size screeen */
 @media (min-width: 768px) {
     .admin-btn-container{
-        max-width: none;
+        max-width: 353px;
     }
 }
 
