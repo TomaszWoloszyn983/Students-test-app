@@ -83,6 +83,10 @@ public class Cohort implements Serializable {
         this.students.add(student);
     }
 
+    public void removeStudentFromList(Student student){
+        this.students.remove(student);
+    }
+
     @Override
     public String toString() {
         return "" + name;

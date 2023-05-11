@@ -127,4 +127,26 @@ public class CohortController {
 
         return "redirect:/cohorts/all";
     }
+
+    @GetMapping("/removeFromCohort")
+    public String removeFromCohort(
+            @RequestParam("cohortId") Long cohortId,
+            @RequestParam("studentId") Long studentId,
+//            @RequestParam("student") Long studentId,
+            Model model){
+        System.out.println("\n\nCohort Controller runs");
+        List<Student> students =  studentService.getStudents();
+//        Long cohId = Long.parseLong(cohortId);
+
+        System.out.println("\n\n!!!\nRemove Student: "+studentId+"\nfrom class no."+cohortId);
+//        model.addAttribute("students", students);
+
+        System.out.println("Call cohort service");
+        cohortService.removeFromCohort(cohortId, studentId);
+        System.out.println("Cohort service finished. Call student service.");
+        studentService.removeStudentFromCohort(studentId, cohortId);
+        System.out.println("Student service finished");
+
+        return "redirect:/cohorts/all";
+    }
 }

@@ -126,4 +126,37 @@ public class CohortService {
         System.out.println(cohort.getName() +" has following students "
                 +cohort.getStudentsList());
     }
+
+    @Transactional
+    public void removeFromCohort(Long cohortId, Long studentId){
+        List<Cohort> list = cohortRepository.findAll();
+        Cohort cohort;
+        boolean exists = cohortRepository.existsById(cohortId);
+        if (!exists){
+            throw new IllegalStateException(
+                    "\nClass can't be removed form the class"+
+                    "Class with id "+cohortId+" does not exist!"
+            );
+        }else{
+            cohort = findCohortById(cohortId);
+        }
+
+        List<Student> studentsList = studentRepository.findAll();
+        boolean existsStudent = studentRepository.existsById(studentId);
+        if (!existsStudent){
+            throw new IllegalStateException(
+                    "Student with id "+studentId+" does not exist!"
+            );
+        }
+        Student student = studentRepository.findById(studentId)
+                .orElseThrow(() -> new IllegalStateException(
+                        "\nStudent can't be removed form the class"+
+                        "Student with id "+studentId+" does not exist!"
+                ));
+
+        System.out.println("Student "+student.getName()+" was removed from "+cohort.getName());
+        cohort.removeStudentFromList(student);
+        System.out.println(cohort.getName() +" remained elements: "
+                +cohort.getStudentsList());
+    }
 }

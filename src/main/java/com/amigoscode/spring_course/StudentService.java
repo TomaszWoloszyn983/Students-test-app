@@ -126,4 +126,35 @@ public class StudentService {
         student.setCohort(cohort);
         System.out.println(student.getName()+" class is "+student.getCohort().getName()+" now.");
     }
+
+    @Transactional
+    public void removeStudentFromCohort(Long studentId, Long cohortId){
+        List<Student> list = studentRepository.findAll();
+        boolean exists = studentRepository.existsById(studentId);
+        if (!exists){
+            throw new IllegalStateException(
+                    "Function removeStudentFromCohort failed"+
+                    "Student with id "+studentId+" does not exist!"
+            );
+        }
+        Student student = studentRepository.findById(studentId)
+                .orElseThrow(() -> new IllegalStateException(
+                        "Student with id "+studentId+" does not exist!"
+                ));
+
+        List<Cohort> cohortsList = cohortRepository.findAll();
+        Cohort cohort;
+        boolean existCohort = cohortRepository.existsById(cohortId);
+
+//            cohort = cohortRepository.findCohortById(cohortId);
+        cohort = cohortRepository.findById(cohortId)
+                .orElseThrow(() -> new IllegalStateException(
+                        "Class with id "+cohortId+" does not exist!"
+                ));
+
+        System.out.println("Student "+student.getName()+" assigned to "
+                +cohort.getName()+" class");
+        student.setCohort(null);
+//        System.out.println(student.getName()+" class is "+student.getCohort().getName()+" now.");
+    }
 }

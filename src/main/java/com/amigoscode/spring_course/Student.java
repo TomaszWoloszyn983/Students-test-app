@@ -144,8 +144,13 @@ public class Student implements Serializable {
         return Period.between(this.dob, LocalDate.now()).getYears();
     }
 
-    public Cohort getCohort() {
-        return cohort;
+    public Cohort getCohort() throws NullPointerException{
+        try {
+            return cohort;
+        } catch (NullPointerException e){
+            System.out.println("Student "+getName()+" is not a member of any team at the moment");
+        }
+        return null;
     }
 
     void setCohort(Cohort cohort) {

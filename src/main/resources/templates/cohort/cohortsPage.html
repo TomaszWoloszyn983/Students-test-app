@@ -61,6 +61,13 @@
                                                 <span 
                                                     th:text="${student.getName()}">Student
                                                 </span>
+                                                <form th:action="@{/cohorts/removeFromCohort}" method="get">
+                                                    <input type="hidden" th:name="studentId"
+                                                           th:value="${student.getId()}">
+                                                    <input type="hidden" th:name="cohortId"
+                                                           th:value="${cohort.getId()}">
+                                                    <button class="btn btn-sm btn-danger" type="submit">Remove</button>
+                                                </form>
                                             </td>
                                         </tr>
                                     </table>
@@ -71,8 +78,7 @@
                                 <div class="row">
                                     <!-- <div class="row "> -->
                                         <div class="col-12 offset-md-1 col-md-5 my-1 text-center">
-                                            <form class=""
-                                                th:action="@{/cohorts/addToCohort/{id}(id=${cohort.getId()})}" th:method="post">
+                                            <form th:action="@{/cohorts/addToCohort/{id}(id=${cohort.getId()})}" th:method="post">
                                                 <select th:name="student" class="admin-buttons mx-auto">
                                                     <option value="0">Choose Student</option>
                                                     <option th:each="student : ${students}"
