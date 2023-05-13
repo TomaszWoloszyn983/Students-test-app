@@ -17,6 +17,7 @@ public class CohortController {
 
     private final CohortService cohortService;
     private final StudentService studentService;
+    String warningMessage = "";
 
     public CohortController(CohortService cohortService, StudentService studentService){
         this.cohortService = cohortService;
@@ -41,8 +42,11 @@ public class CohortController {
         model.addAttribute("cohorts", cohorts);
         model.addAttribute("cohortForm", new Cohort());
         model.addAttribute("students", students);
+        model.addAttribute("welcomeMessage", "Hello Muties!");
+        model.addAttribute("warningMessage", warningMessage);
         ModelAndView modelAndView = new ModelAndView("cohort/cohortsPage");
         modelAndView.addObject("noClasses", "This is an example message.");
+        warningMessage = "";
         return modelAndView;
     }
 
@@ -94,6 +98,7 @@ public class CohortController {
     public String deleteCohort(@PathVariable("cohortId") Long cohortId){
         this.cohortService.deleteCohort(cohortId);
         System.out.println("Delete Class by id "+cohortId);
+        warningMessage = "Delete Class by id "+cohortId;
         return "redirect:/cohorts/all";
     }
 
@@ -116,36 +121,40 @@ public class CohortController {
             @RequestParam("student") Long studentId,
             Model model){
         List<Student> students =  studentService.getStudents();
+        Student newStudent = studentService.findStudentById(studentId);
 
         System.out.println("\n\n!!!\nAdd Student: "+studentId+"\nto class no."+cohortId);
         model.addAttribute("students", students);
 
-        cohortService.addToCohort(cohortId, studentId);
-        studentService.addStudentToCohort(studentId, cohortId);
-
-        System.out.println("Test: ");
-
+        if (newStudent.getCohortsName() == null){
+            cohortService.addToCohort(cohortId, studentId);
+            studentService.addStudentToCohort(studentId, cohortId);
+            warningMessage = ""+newStudent.getName()+" added to new Group";
+        }else{
+            warningMessage = "Student "+newStudent.getName()+" "
+                    +"is already a member of "+newStudent.getCohortsName()+" team!"
+                    +"\nSo he has not been added to the list";
+        }
         return "redirect:/cohorts/all";
     }
 
+    /**
+     * Remove Student from Cohort/group
+     *
+     * @param cohortId
+     * @param studentId
+     * @param model
+     * @return
+     */
     @GetMapping("/removeFromCohort")
     public String removeFromCohort(
             @RequestParam("cohortId") Long cohortId,
             @RequestParam("studentId") Long studentId,
-//            @RequestParam("student") Long studentId,
             Model model){
-        System.out.println("\n\nCohort Controller runs");
-        List<Student> students =  studentService.getStudents();
-//        Long cohId = Long.parseLong(cohortId);
 
-        System.out.println("\n\n!!!\nRemove Student: "+studentId+"\nfrom class no."+cohortId);
-//        model.addAttribute("students", students);
-
-        System.out.println("Call cohort service");
         cohortService.removeFromCohort(cohortId, studentId);
-        System.out.println("Cohort service finished. Call student service.");
         studentService.removeStudentFromCohort(studentId, cohortId);
-        System.out.println("Student service finished");
+        warningMessage = "Student removed from group.";
 
         return "redirect:/cohorts/all";
     }

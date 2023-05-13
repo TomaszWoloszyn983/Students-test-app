@@ -96,7 +96,7 @@ public class CohortService {
      * @param studentId
      */
     @Transactional
-    public void addToCohort(Long cohortId, Long studentId){
+    public boolean addToCohort(Long cohortId, Long studentId){
         List<Cohort> list = cohortRepository.findAll();
         Cohort cohort;
         boolean exists = cohortRepository.existsById(cohortId);
@@ -120,11 +120,17 @@ public class CohortService {
                         "Student with id "+studentId+" does not exist!"
                 ));
 
-        System.out.println("New Student was added to "+cohort.getName()
-                + " Students List");
-        cohort.addStudentToList(student);
-        System.out.println(cohort.getName() +" has following students "
-                +cohort.getStudentsList());
+        if (student.getCohort() != null) {
+            System.out.println("\n!!!\nStudent "+student.getName()+" "
+                    +"is already a member of "+student.getCohortsName()+" team!"
+                    +"\nSo he has not been added to the list");
+            return false;
+        }else{
+            System.out.println("New Student was added to "+cohort.getName()
+                    + " Students List");
+            cohort.addStudentToList(student);
+            return true;
+        }
     }
 
     @Transactional

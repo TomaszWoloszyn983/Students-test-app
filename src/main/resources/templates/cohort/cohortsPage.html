@@ -12,15 +12,19 @@
 </head>
 
 <body>
-    <!--  Message doesn't show -->
-    <div>
-        <h3 class="mx-auto" th:text="${message}">mess</h3>
-    </div>
     <div>
         <div class="my-md-5 mx-0">
             <header class="mt-5 pt-5">
                 <h1 class="mx-auto py-5 text-center">Classes</h1>
             </header>
+        </div>
+        <!--  Message doesn't show -->
+        <div>
+            <th scope="col" class="d-none d-md-inline col-md-4"
+                sec:authorize="hasRole('ADMIN')">
+                <h2 class="text-center mx-auto" th:text="${welcomeMessage}"></h2>
+            </th>
+            <p class="text-center mx-auto" th:text="${warningMessage}"></p>
         </div>
         <!-- Check if user is the ADMIN -->
         <div class="form-group" th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
@@ -57,16 +61,16 @@
                                     <div class="d-md-none col-2 text-right">Students List:</div>
                                     <table class="col-10 text-center">
                                         <tr th:each="student: ${students}">
-                                            <td th:if="${student.getCohort() == cohort}">
-                                                <span 
+                                            <td class="row" th:if="${student.getCohort() == cohort}">
+                                                <span class="col-8 d-inline text-right" 
                                                     th:text="${student.getName()}">Student
                                                 </span>
-                                                <form th:action="@{/cohorts/removeFromCohort}" method="get">
+                                                <form class="offset-1 col-3 d-inline" th:action="@{/cohorts/removeFromCohort}" method="get">
                                                     <input type="hidden" th:name="studentId"
                                                            th:value="${student.getId()}">
                                                     <input type="hidden" th:name="cohortId"
                                                            th:value="${cohort.getId()}">
-                                                    <button class="btn btn-sm btn-danger" type="submit">Remove</button>
+                                                    <button class="btn btn-sm btn-secondary" type="submit">Remove</button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -79,14 +83,21 @@
                                     <!-- <div class="row "> -->
                                         <div class="col-12 offset-md-1 col-md-5 my-1 text-center">
                                             <form th:action="@{/cohorts/addToCohort/{id}(id=${cohort.getId()})}" th:method="post">
-                                                <select th:name="student" class="admin-buttons mx-auto">
-                                                    <option value="0">Choose Student</option>
-                                                    <option th:each="student : ${students}"
+                                                <!-- <span th:if="${student.getCohort()} == null"> -->
+                                                    <select th:name="student" class="admin-buttons mx-auto">
+                                                        <option value="0">Choose Student</option>
+                                                        <option th:each="student : ${students}"
                                                             th:value="${student.getId()}"
                                                             th:text="${student.getName()}">
-                                                    </option>
-                                                </select>
-                                                <button class="btn btn-primary btn-sm mx-auto admin-buttons" type="submit">Add To Class</button>
+                                                        </option>
+                                                        <!-- <span th:if=""></span> -->
+                                                    </select>
+    
+                                                    <button class="btn btn-primary btn-sm mx-auto admin-buttons" type="submit"
+                                                        data-toggle="modal" data-target="#myModal">
+                                                        Add To Class
+                                                    </button>
+                                                <!-- </span> -->
                                             </form>
                                         </div>
                                     <!-- </div>
@@ -104,6 +115,23 @@
                                             </a>
                                         </div>
                                     <!-- </div> -->
+                                    <!-- Modal boxes -->
+                                    <div class="modal" id="myModal">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Confirm</h4>
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>student.getName() is already a member of cohort.getName() team are you sure you want to relocate him?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </td>
                         </tr>

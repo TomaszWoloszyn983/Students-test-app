@@ -169,12 +169,13 @@ public class Student implements Serializable {
         return "" + name;
     }
 
-    public String getCohortsName(){
-        if(cohort.getName() == null){
-            return "Freelancer";
-        }else {
+    public String getCohortsName() throws NullPointerException{
+        try {
             return cohort.getName();
+        } catch (NullPointerException e){
+            System.out.println("Student "+getName()+" is not a member of any team at the moment");
         }
+        return null;
     }
 
     private ISpringTemplateEngine templateEngine(ITemplateResolver templateResolver) {
