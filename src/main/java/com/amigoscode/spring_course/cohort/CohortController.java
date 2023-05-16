@@ -98,7 +98,7 @@ public class CohortController {
     public String deleteCohort(@PathVariable("cohortId") Long cohortId){
         this.cohortService.deleteCohort(cohortId);
         System.out.println("Delete Class by id "+cohortId);
-        warningMessage = "Delete Class by id "+cohortId;
+        warningMessage = "Class "+cohortId+ " deleted";
         return "redirect:/cohorts/all";
     }
 

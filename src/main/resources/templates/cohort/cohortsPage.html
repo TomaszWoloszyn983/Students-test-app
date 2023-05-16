@@ -2,10 +2,15 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <script type="text/javascript" src="webjars/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
           rel="stylesheet"
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
           crossorigin="anonymous">
+           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../static/styles/style.css"
           th:href="@{/styles/style.css}"type="text/css">
     <title>Cohorts List</title>
@@ -107,15 +112,48 @@
                                                 th:href="@{/cohorts/updateCohort/{id}(id=${cohort.getId()})}">
                                                 Edit
                                             </a>
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateModal" data-whatever="@mdo">Edit Modal</button>
                                         </div>
                                         <div class="col-sm-6 col-md-3 my-1 text-center">
-                                            <a class="btn btn-danger btn-sm mx-auto admin-buttons"
-                                                th:href="@{/cohorts/delete/{id}(id=${cohort.getId()})}">
+                                            <button class="btn btn-danger btn-sm mx-auto admin-buttons"
+                                                data-toggle="modal" data-target="cohortId"
+                                                >
                                                 Delete
-                                            </a>
+                                            </button>
                                         </div>
                                     <!-- </div> -->
-                                    <!-- Modal boxes -->
+                                <!-- Modal boxes -->
+
+                                        <!-- Delete modal box definition -->
+                                    <div class="modal" 
+                                            th:with="cohortId='cohortModal' + ${cohort.getId}"
+                                            th:attr="modalId=${cohortId}"
+                                            id="cohortId"
+                                            >
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Confirm Deletion</h5>
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Are you sure you want to delete?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a th:href="@{/cohorts/delete/{id}(id=${cohort.getId()})}"
+                                                        class="btn btn-danger">
+                                                        Delete
+                                                    </a>
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">
+                                                        Cancel
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <!-- End delete modal section -->
+
                                     <div class="modal" id="myModal">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
@@ -131,6 +169,47 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <!-- Update Cohort Modal -->
+                                    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="updateModalLabel">New message</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                              <!--/*@thymesVar id="cohort" type="com.amigoscode.spring_course.Cohort"*/-->
+                                                    <!-- <form class="mx-auto" action="#"
+                                                              th:action="@{/cohorts/updateCohort/{id}/submitChanges(id=${cohort.getId()})}"
+                                                              th:method="post" th:object="${cohort}">
+                                                        <fieldset>
+                                                            <legend>Update Class</legend>
+                                                            <label for="name-box">Name
+                                                                <input type="text" id="name-box" th:field="*{name}" name="name">
+                                                            </label>
+                                                        </fieldset>
+                                                        <fieldset>
+                                                            <label for="date-box">Start Date
+                                                                <input type="date" id="date-box" name="date"
+                                                                        th:date="${#temporals.format(localDate, 'yyyy-MM-dd')}"
+                                                                        th:field="*{startDate}">
+                                                            </label>
+                                                        </fieldset>
+                                                        <button class="btn btn-secondary mx-2 mt-3" type="submit">Submit</button>
+                                                        <button class="btn btn-danger mx-2 mt-3" type="cancel"
+                                                                name="cancel" th:href="@{/cohorts/all}">Cancel</button>
+                                                    </form> -->
+                                                </div>
+                                                <div class="modal-footer">
+                                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                  <button type="button" class="btn btn-primary">Send message</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <!-- End of Modals section -->
                                     </div>
                                 </div>
                             </td>
@@ -227,5 +306,28 @@
             </a>
         </div>
     </div>
+    <!-- <script>
+        function showModal(){
+            $('#deleteModal').modal('show');
+        }
+    </script> -->
 </body>
+<!-- 
+    <script>
+        // Modal initialization
+        document.addEventListener('DOMContentLoaded', function() {
+          let modal = document.querySelectorAll('.modal');
+          M.Modal.init(modal, {
+            opacity:0.8,
+            inDuration:300,
+            outDuration:400
+          });
+        });
+    </script>
+
+    <script>
+        $('#deleteModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+        })
+    </script> -->
 </html>
