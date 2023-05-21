@@ -6,7 +6,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -29,7 +28,7 @@ public class Cohort implements Serializable {
     private Long id;
 
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cohort")
+    @OneToMany(cascade = { CascadeType.ALL }, mappedBy = "cohort")
     private Set<Student> students;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
@@ -91,6 +90,7 @@ public class Cohort implements Serializable {
     public String toString() {
         return "" + name;
     }
+
 
     //    public String getstudentsName(){
 //        if(student.getName() == null){

@@ -73,24 +73,36 @@ public class CohortController {
     }
 
 //    @RolesAllowed({"ROLE_USER", "ROLE_ADMIN"})
-    @GetMapping(path = "/updateCohort/{cohortId}")
-    public String updateCohort(@PathVariable(value = "cohortId")
-                                        Long cohortId, Model model){
-        Cohort cohortToUpdate = cohortService.findCohortById(cohortId);
-        System.out.println("Update information about "+cohortToUpdate.getName());
-        model.addAttribute("cohort", cohortToUpdate);
-        return "cohort/updateCohort";
-    }
+@GetMapping(path = "/updateCohort/{cohortId}")
+public String updateCohort(@PathVariable(value = "cohortId")
+                                   Long cohortId, Model model){
+    Cohort cohortToUpdate = cohortService.findCohortById(cohortId);
+    System.out.println("Update information about "+cohortToUpdate.getName());
+    model.addAttribute("cohort", cohortToUpdate);
+    return "cohort/updateCohort";
+}
 
     @PostMapping("/updateCohort/{cohortId}/submitChanges")
     public String submitChanges(
             @PathVariable(value = "cohortId") Long cohortId,
-            @ModelAttribute("cohort") Cohort cohort){
+            @ModelAttribute("cohort") Cohort cohort) {
         System.out.println("Trying to submit changes.");
         Cohort cohortToUpdate = cohortService.findCohortById(cohortId);
-        System.out.println("Submitting changes in "+cohortToUpdate.getName());
+        System.out.println("Submitting changes in " + cohortToUpdate.getName());
         cohortService.updateCohort(cohortId, cohort.getName(),
                 cohort.getStartDate());
+        return "redirect:/cohorts/all";
+    }
+
+    @PutMapping("/update/{cohortId}")
+    public String handleUpdateRequest(
+            @PathVariable(value = "cohortId") Long cohortId,
+            Model model) {
+        Cohort cohortToUpdate = cohortService.findCohortById(cohortId);
+        System.out.println("Display class update modal for: "+cohortToUpdate.getId()+
+                           " - "+cohortToUpdate.getName()+
+                           " : "+cohortToUpdate.getStudents());
+        model.addAttribute("cohortToUpdate", cohortToUpdate);
         return "redirect:/cohorts/all";
     }
 
@@ -132,8 +144,7 @@ public class CohortController {
             warningMessage = ""+newStudent.getName()+" added to new Group";
         }else{
             warningMessage = "Student "+newStudent.getName()+" "
-                    +"is already a member of "+newStudent.getCohortsName()+" team!"
-                    +"\nSo he has not been added to the list";
+                    +"is already a member of "+newStudent.getCohortsName()+" team!";
         }
         return "redirect:/cohorts/all";
     }
