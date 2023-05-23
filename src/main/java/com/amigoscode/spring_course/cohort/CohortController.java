@@ -100,8 +100,8 @@ public String updateCohort(@PathVariable(value = "cohortId")
             Model model) {
         Cohort cohortToUpdate = cohortService.findCohortById(cohortId);
         System.out.println("Display class update modal for: "+cohortToUpdate.getId()+
-                           " - "+cohortToUpdate.getName()+
-                           " : "+cohortToUpdate.getStudents());
+                " - "+cohortToUpdate.getName()+
+                " : "+cohortToUpdate.getStudents());
         model.addAttribute("cohortToUpdate", cohortToUpdate);
         return "redirect:/cohorts/all";
     }

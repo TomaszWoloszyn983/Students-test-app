@@ -194,28 +194,6 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <!--/*@thymesVar id="cohortcohortToUpdate" type="com.amigoscode.spring_course.Cohort"*/-->
-                                                    <!-- <form class="mx-auto" action="#"
-                                                              th:action="@{/cohorts/update/{id}(id=${cohort.getId()})}"
-                                                              th:method="post" th:object="${cohort}">
-                                                        <fieldset>
-                                                            <legend>Update Class</legend>
-                                                            <label for="name-box">Name
-                                                                <input type="text" id="name-box" th:field="*{name}" name="name">
-                                                            </label>
-                                                        </fieldset>
-                                                        <fieldset>
-                                                            <label for="date-box">Start Date
-                                                                <input type="date" id="date-box" name="date"
-                                                                       th:date="${#temporals.format(localDate, 'yyyy-MM-dd')}"
-                                                                       th:field="*{startDate}">
-                                                            </label>
-                                                        </fieldset>
-                                                        <button class="btn btn-secondary mx-2 mt-3" type="submit">Submit</button>
-                                                        <button class="btn btn-danger mx-2 mt-3" type="cancel"
-                                                                name="cancel" data-dismiss="modal"
-                                                                >Cancel</button>
-                                                    </form> -->
                                                     <!--/*@thymesVar id="cohort" type="com.amigoscode.spring_course.Cohort"*/-->
                                                     <form
                                                         th:action="@{/cohorts/updateCohort/{id}/submitChanges(id=${cohort.getId()})}"
@@ -226,13 +204,13 @@
                                                             <label for="name-box">Name
                                                                 <!-- <input type="text" id="name-box" th:field="*{name}" name="name"> -->
                                                               <input type="text" id="editName" name="name"
-                                                                     />
+                                                                     >
                                                             </label>
-                                                            <label for="date-box">startDate
-                                                                <!-- <input type="text" id="name-box" th:field="*{name}" name="name"> -->
-                                                              <input type="date" id="editDate" name="date"
-                                                                     th:date="${#temporals.format(localDate, 'yyyy-MM-dd')}"
-                                                                     />
+                                                            <label for="editdate-box">Start Date
+                                                                <input type="date" id="editdate-box" name="date"
+                                                                       th:date="${#temporals.format(localDate, 'yyyy-MM-dd')}"
+                                                                        th:field="*{startDate}"
+                                                                       >
                                                             </label>
                                                         </fieldset>
                                                         <!-- <input type="text" th:field="${objectToUpdate.email}" /> -->

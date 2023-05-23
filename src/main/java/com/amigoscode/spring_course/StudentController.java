@@ -108,4 +108,17 @@ public class StudentController {
             model.addAttribute("student", studentToUpdate);
     return "updateStudent";
     }
+
+    @PostMapping("/update/{studentId}")
+    public Model handleUpdateRequest(@ModelAttribute("student")
+                                      Student student,
+                                      @PathVariable(value = "studentId")
+                                      Long studentId, Model model) {
+        Student studentToUpdate = studentService.findStudentById(studentId);
+        System.out.println("\n\n\n!!!\nHandleUpdateRequest method was launched\nfor a student: "
+                + studentToUpdate.getId()+" - "+studentToUpdate.getName()+"\n!!!\n");
+        model.addAttribute("student", studentToUpdate);
+//        Może trzeba tutaj zwrócić formularz
+        return model;
+    }
 }
