@@ -2,12 +2,14 @@ package com.amigoscode.spring_course.cohort;
 
 import com.amigoscode.spring_course.Student;
 import com.amigoscode.spring_course.StudentService;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -94,15 +96,14 @@ public String updateCohort(@PathVariable(value = "cohortId")
         return "redirect:/cohorts/all";
     }
 
-    @PutMapping("/update/{cohortId}")
-    public String handleUpdateRequest(
-            @PathVariable(value = "cohortId") Long cohortId,
-            Model model) {
-        Cohort cohortToUpdate = cohortService.findCohortById(cohortId);
-        System.out.println("Display class update modal for: "+cohortToUpdate.getId()+
-                " - "+cohortToUpdate.getName()+
-                " : "+cohortToUpdate.getStudents());
-        model.addAttribute("cohortToUpdate", cohortToUpdate);
+    @PostMapping("/update/{cohortId}")
+    public String handleUpdateCohort(
+            @RequestParam ("name") String name,
+            @DateTimeFormat(pattern = "yyyy-MM-dd")
+            @RequestParam ("date") LocalDate startDate,
+            @PathVariable(value = "cohortId") Long cohortId) {
+
+        cohortService.updateCohort(cohortId, name, startDate);
         return "redirect:/cohorts/all";
     }
 

@@ -2,12 +2,14 @@ package com.amigoscode.spring_course;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -109,16 +111,31 @@ public class StudentController {
     return "updateStudent";
     }
 
+    /**
+     * Collect data from update student form displayed in the Update Modal Dialog-Box
+     * Call updateStudent method from StudentService class and pass the collected data
+     * to the method in order to update existing students information.
+     *
+     * @param name
+     * @param email
+     * @param date
+     * @param studentId
+     * @return redirect url to the students list page.
+     */
     @PostMapping("/update/{studentId}")
-    public Model handleUpdateRequest(@ModelAttribute("student")
-                                      Student student,
+    public String handleUpdateRequest(@RequestParam ("name") String name,
+                                      @RequestParam ("email") String email,
+                                      @DateTimeFormat(pattern = "yyyy-MM-dd")
+                                      @RequestParam ("date") LocalDate date,
                                       @PathVariable(value = "studentId")
-                                      Long studentId, Model model) {
-        Student studentToUpdate = studentService.findStudentById(studentId);
-        System.out.println("\n\n\n!!!\nHandleUpdateRequest method was launched\nfor a student: "
-                + studentToUpdate.getId()+" - "+studentToUpdate.getName()+"\n!!!\n");
-        model.addAttribute("student", studentToUpdate);
-//        Może trzeba tutaj zwrócić formularz
-        return model;
+                                      Long studentId) {
+
+        studentService.updateStudent(studentId, name,
+                email, date);
+        System.out.println("\n\n\n!!!\nData received from modal-box.\nfor a student: "
+                + studentId+"-"+name+" - "+email+" - "+date+"\n!!!\n");
+
+//        Pamiętaj o dodaniu do notastek wzmianki o adnotacji     @DateTimeFormat(pattern = "yyyy-MM-dd") dodanej do RequestParamsów
+        return "redirect:/student/allStudents";
     }
 }

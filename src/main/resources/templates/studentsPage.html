@@ -102,8 +102,8 @@
                                th:href="@{/student/updateStudent/{id}(id=${student.getId()})}">
                                 Edit
                             </a>
-                            <button type="button" class="btn btn-primary" data-toggle="modal"
-                                    th:data-target="${'#update' + studenttId}" data-whatever="@mdo">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" th:id="${studentId} + Btn"
+                                    th:data-target="${'#update' + studentId}" data-whatever="@mdo">
                                     Edit Modal
                             </button>
                             <button class="btn btn-danger btn-sm mx-auto admin-buttons"
@@ -122,7 +122,7 @@
                                             <button type="button" class="close" data-dismiss="modal"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <p>Are you sure you want to remove student from school?</p>
+                                            <p>Are you sure you want to remove student <span th:text="${student.getName()}"></span> from school?</p>
                                             <p>If you submir deletion, this Student will delete him
                                                 from the data base
                                             </p>
@@ -141,7 +141,7 @@
                                 </div>
                             </div>
                             <!-- Update Student Modal -->
-                            <div class="modal fade" id="updateModal" th:id="${'update' + studenttId}"
+                            <div class="modal fade" id="updateModal" th:id="${'update' + studentId}"
                                  tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -152,34 +152,33 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <!-- Update form goes here -->
-                                            <form th:action="@{/student/update/{studentId}}"
-                                                  th:object="${student}" method="post">
+                                            <!-- Update form -->
+                                            <form th:action="@{/student/update/{id}(id=${student.getId()})}"
+                                                  th:object="${studentToUpdate}" method="post">
+                                                <legend>Update Student</legend>
+                                                <p><span th:text="${student.getName()}"></span></p>
                                                 <fieldset>
-                                                    <legend>Update Student</legend>
-                                                    <h3 th:text="${student != null ? student.name : 'No student found'}"></h3>
                                                     <label for="name-box">Name
-                                <!--                        <input type="hidden" th:field="*{name}" name="name">-->
-                                                        <!-- <input type="text" id="name-box" th:field="*{name}" name="name"> -->
+                                                        <input type="text" name="name" th:value="${student.getName()}">
                                                     </label>
                                                 </fieldset>
                                                 <fieldset>
                                                     <label>Email
-                                                        <!-- <input type="text" th:field="*{email}"> -->
+                                                        <input type="text" name="email" th:value="${student.getEmail()}">
                                                     </label>
                                                 </fieldset>
                                                 <fieldset>
                                                     <label for="date-box">Date Of Birth
-                                                        <!-- <input type="date" id="date-box" name="date"
+                                                        <input type="date" id="date-box" name="date" th:value="${student.getDob()}"
                                                                th:date="${#temporals.format(localDate, 'yyyy-MM-dd')}"
-                                                               th:field="*{dob}"> -->
+                                                               date="localDate, 'yyyy-MM-dd'">
                                                     </label>
                                                 </fieldset>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-primary">Update</button>
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                </div>
                                             </form>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary">Update</button>
                                         </div>
                                     </div>
                                 </div>
