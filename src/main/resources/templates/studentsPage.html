@@ -98,17 +98,14 @@
                     <td class="col-12 col-md-4" sec:authorize="hasRole('ADMIN')"
                         th:with="studentId='studentModal' + ${student.getId()}">
                         <div class="mx-3">
-                            <a class="btn btn-primary btn-sm px-auto mx-1 admin-buttons"
-                               th:href="@{/student/updateStudent/{id}(id=${student.getId()})}">
-                                Edit
-                            </a>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" th:id="${studentId} + Btn"
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    th:id="${studentId} + Btn"
                                     th:data-target="${'#update' + studentId}" data-whatever="@mdo">
-                                    Edit Modal
+                                Edit Modal
                             </button>
                             <button class="btn btn-danger btn-sm mx-auto admin-buttons"
-                                data-toggle="modal"
-                                th:data-target="${'#' + studentId}">
+                                    data-toggle="modal"
+                                    th:data-target="${'#' + studentId}">
                                 Delete
                             </button>
                             
@@ -123,7 +120,7 @@
                                         </div>
                                         <div class="modal-body">
                                             <p>Are you sure you want to remove student <span th:text="${student.getName()}"></span> from school?</p>
-                                            <p>If you submir deletion, this Student will delete him
+                                            <p>If you submit deletion, this Student will delete him
                                                 from the data base
                                             </p>
                                         </div>

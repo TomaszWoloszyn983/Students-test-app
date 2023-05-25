@@ -7,20 +7,25 @@
 </head>
 <body>
     <header>
-        <h1>Update Students Data</h1>
+        <h1 class="text-center">Students Detail</h1>
     </header>
+
+    <p>Some information about the student. Maybe table with result aso.</p>
+
     <!--  Message  -->
     <div class="row p-2 border border-dark my-3">
-        <div class="col">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
             <!--/*@thymesVar id="student" type="com.amigoscode.spring_course.Student"*/-->
             <!--        <form action="#" method="post" th:action="@{/addStudents}" th:object="${student}" >-->
             <form class="mx-auto" action="#" 
                     th:action="@{/student/updateStudent/{id}/submitChanges(id=${student.getId()})}"
                     th:method="post" th:object="${student}">
                 <fieldset>
-                    <legend>Update Student</legend>
+                    <legend class="text-center">
+                        <span th:text="*{name}"></span>
+                    </legend>
                     <label for="name-box">Name
-<!--                        <input type="hidden" th:field="*{name}" name="name">-->
                         <input type="text" id="name-box" th:field="*{name}" name="name">
                     </label>
                 </fieldset>
@@ -38,10 +43,29 @@
                 </fieldset>
                 <button class="btn btn-secondary mx-2 mt-3" type="submit">Submit</button>
                 <button class="btn btn-danger mx-2 mt-3" type="cancel"
-                        name="cancel" th:href="@{/student/allStudents}">Cancel</button>
+                        name="cancel">Cancel</button>
             </form>
         </div>
+        <div class="col-md-4"></div>
     </div>
 
+    <div class="row">
+        <div class="col-6 offset-md-3 col-md-3">
+            <button class="btn btn-secondary mx-2 mt-3"
+                onclick="history.go(-1)">
+                Go back
+            </button>
+        </div>
+        <div class="col-6 col-md-3">
+            <a class="btn btn-secondary mx-2 mt-3"
+                th:href="@{/student/allStudents}">
+                Student Page
+            </a>
+        </div>
+    </div>
+    <a class="offset-9 offset-md-11 col-3 col-md-1 btn btn-secondary"
+        th:href="@{/}">
+        Home Page
+    </a>
 </body>
 </html>

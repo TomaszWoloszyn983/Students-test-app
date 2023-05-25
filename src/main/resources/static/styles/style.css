@@ -85,6 +85,11 @@ html{
     background-color: yellow;
 }
 
+.student-links {
+    text-decoration: none;
+    color: #000;
+}
+
 /* Home Page content */
 .main-content {
     margin-right: 11rem;

@@ -76,6 +76,9 @@ public class StudentController {
         return "index";
     }
 
+    /*
+        This function is not used anymore
+     */
     @PostMapping("/updateStudent/{studentId}/submitChanges")
     public String submitChanges(
             @PathVariable(value = "studentId") Long studentId,
@@ -83,7 +86,7 @@ public class StudentController {
         Student studentToUpdate = studentService.findStudentById(studentId);
         studentService.updateStudent(studentId, student.getName(),
                                      student.getEmail(), student.getDob());
-        return "redirect:/student/allStudents";
+        return "redirect:/student/{studentId}/studentDetail";
     }
 
     /*
@@ -95,20 +98,22 @@ public class StudentController {
     public String deleteStudent(@PathVariable("studentId") Long studentId){
         this.studentService.deleteStudent(studentId);
         System.out.println("Student Service. Delete student by id "+studentId);
-        return "redirect:/student/allStudents";
+        return "redirect:/student/{studentId}/studentDetail";
     }
 
     /*
+        This function is not used anymore.
+
         Update student information is allowed to any logged in users.
         It should be allowed only to one user and admins.
      */
     @RolesAllowed({"ROLE_USER", "ROLE_ADMIN"})
-    @GetMapping(path = "/updateStudent/{studentId}")
-    public String updateStudent(@PathVariable(value = "studentId")
+    @GetMapping(path = "/{studentId}/studentDetail")
+    public String studentDetail(@PathVariable(value = "studentId")
                                 Long studentId, Model model){
             Student studentToUpdate = studentService.findStudentById(studentId);
             model.addAttribute("student", studentToUpdate);
-    return "updateStudent";
+    return "studentDetail";
     }
 
     /**
