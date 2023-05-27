@@ -133,6 +133,11 @@ form > input {
     padding: auto;
 }
 
+/* Tables */
+.my-table {
+    background-color: #ffffffd5;
+}
+
 /* Medium size screeen */
 @media (min-width: 768px) {
     .admin-btn-container{
