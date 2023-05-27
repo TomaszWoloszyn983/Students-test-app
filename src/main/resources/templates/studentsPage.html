@@ -169,8 +169,8 @@
                                                         </label>
                                                     </fieldset>
                                                     <fieldset>
-                                                        <label for="date-box">Date Of Birth
-                                                            <input type="date" id="date-box" name="date" th:value="${student.getDob()}"
+                                                        <label for="date">Date Of Birth
+                                                            <input type="date" name="date" th:value="${student.getDob()}"
                                                                 th:date="${#temporals.format(localDate, 'yyyy-MM-dd')}"
                                                                 date="localDate, 'yyyy-MM-dd'">
                                                         </label>

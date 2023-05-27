@@ -19,6 +19,11 @@ html{
     height: 100vh;
 }
 
+.title-image {
+    height: 150px;
+    width: fit-content;
+}
+
 .login-buttons {
     align-items: end;
     color: yellow;

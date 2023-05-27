@@ -82,7 +82,6 @@
                                                           th:text="${student.getName()}" class="student-links">Student
                                                     </span>
                                                 </a>
-                                                
                                                 <form class="offset-1 col-3 d-inline" th:action="@{/cohorts/removeFromCohort}" method="get">
                                                     <input type="hidden" th:name="studentId"
                                                            th:value="${student.getId()}">
@@ -188,7 +187,7 @@
                                     <div class="modal fade" id="editModal" th:id="${'update' + cohortId}"  tabindex="-1"
                                          role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
-                                              <div class="modal-content">
+                                            <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="updateModalLabel">Update Class details</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -202,16 +201,16 @@
                                                         th:method="post">
                                                         <fieldset>
                                                             <legend><span th:text="${cohort.getName}"></span></legend>
-                                                            <label for="name-box">New Name
-                                                                <input type="text" id="name-box" th:value="${cohort.getName()}" name="name">
+                                                            <label for="name">New Name
+                                                                <input type="text" th:value="${cohort.getName()}" name="name">
                                                             </label>
-                                                            <label for="editdate-box">Start Date
-                                                                <input type="date" id="editdate-box" name="date" th:value="${cohort.getStartDate()}"
+                                                            <label for="date">Start Date
+                                                                <input type="date" name="date" th:value="${cohort.getStartDate()}"
                                                                        th:date="${#temporals.format(localDate, 'yyyy-MM-dd')}">
                                                             </label>
                                                         </fieldset>
 
-                                                        <button class="btn btn-secondary mx-2 mt-3" id="updateBtn" type="submit">Submit</button>
+                                                        <button class="btn btn-secondary mx-2 mt-3" type="submit">Submit</button>
                                                         <button class="btn btn-danger mx-2 mt-3" type="cancel"
                                                                 name="cancel" data-dismiss="modal">
                                                                 Cancel
