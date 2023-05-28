@@ -56,7 +56,7 @@ public class CohortController {
     public String addNewCohort(@ModelAttribute Cohort cohort, Model model,
                                      Authentication auth) throws IllegalArgumentException{
 //        Authentication temporarily removed
-//        if (auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))){
+        if (auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))){
             try{
                 model.addAttribute("cohortForm", new Cohort());
                 model.addAttribute("standardDate", new Date());
@@ -70,8 +70,8 @@ public class CohortController {
                 System.out.println("Parse attempt failed for value");
             }
             return "cohort/cohortsPage";
-//        }
-//        return "index";
+        }
+        return "redirect:/cohorts/all";
     }
 
 //    @RolesAllowed({"ROLE_USER", "ROLE_ADMIN"})
