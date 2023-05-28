@@ -15,13 +15,28 @@ html{
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
+    background-color: #ffffffa6;
     min-height: 750px;
     height: 100vh;
 }
 
 .title-image {
-    height: 150px;
-    width: fit-content;
+    /* height: 150px; */
+    margin: auto;
+    max-width: 100%;
+    height: auto;
+}
+.my-title-text {
+    text-decoration: none;
+    margin: auto;
+    max-width: 100%;
+    height: auto;
+}
+.title-image :hover {
+    color: #ffffffa9;
+}
+.my-title-text :hover {
+    color: #ffffffa9;
 }
 
 .login-buttons {
@@ -73,7 +88,6 @@ html{
 /* Buttons */
 .admin-buttons{
     width: 150px;
-    /* padding: auto; */
     margin: auto;
 }
 .admin-btn-container{
