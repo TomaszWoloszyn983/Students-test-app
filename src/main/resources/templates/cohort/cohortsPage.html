@@ -38,7 +38,7 @@
             </th>
             <p class="text-center mx-auto" th:text="${warningMessage}"></p>
         </div>
-        <!-- Check if user is the ADMIN -->
+        <!-- Check if user is ADMIN -->
         <div class="form-group my-table" th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
             <table class="row mx-0 p-2 border border-dark my-3
                           table table-stripe my-table">
@@ -60,7 +60,7 @@
                     </thead>
                     <!-- Cohort Card -->
                     <tbody>
-                        <tr class="row mx-0 border-bottom border border-dark" th:each="cohort: ${cohorts}">
+                        <tr class="row mx-0 border-bottom border-dark" th:each="cohort: ${cohorts}">
                             <td class="col-2 col-md-1">
                                 <span th:text="${cohort.getId()}"> Id </span>
                             </td>
@@ -280,19 +280,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="row mx-0 border border-dark text-left" th:each="cohort: ${cohorts}">
-                            <td class="col-2 col-md-1">
+                        <tr class="row mx-0 border-bottom border-dark text-left my-table-rows" th:each="cohort: ${cohorts}">
+                            <td class="col-2 col-md-1 my-cols">
                                 <span th:text="${cohort.getId()}"> Id </span>
                             </td>
-                            <td class="col-5 col-md-3">
+                            <td class="col-5 col-md-3 my-cols">
                                 <span th:text="${cohort.getName()}"> Name </span>
                             </td>
-                            <td class="col-5 col-md-3">
+                            <td class="col-5 col-md-3 my-cols">
                                 <span th:text="${cohort.getStartDate()}"> Start Date </span>
                             </td>
-                            <td class="col-12 col-md-5">
+                            <td class="col-12 col-md-5 my-cols">
                                 <div class="row">
-                                    <div class="d-md-none col-2 text-right">Students List:</div>
+                                    <div class="d-md-none col-2 my-cols text-right">Students List:</div>
                                     <table class="col-10 text-center">
                                         <tr th:each="student: ${students}">
                                             <td th:if="${student.getCohort() == cohort}">

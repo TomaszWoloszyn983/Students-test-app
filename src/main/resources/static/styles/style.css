@@ -7,6 +7,7 @@ html{
     background-size: cover;
     min-height: 750px;
     height: 100vh;
+    scroll-behavior: smooth;
 }
 
 /* Header and Navbar */
@@ -15,7 +16,6 @@ html{
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
-    background-color: #ffffffa6;
     min-height: 750px;
     height: 100vh;
 }
@@ -24,19 +24,32 @@ html{
     /* height: 150px; */
     margin: auto;
     max-width: 100%;
+    text-decoration: none;
     height: auto;
+    opacity: 0.6;
 }
 .my-title-text {
+    color: #493e36b4;
+    font-style: italic;
+    font-size: 48px;
     text-decoration: none;
     margin: auto;
     max-width: 100%;
     height: auto;
 }
 .title-image :hover {
-    color: #ffffffa9;
+    opacity: 0.9;
+    transition-duration: 0.5s;
+    text-decoration: none;
+    
 }
 .my-title-text :hover {
-    color: #ffffffa9;
+    color: #493e36;
+    font-size: 49px;
+    font-weight: 600;
+    text-decoration: none;
+    /* text-decoration-color: #ffffff0e; */
+    transition-duration: 0.8s;
 }
 
 .login-buttons {
@@ -56,10 +69,6 @@ html{
     border-color: blue;
 }
 
-.my-main-title {
-    color: #493e36b4;
-    font-style: italic;
-}
 
 
 /* Navigation Bar */
@@ -80,6 +89,7 @@ html{
 .my-nav-button :hover{
     background-color: #493e36b4;
     color: #fff;
+    transition-delay: 0.5;
 }
 .nav-link{
     /* background-color: red; */
@@ -139,6 +149,7 @@ form > input {
 
 .my-form-button {
     min-width: 100px;
+    max-width: 150px;
 }
 
 .add-student-form {
@@ -150,6 +161,22 @@ form > input {
 /* Tables */
 .my-table {
     background-color: #ffffffd5;
+}
+
+/* .my-table tr {
+    background: red;
+    background-color: blue;
+    border-style: solid;
+    border: red;
+    transition: 0.5s;
+} */
+
+.my-table-rows :hover {
+    border-bottom-right-radius: 2px solid black;
+    transition-duration: 0.3s;
+    /* font-weight: 500; */
+    margin-bottom: 1px;
+    margin-top: 1px;
 }
 
 /* Medium size screeen */
