@@ -10,13 +10,14 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
     <script type="text/javascript" src="../static/js/main.js" th:src="@{/js/main.js}"></script>
     <link rel="stylesheet" href="../static/styles/style.css" th:href="@{/styles/style.css}" type="text/css">
+    <script src="https://kit.fontawesome.com/6f22d5f9fc.js" crossorigin="anonymous"></script>
     <title>Student</title>
 </head>
 <body class="row mx-0 px-0">
 
     <!-- Page content -->
-    <div class="col base-header">
-        <div class="row mx-0 px-0 ">
+    <div class="col mx-0 px-0 base-header">
+        <div class="row mx-0 px-0">
 
             <!-- Main Title -->
             <header class="col-12">
@@ -85,27 +86,26 @@
                 </div>
             </nav>
         </div>
-
         <!-- Content section -->
         <main class="col-12 px-0 mx-0 main-content">
-
+    
             <h1 class="text-center py-5 mt-3 text-white">
                 Who Are We
             </h1>
-
-            <article class="p-0 p-md-2 home-page-article rounded-3">
+    
+            <article class="p-0 p-md-2 m-3 home-page-article rounded-3">
                 <P class="mx-1 mx-sm-3 mt-4 home-page-text">
                     The Charles Xavier School is a fictional school for gifted youngsters
                     in the Marvel Comics universe, which was founded by Professor Charles Xavier.
                     The school is located in North Salem, New York, and serves as a training
                     ground and safe haven for young mutants.
-
+    
                     The school was first introduced in X-Men #1 in 1963 and has since become
                     a significant location in the X-Men franchise. In the comics, the school has
                     been destroyed and rebuilt several times, but it always remains a place of
                     refuge and education for young mutants who are trying to come to terms with
                     their powers and learn how to use them for good.
-
+    
                     The Charles Xavier School has been depicted in various forms of media,
                     including the X-Men films and television series. In these adaptations,
                     the school is often shown as a large mansion with high-tech facilities and
@@ -149,9 +149,54 @@
                     include Storm, Wolverine, Colossus, Rogue, and many others.
                 </P>
             </article>
+            <div class="footer-divider"></div>
         </main>
-       
+        <footer class="footer my-footer">
+            <div class="container">
+                <div class="row px-0 mx-0">
+                    <div class="col-6 col-md-3 p-2 my-footer-col">
+                        <h4>School</h4>
+                        <ul class="list-group py-1 mx-4">
+                            <li>1407 Graymalkin Lane</a></li>
+                            <li>Salem Center</li>
+                            <li>Westchester County</li>
+                            <li>New York</li>
+                        </ul>
+                    </div>
+                    <div class="col-6 col-md-3 p-2 my-footer-col">
+                        <h4>Get Help</h4>
+                        <ul>
+                            <li><a href="#">Contact</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Application</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-6 col-md-3 p-2 my-footer-col">
+                        <h4>Shop</h4>
+                        <ul>
+                            <li><a href="#">T-Shirts</a></li>
+                            <li><a href="#">Bag</a></li>
+                            <li><a href="#">Mogs</a></li>
+                            <li><a href="#">Accessories</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-6 col-md-3 p-2 my-footer-col 
+                                my-social-links">
+                        <h4>Links</h4>
+                        <ul>
+                            <li><a href="#"><i class="fa-brands fa-square-facebook"></i> Facebook</a></li>
+                            <li><a href="#"><i class="fa-brands fa-square-instagram"></i> Instagram</a></li>
+                            <li><a href="#"><i class="fa-brands fa-square-twitter"></i> Twitter</a></li>
+                            <li><a href="#"><i class="fa-brands fa-linkedin"></i> LinkedIn</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    <!-- Closing main section -->
     </div>
+
     
 </body>
 </html>

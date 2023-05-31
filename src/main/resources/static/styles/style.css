@@ -8,6 +8,8 @@ html{
     min-height: 750px;
     height: 100vh;
     scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
 }
 
 /* Header and Navbar */
@@ -178,6 +180,64 @@ form > input {
     margin-bottom: 1px;
     margin-top: 1px;
 }
+
+
+/* Footer */
+.footer-divider {
+    height: 55px;
+}
+.my-footer {
+    background: #493e36c4;
+    height: fit-content;
+    text-decoration: none;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+.my-footer :hover {
+    background: #493e36;
+    transition-duration: 2s;
+}
+.my-footer container {
+    width: 100%;
+}
+.my-footer-col {
+
+}
+.my-footer-col :hover {
+
+}
+.my-footer a {
+    color: #fff;
+    text-decoration: none;
+}
+.my-footer h4 {
+    text-transform: capitalize;
+    position: relative;
+}
+.my-footer h4::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    background-color: red;
+    height: 2px;
+    box-sizing: border-box;
+    width: 50px;
+}
+
+.my-footer-col ul {
+    margin-top: 25px;
+}
+.my-footer-col ul li {
+    margin: 0 10px 5px 0;
+    list-style: none;
+}
+.my-footer-col ul li a:hover {
+    padding-left: 8px;
+    transition-duration: 200ms;
+}
+
 
 /* Medium size screeen */
 @media (min-width: 768px) {

@@ -16,7 +16,7 @@
 </head>
 
 <body class="row mx-0 px-0">
-    <div class="col base-header">
+    <div class="col mx-0 px-0 base-header">
 
         <!-- Header Implemen from index.html -->
         <header th:insert="index.html :: header"></header>
@@ -96,7 +96,7 @@
                                 </div>
                             </td>
                             <!-- Admin Buttons: Add, Edit, Delete -->
-                            <td class="col-12 mx-auto px-auto">
+                            <td class="col-12 mx-auto px-auto ">
                                 <div class="row" th:with="cohortId='cohortModal' + ${cohort.getId()}">
                                     <div class="col-12 offset-md-1 col-md-5 my-1 text-center">
                                         <form th:action="@{/cohorts/addToCohort/{id}(id=${cohort.getId()})}" th:method="post">
@@ -316,6 +316,12 @@
                 Home Page
             </a>
         </div>
+    
+        <div class="footer-divider"></div>
+    
+        <!-- Footer Implemen from index.html -->
+        <footer th:insert="index.html :: footer"></footer>
     </div>
+
 </body>
 </html>
