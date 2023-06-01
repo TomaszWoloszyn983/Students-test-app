@@ -5,6 +5,8 @@ html{
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
+    /* background-color: rgba(150, 151, 91, 0.856);
+    background-blend-mode: color-dodge; */
     min-height: 750px;
     height: 100vh;
     scroll-behavior: smooth;
@@ -85,8 +87,9 @@ html{
     height: fit-content;
 }
 .my-nav-button{
-    width: 20%;
+    width: 156px;
     background-color: #fff;
+    text-align: center;
 }
 .my-nav-button :hover{
     background-color: #493e36b4;
@@ -119,6 +122,10 @@ html{
 .student-links {
     text-decoration: none;
     color: #000;
+}
+.my-home-button {
+    width: 150px;
+    /* margin: auto; */
 }
 
 /* Home Page content */
@@ -194,9 +201,12 @@ form > input {
     margin: 0;
     padding: 0;
 }
-.my-footer :hover {
+
+.my-footer-col :hover {
     background: #493e36;
-    transition-duration: 2s;
+    /* background: linear-gradient(to right, #493e36, #493e36a6 ,#493e3600); */
+    background: linear-gradient(#493e36, #493e36a6 ,#493e3600);
+    transition: 2s;
 }
 .my-footer container {
     width: 100%;
@@ -235,6 +245,7 @@ form > input {
 }
 .my-footer-col ul li a:hover {
     padding-left: 8px;
+    text-decoration: underline;
     transition-duration: 200ms;
 }
 

@@ -14,9 +14,8 @@
     <title>Student</title>
 </head>
 <body class="row mx-0 px-0">
-
-    <!-- Page content -->
     <div class="col mx-0 px-0 base-header">
+        
         <div class="row mx-0 px-0">
 
             <!-- Main Title -->
@@ -60,22 +59,18 @@
                 <!-- Main navbar -->
                 <div class="container navbar px-0 mx-0" id="navbarTogglerDemo02">
                     <ul class="row mx-0 px-0 my-navbar navbar-nav">
-                        <li class="col-2 nav-item my-nav-button">
+                        <li class="d-inline col-2 nav-item my-nav-button">
                             <a class="nav-link rounded-2" href="/student/allStudents"
                                 th:href="@{/student/allStudents}">
                                 Students List
                             </a>
                         </li>
-                        <li class="col-2 nav-item active my-nav-button">
+                        <li class="d-inline col-2 nav-item active my-nav-button">
                             <a href="/cohorts/all" class="nav-link rounded-2"
                                 th:href="@{/cohorts/all}">
                                 Classes</a>
                         </li>
-                        
-                        <li class="col-4 my-nav-button">
-                            <div class="nav-link my-nav-button"></div>
-                        </li>
-                        <li class="col-12 col-md-4">
+                        <li class="d-inline col-12 float-end col-md-4 offset-md-3">
                             <div class="input-group">
                                 <input type="search" class="form-control rounded" placeholder="Search"
                                        aria-label="Search" aria-describedby="search-addon"/>

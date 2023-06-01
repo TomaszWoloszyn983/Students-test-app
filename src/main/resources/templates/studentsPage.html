@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">
-<head>
+<!-- <head>
     <meta charset="UTF-8">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
@@ -11,53 +11,24 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../static/styles/style.css" th:href="@{/styles/style.css}" type="text/css">
     <title>Students List</title>
-</head>
+</head> -->
+<head th:insert="index.html :: head"></head>
 
 <body class="row mx-0 px-0">
-    <div class="col mx-0 p-3 base-header">
+    <div class="col mx-0 px-0 base-header">
 
         <!-- Header Implemen from index.html -->
         <header th:insert="index.html :: header"></header>
-        
-        <!-- Navigation bar -->
-        <nav class="row mx-0 px-0 navbar navbar-expand-sm navbar-light
-                    bg-light position: sticky rounded-2">
 
-            <!-- Main navbar -->
-            <div class="container navbar px-0" id="navbarTogglerDemo02">
-                <ul class="row mx-0 px-0 my-navbar active navbar-nav">
-                    <li class="col-2 nav-item my-nav-button">
-                        <a class="nav-link rounded-2" href="/student/allStudents"
-                            th:href="@{/student/allStudents}">
-                            Students List
-                        </a>
-                    </li>
-                    <li class="col-2 nav-item my-nav-button">
-                        <a href="/cohorts/all" class="nav-link rounded-2"
-                            th:href="@{/cohorts/all}">
-                            Classes</a>
-                    </li>
-                    
-                    <li class="col-4 my-nav-button">
-                        <div class="nav-link my-nav-button"></div>
-                    </li>
-                    <li class="col-12 col-md-4">
-                        <div class="input-group">
-                            <input type="search" class="form-control rounded" placeholder="Search"
-                                    aria-label="Search" aria-describedby="search-addon"/>
-                            <button type="button" class="btn btn-outline-primary">search</button>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+        <!-- Navigation Bar implemented from index.html -->
+        <nav th:insert="index.html :: nav"></nav>
     
-        <div class="row mt-5 py-1">
-            <h1 class="col mx-auto py-5 text-center">Students List</h1>
+        <div class="mt-5 py-1">
+            <h1 class="mx-auto py-5 text-white text-center">Students List</h1>
         </div>
     
         <!--  Add New Student Form  -->
-        <div class="row px-0 mx-0 border border-dark my-table">
+        <div class="row px-0 mx-3 border border-dark my-table">
             <div class="col px-3" sec:authorize="hasRole('ADMIN')">
                 <!--/*@thymesVar id="student" type="com.amigoscode.spring_course.Student"*/-->
                 <!--<form action="#" method="post" th:action="@{/addStudents}" th:object="${student}" >-->
@@ -91,143 +62,145 @@
         </div>
        
         <!--  Message  -->
-        <div>
+        <div class="mx-3">
             <h3 th:test="${message}">message</h3>
         </div>
 
-        <table class="row px-0 mx-0 py-2 my-3 table table-stripe my-table">
-            <!-- <div class="col-12"> -->
-                <thead class="text-center">
-                    <tr class="row px-auto mx-auto" th:if="${students.empty}">
-                        <td class="text-center mx-0 px-0" colspan="2" >No Students in the database</td>
-                    </tr>
-                    <tr class="row px-auto mx-auto">
-                        <th scope="col" class="col-1 col-md-1">#</th>
-                        <th scope="col" class="col-5 col-md-3">Name</th>
-                        <th scope="col" class="col-5 col-md-3">Email</th>
-                        <th scope="col" class="col-1 col-md-1">Age</th>
-                        <th scope="col" class="col-1 col-md-1">Group</th>
-                        <th scope="col" class="d-none d-md-inline col-md-3"
-                            sec:authorize="hasRole('ADMIN')">Functions
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="row px-auto mx-auto border-bottom border-dark my-table-rows" th:each="student: ${students}">
-                        <td class="col-1 col-md-1">
-                            <span th:text="${student.getId()}"> Id </span>
-                        </td>
-                        <td class="col-4 col-md-3">
-                            <span th:text="${student.getName()}"> Name </span>
-                        </td>
-                        <td class="col-4 col-md-3">
-                            <span th:text="${student.getEmail()}"> Email </span>
-                        </td>
-                        <td class="col-1 col-md-1">
-                            <span th:text="${student.getAge()}"> Age </span>
-                        </td>
-                        <td class="col-2 col-md-1">
-                            <span th:text="${student.getCohort()}"> Group </span>
-                        </td>
-                        <td class="col-12 col-md-3" sec:authorize="hasRole('ADMIN')"
-                            th:with="studentId='studentModal' + ${student.getId()}">
-                            <div class="row mx-3">
-                                <button class="col-4 col-md-12 mb-md-1 btn btn-primary mx-auto my-3 my-form-button" data-toggle="modal"
-                                        th:id="${studentId} + Btn"
-                                        th:data-target="${'#update' + studentId}" data-whatever="@mdo">
-                                    Edit
-                                </button>
-                                <button class="col-4 col-md-12 mb-md-1 btn btn-danger mx-auto my-3 my-form-button"
-                                        data-toggle="modal"
-                                        th:data-target="${'#' + studentId}">
-                                    Delete
-                                </button>
-                                
-                                <!-- Delete Student Modal Box -->
-                                <div class="modal fade" tabindex="-1" role="dialog"
-                                        th:id="${studentId}">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Confirm Deletion</h5>
-                                                <button type="button" class="close" data-dismiss="modal"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <p>Are you sure you want to remove student <span th:text="${student.getName()}"></span> from school?</p>
-                                                <p>If you submit deletion, this Student will delete him
-                                                    from the data base
-                                                </p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <a th:href="@{/student/delete/{id}(id=${student.getId()})}"
-                                                    class="btn btn-danger">
-                                                    Delete
-                                                </a>
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">
-                                                    Cancel
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Update Student Modal -->
-                                <div class="modal fade" id="updateModal" th:id="${'update' + studentId}"
-                                    tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="updateModalLabel">Update Form</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <!-- Update form -->
-                                                <form th:action="@{/student/update/{id}(id=${student.getId()})}"
-                                                    th:object="${studentToUpdate}" method="post">
-                                                    <legend>Update Student</legend>
-                                                    <p><span th:text="${student.getName()}"></span></p>
-                                                    <fieldset>
-                                                        <label for="name-box">Name
-                                                            <input type="text" name="name" th:value="${student.getName()}">
-                                                        </label>
-                                                    </fieldset>
-                                                    <fieldset>
-                                                        <label>Email
-                                                            <input type="text" name="email" th:value="${student.getEmail()}">
-                                                        </label>
-                                                    </fieldset>
-                                                    <fieldset>
-                                                        <label>Date Of Birth
-                                                            <input type="date" name="date" th:value="${student.getDob()}"
-                                                                th:date="${#temporals.format(localDate, 'yyyy-MM-dd')}"
-                                                                date="localDate, 'yyyy-MM-dd'">
-                                                        </label>
-                                                    </fieldset>
-                                                    <div class="modal-footer">
-                                                        <button type="submit" class="btn btn-primary">Update</button>
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    </div>
-                                                </form>
+        <div class="mx-3">
+            <table class="row px-0 mx-0 py-2 my-3 table table-stripe my-table">
+                <!-- <div class="col-12"> -->
+                    <thead class="text-center">
+                        <tr class="row px-auto mx-auto" th:if="${students.empty}">
+                            <td class="text-center mx-0 px-0" colspan="2" >No Students in the database</td>
+                        </tr>
+                        <tr class="row px-auto mx-auto">
+                            <th scope="col" class="col-1 col-md-1">#</th>
+                            <th scope="col" class="col-5 col-md-3">Name</th>
+                            <th scope="col" class="col-5 col-md-3">Email</th>
+                            <th scope="col" class="col-1 col-md-1">Age</th>
+                            <th scope="col" class="col-1 col-md-1">Group</th>
+                            <th scope="col" class="d-none d-md-inline col-md-3"
+                                sec:authorize="hasRole('ADMIN')">Functions
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="row px-auto mx-auto border-bottom border-dark my-table-rows" th:each="student: ${students}">
+                            <td class="col-1 col-md-1">
+                                <span th:text="${student.getId()}"> Id </span>
+                            </td>
+                            <td class="col-4 col-md-3">
+                                <span th:text="${student.getName()}"> Name </span>
+                            </td>
+                            <td class="col-4 col-md-3">
+                                <span th:text="${student.getEmail()}"> Email </span>
+                            </td>
+                            <td class="col-1 col-md-1">
+                                <span th:text="${student.getAge()}"> Age </span>
+                            </td>
+                            <td class="col-2 col-md-1">
+                                <span th:text="${student.getCohort()}"> Group </span>
+                            </td>
+                            <td class="col-12 col-md-3" sec:authorize="hasRole('ADMIN')"
+                                th:with="studentId='studentModal' + ${student.getId()}">
+                                <div class="row mx-3">
+                                    <button class="col-4 col-md-12 mb-md-1 btn btn-primary mx-auto my-3 my-form-button" data-toggle="modal"
+                                            th:id="${studentId} + Btn"
+                                            th:data-target="${'#update' + studentId}" data-whatever="@mdo">
+                                        Edit
+                                    </button>
+                                    <button class="col-4 col-md-12 mb-md-1 btn btn-danger mx-auto my-3 my-form-button"
+                                            data-toggle="modal"
+                                            th:data-target="${'#' + studentId}">
+                                        Delete
+                                    </button>
+                                    
+                                    <!-- Delete Student Modal Box -->
+                                    <div class="modal fade" tabindex="-1" role="dialog"
+                                            th:id="${studentId}">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Confirm Deletion</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Are you sure you want to remove student <span th:text="${student.getName()}"></span> from school?</p>
+                                                    <p>If you submit deletion, this Student will delete him
+                                                        from the data base
+                                                    </p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a th:href="@{/student/delete/{id}(id=${student.getId()})}"
+                                                        class="btn btn-danger">
+                                                        Delete
+                                                    </a>
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">
+                                                        Cancel
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- Update Student Modal -->
+                                    <div class="modal fade" id="updateModal" th:id="${'update' + studentId}"
+                                        tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="updateModalLabel">Update Form</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <!-- Update form -->
+                                                    <form th:action="@{/student/update/{id}(id=${student.getId()})}"
+                                                        th:object="${studentToUpdate}" method="post">
+                                                        <legend>Update Student</legend>
+                                                        <p><span th:text="${student.getName()}"></span></p>
+                                                        <fieldset>
+                                                            <label for="name-box">Name
+                                                                <input type="text" name="name" th:value="${student.getName()}">
+                                                            </label>
+                                                        </fieldset>
+                                                        <fieldset>
+                                                            <label>Email
+                                                                <input type="text" name="email" th:value="${student.getEmail()}">
+                                                            </label>
+                                                        </fieldset>
+                                                        <fieldset>
+                                                            <label>Date Of Birth
+                                                                <input type="date" name="date" th:value="${student.getDob()}"
+                                                                    th:date="${#temporals.format(localDate, 'yyyy-MM-dd')}"
+                                                                    date="localDate, 'yyyy-MM-dd'">
+                                                            </label>
+                                                        </fieldset>
+                                                        <div class="modal-footer">
+                                                            <button type="submit" class="btn btn-primary">Update</button>
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+    
                                 </div>
-
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            <!-- </div> -->
-        </table>
-
-        <div class="row text-right">
-            <a class="offset-9 offset-md-11 col-3 col-md-1 btn btn-secondary"
-                th:href="@{/}">
-                Home Page
-            </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                <!-- </div> -->
+            </table>
+            <div class="text-center text-lg-right">
+                <a class="my-home-button btn btn-secondary"
+                    th:href="@{/}">
+                    Home Page
+                </a>
+            </div>
         </div>
+
 
         <div class="footer-divider"></div>
 
