@@ -19,306 +19,308 @@
 <body class="row mx-0 px-0">
     <div class="col mx-0 px-0 base-header">
 
-        <!-- Header Implemen from index.html -->
+        <!-- Header Implemened from index.html -->
         <header th:insert="index.html :: header"></header>
         
         <!-- Navigation Bar implemented from index.html -->
         <nav th:insert="index.html :: nav"></nav>
 
-        <div class="my-md-5 mx-0">
-            <div class="mt-5 pt-5">
-                <h1 class="mx-auto py-1 text-white text-center">Classes</h1>
-            </div>
-        </div>
-
-        <!--  Message doesn't show -->
-        <div>
-            <th scope="col" class="d-none d-md-inline col-md-4"
-                sec:authorize="hasRole('ADMIN')">
-                <h2 class="text-center mx-auto" th:text="${welcomeMessage}"></h2>
-            </th>
-            <p class="text-center mx-auto" th:text="${warningMessage}"></p>
-        </div>
-        <!-- Check if user is ADMIN -->
-        <div class="mx-3">
-            <div class="form-group my-table" th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
-                <table class="row mx-0 p-2 border border-dark my-3
-                              table table-stripe my-table">
-                    <div class="col-12 my-table">
-                        <thead class="text-center">
-                            <tr class="row" th:if="${cohorts.empty}">
-                                <td class="text-center" colspan="2" >No Classes yet.</td>
-                            </tr>
-                            <tr class="row">
-                                <th scope="" class="col-2 col-md-1">#</th>
-                                <th scope="" class="col-5 col-md-3">Name</th>
-                                <th scope="" class="col-5 col-md-3">Start date</th>
-                                <th scope="" class="d-none d-md-inline col-md-5">Students List</th>
-                                <!-- <th scope="col" class="d-none d-md-inline col-md-4"
-                                sec:authorize="hasRole('ADMIN')">Manage Classes
-                                </th> -->
-                            </tr>
-    
-                        </thead>
-                        <!-- Cohort Card -->
-                        <tbody>
-                            <tr class="row mx-0 border-bottom border-dark" th:each="cohort: ${cohorts}">
-                                <td class="col-2 col-md-1">
-                                    <span th:text="${cohort.getId()}"> Id </span>
-                                </td>
-                                <td class="col-5 col-md-3">
-                                    <span th:text="${cohort.getName()}"> Name </span>
-                                </td>
-                                <td class="col-5 col-md-3">
-                                    <span th:text="${cohort.getStartDate()}"> Start Date </span>
-                                </td>
-                                <td class="col-12 col-md-5">
-                                    <div class="row">
-                                        <!-- Cohort Students List -->
-                                        <div class="d-md-none col-2 text-right">Students List:</div>
-                                        <table class="col-10 text-center">
-                                            <tr th:each="student: ${students}">
-                                                <td class="row" th:if="${student.getCohort() == cohort}">
-                                                    <a th:href="@{/student/{id}/studentDetail(id=${student.getId()})}"
-                                                        class="col-8 d-inline text-right hover student-links">
-                                                        <span  
-                                                              th:text="${student.getName()}" class="student-links">Student
-                                                        </span>
-                                                    </a>
-                                                    <form class="offset-1 col-3 d-inline" th:action="@{/cohorts/removeFromCohort}" method="get">
-                                                        <input type="hidden" th:name="studentId"
-                                                               th:value="${student.getId()}">
-                                                        <input type="hidden" th:name="cohortId"
-                                                               th:value="${cohort.getId()}">
-                                                        <button class="btn btn-sm btn-secondary" type="submit">Remove</button>
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </td>
-                                <!-- Admin Buttons: Add, Edit, Delete -->
-                                <td class="col-12 mx-auto px-auto ">
-                                    <div class="row" th:with="cohortId='cohortModal' + ${cohort.getId()}">
-                                        <div class="col-12 offset-md-1 col-md-5 my-1 text-center">
-                                            <form th:action="@{/cohorts/addToCohort/{id}(id=${cohort.getId()})}" th:method="post">
-                                                <select th:name="student" class="admin-buttons mx-auto">
-                                                    <option value="0">Choose Student</option>
-                                                    <option th:each="student : ${students}"
-                                                        th:value="${student.getId()}"
-                                                        th:text="${student.getName()}">
-                                                    </option>
-                                                </select>
-    
-                                                <button class="btn btn-primary btn-sm mx-auto admin-buttons" type="submit"
-                                                    data-toggle="modal" data-target="#myModal">
-                                                    Add To Class
-                                                </button>
-                                            </form>
-                                        </div>
-                                        <div class="col-sm-6 col-md-3 my-1 text-center">
-                                            <button type="button" class="btn btn-primary btn-sm mx-auto admin-buttons"
-                                                data-toggle="modal"
-                                                th:data-target="${'#update' + cohortId}" data-whatever="@mdo">
-                                                Edit
-                                            </button>
-                                        </div>
-                                        <div class="col-sm-6 col-md-3 my-1 text-center">
-                                            <button class="btn btn-danger btn-sm mx-auto admin-buttons"
-                                                data-toggle="modal"
-                                                th:data-target="${'#' + cohortId}">
-                                                Delete
-                                            </button>
-                                        </div>
-                                        <!-- Modal boxes -->
-    
-                                        <!-- Delete modal box definition -->
-                                        <div class="modal fade" tabindex="-1" role="dialog"
-                                                th:id="${cohortId}">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title">Confirm Deletion</h5>
-                                                        <button type="button" class="close" data-dismiss="modal"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <p>Are you sure you want to delete class ?</p>
-                                                        <p>Deletion of this Team will result with deletion
-                                                            of all its student from the database.
-                                                            (At least untill I fix this problem).
-                                                            So, if you don't want to delete students, remove them from the 
-                                                            class before you delete the class.
-                                                        </p>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <a th:href="@{/cohorts/delete/{id}(id=${cohort.getId()})}"
-                                                            class="btn btn-danger">
-                                                            Delete
-                                                        </a>
-                                                        <button type="button" class="btn btn-secondary"
-                                                            data-dismiss="modal">
-                                                            Cancel
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-    
-                                        <!-- Confirm student relocation Modal -->
-                                        <div class="modal" id="myModal">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h4 class="modal-title">Confirm</h4>
-                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <p>This student is already a member of <span th:text="${cohort.getName()}"></span>
-                                                            team are you sure you want to relocate him?
-                                                        </p>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                                                            Close
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-    
-                                        <!-- Update Cohort Modal -->
-                                        <div class="modal fade" id="editModal" th:id="${'update' + cohortId}"  tabindex="-1"
-                                             role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="updateModalLabel">Update Class details</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <!--/*@thymesVar id="cohort" type="com.amigoscode.spring_course.Cohort"*/-->
-                                                        <form
-                                                            th:action="@{/cohorts/update/{id}(id=${cohort.getId()})}"
-                                                            th:method="post">
-                                                            <fieldset>
-                                                                <legend><span th:text="${cohort.getName}"></span></legend>
-                                                                <label for="name">New Name
-                                                                    <input type="text" th:value="${cohort.getName()}" name="name">
-                                                                </label>
-                                                                <label for="date">Start Date
-                                                                    <input type="date" name="date" th:value="${cohort.getStartDate()}"
-                                                                           th:date="${#temporals.format(localDate, 'yyyy-MM-dd')}">
-                                                                </label>
-                                                            </fieldset>
-    
-                                                            <button class="btn btn-secondary mx-2 mt-3" type="submit">Submit</button>
-                                                            <button class="btn btn-danger mx-2 mt-3" type="cancel"
-                                                                    name="cancel" data-dismiss="modal">
-                                                                    Cancel
-                                                            </button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- End of Modals section -->
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </div>
-                </table>
-                <!--  Add New Cohort Form  -->
-                <div class="border border-dark my-table">
-                    <div class="row mx-0 px-auto my-table">
-                        <!--/*@thymesVar id="cohort" type="com.amigoscode.spring_course.Cohort"*/-->
-                        <form class="offset-d-none col-12 offset-md-3 col-md-6 px-auto" action="#" th:action="addCohort"
-                                     th:method="post" th:object="${cohortForm}">
-                            <legend class="col-12 text-center">Create New Cohort</legend>
-                            <div class="">
-                                <div class="row mx-0">
-                                    <fieldset class="col-12">
-                                        <label for="name-box" class="my-form-label">Name</label>
-                                        <input type="text" id="name-box" th:field="*{name}" name="name">
-                                    </fieldset>
-                                    <fieldset class="col-12">
-                                        <label for="date-box" class="my-form-label">Start Date</label>
-                                        <input type="date" id="date-box" name="date"
-                                               th:date="${#temporals.format(localDate, 'yyyy-MM-dd')}"
-                                               th:field="*{startDate}">
-                                    </fieldset>
-                                </div>
-                                <div class="row mx-0">
-                                    <button class="col-4 btn btn-secondary mx-auto my-3 my-form-button"
-                                            type="submit">
-                                        Submit
-                                    </button>
-                                    <button class="col-4 btn btn-secondary mx-auto my-3 my-form-button"
-                                            type="reset" name="reset" th:value="Reset">
-                                        Reset
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+        <main>
+            <div class="my-md-5 mx-0">
+                <div class="mt-5 pt-5">
+                    <h1 class="mx-auto py-1 text-white text-center">Classes</h1>
                 </div>
             </div>
     
-            <!-- NOT ADMIN -->
-            <div class="form-group my-table" th:unless="${#authorization.expression('hasRole(''ADMIN'')')}">
-                <table class="row mx-0 p-2 border border-dark my-3 table table-stripe">
-                    <div class="col-12">
-                        <thead class="text-left">
-                            <tr class="row" th:if="${cohorts.empty}">
-                                <td class="col-12 text-left" colspan="2" >No Classes yet.</td>
-                            </tr>
-                            <tr class="row mx-0">
-                                <th scope="" class="col-2 col-md-1">#</th>
-                                <th scope="" class="col-5 col-md-3">Name</th>
-                                <th scope="" class="col-5 col-md-3">Start date</th>
-                                <th scope="" class="d-none d-md-inline col-md-5">Students List</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="row mx-0 border-bottom border-dark text-left my-table-rows" th:each="cohort: ${cohorts}">
-                                <td class="col-2 col-md-1 my-cols">
-                                    <span th:text="${cohort.getId()}"> Id </span>
-                                </td>
-                                <td class="col-5 col-md-3 my-cols">
-                                    <span th:text="${cohort.getName()}"> Name </span>
-                                </td>
-                                <td class="col-5 col-md-3 my-cols">
-                                    <span th:text="${cohort.getStartDate()}"> Start Date </span>
-                                </td>
-                                <td class="col-12 col-md-5 my-cols">
-                                    <div class="row">
-                                        <div class="d-md-none col-2 my-cols text-right">Students List:</div>
-                                        <table class="col-10 text-center">
-                                            <tr th:each="student: ${students}">
-                                                <td th:if="${student.getCohort() == cohort}">
-                                                    <span 
-                                                    th:text="${student.getName()}">Student
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                        </table>
+            <!--  Message doesn't show -->
+            <div>
+                <th scope="col" class="d-none d-md-inline col-md-4"
+                    sec:authorize="hasRole('ADMIN')">
+                    <h2 class="text-center mx-auto" th:text="${welcomeMessage}"></h2>
+                </th>
+                <p class="text-center mx-auto" th:text="${warningMessage}"></p>
+            </div>
+            <!-- Check if user is ADMIN -->
+            <div class="mx-3">
+                <div class="form-group my-table" th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+                    <table class="row mx-0 p-2 border border-dark my-3
+                                  table table-stripe my-table">
+                        <div class="col-12 my-table">
+                            <thead class="text-center">
+                                <tr class="row" th:if="${cohorts.empty}">
+                                    <td class="text-center" colspan="2" >No Classes yet.</td>
+                                </tr>
+                                <tr class="row">
+                                    <th scope="" class="col-2 col-md-1">#</th>
+                                    <th scope="" class="col-5 col-md-3">Name</th>
+                                    <th scope="" class="col-5 col-md-3">Start date</th>
+                                    <th scope="" class="d-none d-md-inline col-md-5">Students List</th>
+                                    <!-- <th scope="col" class="d-none d-md-inline col-md-4"
+                                    sec:authorize="hasRole('ADMIN')">Manage Classes
+                                    </th> -->
+                                </tr>
+        
+                            </thead>
+                            <!-- Cohort Card -->
+                            <tbody>
+                                <tr class="row mx-0 border-bottom border-dark" th:each="cohort: ${cohorts}">
+                                    <td class="col-2 col-md-1">
+                                        <span th:text="${cohort.getId()}"> Id </span>
+                                    </td>
+                                    <td class="col-5 col-md-3">
+                                        <span th:text="${cohort.getName()}"> Name </span>
+                                    </td>
+                                    <td class="col-5 col-md-3">
+                                        <span th:text="${cohort.getStartDate()}"> Start Date </span>
+                                    </td>
+                                    <td class="col-12 col-md-5">
+                                        <div class="row">
+                                            <!-- Cohort Students List -->
+                                            <div class="d-md-none col-2 text-right">Students List:</div>
+                                            <table class="col-10 text-center">
+                                                <tr th:each="student: ${students}">
+                                                    <td class="row" th:if="${student.getCohort() == cohort}">
+                                                        <a th:href="@{/student/{id}/studentDetail(id=${student.getId()})}"
+                                                            class="col-8 d-inline text-right hover student-links">
+                                                            <span  
+                                                                  th:text="${student.getName()}" class="student-links">Student
+                                                            </span>
+                                                        </a>
+                                                        <form class="offset-1 col-3 d-inline" th:action="@{/cohorts/removeFromCohort}" method="get">
+                                                            <input type="hidden" th:name="studentId"
+                                                                   th:value="${student.getId()}">
+                                                            <input type="hidden" th:name="cohortId"
+                                                                   th:value="${cohort.getId()}">
+                                                            <button class="btn btn-sm btn-secondary" type="submit">Remove</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                    <!-- Admin Buttons: Add, Edit, Delete -->
+                                    <td class="col-12 mx-auto px-auto ">
+                                        <div class="row" th:with="cohortId='cohortModal' + ${cohort.getId()}">
+                                            <div class="col-12 offset-md-1 col-md-5 my-1 text-center">
+                                                <form th:action="@{/cohorts/addToCohort/{id}(id=${cohort.getId()})}" th:method="post">
+                                                    <select th:name="student" class="admin-buttons mx-auto">
+                                                        <option value="0">Choose Student</option>
+                                                        <option th:each="student : ${students}"
+                                                            th:value="${student.getId()}"
+                                                            th:text="${student.getName()}">
+                                                        </option>
+                                                    </select>
+        
+                                                    <button class="btn btn-primary btn-sm mx-auto admin-buttons" type="submit"
+                                                        data-toggle="modal" data-target="#myModal">
+                                                        Add To Class
+                                                    </button>
+                                                </form>
+                                            </div>
+                                            <div class="col-sm-6 col-md-3 my-1 text-center">
+                                                <button type="button" class="btn btn-primary btn-sm mx-auto admin-buttons"
+                                                    data-toggle="modal"
+                                                    th:data-target="${'#update' + cohortId}" data-whatever="@mdo">
+                                                    Edit
+                                                </button>
+                                            </div>
+                                            <div class="col-sm-6 col-md-3 my-1 text-center">
+                                                <button class="btn btn-danger btn-sm mx-auto admin-buttons"
+                                                    data-toggle="modal"
+                                                    th:data-target="${'#' + cohortId}">
+                                                    Delete
+                                                </button>
+                                            </div>
+                                            <!-- Modal boxes -->
+        
+                                            <!-- Delete modal box definition -->
+                                            <div class="modal fade" tabindex="-1" role="dialog"
+                                                    th:id="${cohortId}">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Confirm Deletion</h5>
+                                                            <button type="button" class="close" data-dismiss="modal"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>Are you sure you want to delete class ?</p>
+                                                            <p>Deletion of this Team will result with deletion
+                                                                of all its student from the database.
+                                                                (At least untill I fix this problem).
+                                                                So, if you don't want to delete students, remove them from the 
+                                                                class before you delete the class.
+                                                            </p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <a th:href="@{/cohorts/delete/{id}(id=${cohort.getId()})}"
+                                                                class="btn btn-danger">
+                                                                Delete
+                                                            </a>
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-dismiss="modal">
+                                                                Cancel
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+        
+                                            <!-- Confirm student relocation Modal -->
+                                            <div class="modal" id="myModal">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Confirm</h4>
+                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>This student is already a member of <span th:text="${cohort.getName()}"></span>
+                                                                team are you sure you want to relocate him?
+                                                            </p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                                Close
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+        
+                                            <!-- Update Cohort Modal -->
+                                            <div class="modal fade" id="editModal" th:id="${'update' + cohortId}"  tabindex="-1"
+                                                 role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="updateModalLabel">Update Class details</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <!--/*@thymesVar id="cohort" type="com.amigoscode.spring_course.Cohort"*/-->
+                                                            <form
+                                                                th:action="@{/cohorts/update/{id}(id=${cohort.getId()})}"
+                                                                th:method="post">
+                                                                <fieldset>
+                                                                    <legend><span th:text="${cohort.getName}"></span></legend>
+                                                                    <label for="name">New Name
+                                                                        <input type="text" th:value="${cohort.getName()}" name="name">
+                                                                    </label>
+                                                                    <label for="date">Start Date
+                                                                        <input type="date" name="date" th:value="${cohort.getStartDate()}"
+                                                                               th:date="${#temporals.format(localDate, 'yyyy-MM-dd')}">
+                                                                    </label>
+                                                                </fieldset>
+        
+                                                                <button class="btn btn-secondary mx-2 mt-3" type="submit">Submit</button>
+                                                                <button class="btn btn-danger mx-2 mt-3" type="cancel"
+                                                                        name="cancel" data-dismiss="modal">
+                                                                        Cancel
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- End of Modals section -->
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </div>
+                    </table>
+                    <!--  Add New Cohort Form  -->
+                    <div class="border border-dark my-table">
+                        <div class="row mx-0 px-auto my-table">
+                            <!--/*@thymesVar id="cohort" type="com.amigoscode.spring_course.Cohort"*/-->
+                            <form class="offset-d-none col-12 offset-md-3 col-md-6 px-auto" action="#" th:action="addCohort"
+                                         th:method="post" th:object="${cohortForm}">
+                                <legend class="col-12 text-center">Create New Cohort</legend>
+                                <div class="">
+                                    <div class="row mx-0">
+                                        <fieldset class="col-12">
+                                            <label for="name-box" class="my-form-label">Name</label>
+                                            <input type="text" id="name-box" th:field="*{name}" name="name">
+                                        </fieldset>
+                                        <fieldset class="col-12">
+                                            <label for="date-box" class="my-form-label">Start Date</label>
+                                            <input type="date" id="date-box" name="date"
+                                                   th:date="${#temporals.format(localDate, 'yyyy-MM-dd')}"
+                                                   th:field="*{startDate}">
+                                        </fieldset>
                                     </div>
-                                </td>
-                            </tr>
-                        </tbody>
+                                    <div class="row mx-0">
+                                        <button class="col-4 btn btn-secondary mx-auto my-3 my-form-button"
+                                                type="submit">
+                                            Submit
+                                        </button>
+                                        <button class="col-4 btn btn-secondary mx-auto my-3 my-form-button"
+                                                type="reset" name="reset" th:value="Reset">
+                                            Reset
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                </table>
+                </div>
+        
+                <!-- NOT ADMIN -->
+                <div class="form-group my-table" th:unless="${#authorization.expression('hasRole(''ADMIN'')')}">
+                    <table class="row mx-0 p-2 border border-dark my-3 table table-stripe">
+                        <div class="col-12">
+                            <thead class="text-left">
+                                <tr class="row" th:if="${cohorts.empty}">
+                                    <td class="col-12 text-left" colspan="2" >No Classes yet.</td>
+                                </tr>
+                                <tr class="row mx-0">
+                                    <th scope="" class="col-2 col-md-1">#</th>
+                                    <th scope="" class="col-5 col-md-3">Name</th>
+                                    <th scope="" class="col-5 col-md-3">Start date</th>
+                                    <th scope="" class="d-none d-md-inline col-md-5">Students List</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="row mx-0 border-bottom border-dark text-left my-table-rows" th:each="cohort: ${cohorts}">
+                                    <td class="col-2 col-md-1 my-cols">
+                                        <span th:text="${cohort.getId()}"> Id </span>
+                                    </td>
+                                    <td class="col-5 col-md-3 my-cols">
+                                        <span th:text="${cohort.getName()}"> Name </span>
+                                    </td>
+                                    <td class="col-5 col-md-3 my-cols">
+                                        <span th:text="${cohort.getStartDate()}"> Start Date </span>
+                                    </td>
+                                    <td class="col-12 col-md-5 my-cols">
+                                        <div class="row">
+                                            <div class="d-md-none col-2 my-cols text-right">Students List:</div>
+                                            <table class="col-10 text-center">
+                                                <tr th:each="student: ${students}">
+                                                    <td th:if="${student.getCohort() == cohort}">
+                                                        <span 
+                                                        th:text="${student.getName()}">Student
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </div>
+                    </table>
+                </div>
+        
+                <div class="text-center text-lg-right mt-2">
+                    <a class="my-home-button btn btn-secondary"
+                        th:href="@{/}">
+                        Home Page
+                    </a>
+                </div>
             </div>
-    
-            <div class="text-center text-lg-right">
-                <a class="my-home-button btn btn-secondary"
-                    th:href="@{/}">
-                    Home Page
-                </a>
-            </div>
-        </div>
+        </main>
     
         <div class="footer-divider"></div>
     

@@ -56,23 +56,12 @@ html{
     transition-duration: 0.8s;
 }
 
-.login-buttons {
-    align-items: end;
-    color: yellow;
-    background-color: blue;
-    text-align: center;
-    padding: auto;
-    width: 100px;
-    margin: 0px, 10px;
-    
+.my-login-container{
+    height: 100vh;
+    background-color: #493e36b4;
+    margin-left: 50px;
+    margin-right: 50px
 }
-.login-buttons :hover{
-    color: blue;
-    background-color: #000;
-    border-width: 1px;
-    border-color: blue;
-}
-
 
 
 /* Navigation Bar */
@@ -104,6 +93,7 @@ html{
 .admin-buttons{
     width: 150px;
     margin: auto;
+    text-decoration: none;
 }
 .admin-btn-container{
     max-width: 353px;
@@ -127,16 +117,30 @@ html{
     width: 150px;
     /* margin: auto; */
 }
-
-/* Home Page content */
-.main-content {
-    margin-right: 11rem;
-    margin-left: 11rem;
-    padding: 10px, 15px;
+.login-buttons {
+    align-items: end;
+    color: yellow;
+    background-color: blue;
+    text-align: center;
+    padding: auto;
+    width: 100px;
+    margin: 0px, 10px;
+    
+}
+.login-buttons :hover{
+    color: blue;
+    background-color: #000;
+    border-width: 1px;
+    border-color: blue;
 }
 
+
+
+/* Home Page Article */
 .home-page-article{
     background-color: rgba(0, 0, 0, 0.514);
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 .home-page-text {
@@ -146,7 +150,6 @@ html{
 
 
 /* Forms */
-
 .my-form-label{
     min-width: 100px;
     text-align: right;
@@ -183,9 +186,10 @@ form > input {
 .my-table-rows :hover {
     border-bottom-right-radius: 2px solid black;
     transition-duration: 0.3s;
+    background-color: #ffffffec;
     /* font-weight: 500; */
-    margin-bottom: 1px;
-    margin-top: 1px;
+    /* margin-bottom: 1px;
+    margin-top: 1px; */
 }
 
 
@@ -203,10 +207,10 @@ form > input {
 }
 
 .my-footer-col :hover {
-    background: #493e36;
+    /* background: #493e36; */
     /* background: linear-gradient(to right, #493e36, #493e36a6 ,#493e3600); */
-    background: linear-gradient(#493e36, #493e36a6 ,#493e3600);
-    transition: 2s;
+    /* background: linear-gradient(#493e36, #493e36a6 ,#493e3600);
+    transition: 2s; */
 }
 .my-footer container {
     width: 100%;
@@ -259,8 +263,9 @@ form > input {
 
 /* Large Screen */
 @media (min-width: 1200px) {
-    html{
+    main{
         margin-left: 150px;
         margin-right: 150px;
     }
+
 }

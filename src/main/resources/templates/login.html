@@ -1,27 +1,39 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Login</title>
+
+<head th:insert="index.html :: head">
+    <title th:insert="title">Login Page</title>
 </head>
-<body>
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <h1 class="mx-auto my-5">WELCOME TO OUR SCHOOL</h1>
-            </div>
-            <div class="col">
-                <div id="kc-header-wrapper" class="${properties.kcHeaderWrapperClass!}">
-                    You have logged in!
+
+
+<body class="row mx-0 px-0">
+    <div class="col mx-0 px-0 base-header">
+
+        <!-- Header Implemen from index.html -->
+        <header th:insert="index.html :: header"></header>
+
+        <div class="row mx-0 px-5">
+            <div class="col-12 px-5 home-page-article rounded-3 text-center">
+                <div class="mx-auto mt-3 px-auto home-page-text ">
+                    <h1 class="mx-auto my-5">WELCOME TO OUR SCHOOL</h1>
+                </div>
+                <div class="py-3">
+                    <div class="home-page-text">
+                        You have successfully logged in!
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row text-right">
-            <a class="offset-9 offset-md-11 col-3 col-md-1 btn btn-secondary login-buttons"
-               th:href="@{/}">
-                Home Page
-            </a>
+            <div class="col-12 text-center text-lg-right mt-4">
+                <a class="my-home-button btn btn-secondary"
+                    th:href="@{/}">
+                    Home Page
+                </a>
+            </div>
         </div>
     </div>
+
+    <!-- Footer Implemented from index.html -->
+    <footer th:insert="index.html :: footer" class="mx-0 px-0"></footer>
+
 </body>
 </html>
