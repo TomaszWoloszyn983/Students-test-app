@@ -156,6 +156,14 @@ public class Student implements Serializable {
     void setCohort(Cohort cohort) {
         this.cohort = cohort;
     }
+
+    boolean isTeamMember(){
+        if(cohort == null)
+            return false;
+        else
+            return true;
+
+    }
     //    public String getAge() {
 //        this.tempDate = LocalDate.parse(dob);
 //        int age = Period.between(this.dob, LocalDate.now()).getYears();

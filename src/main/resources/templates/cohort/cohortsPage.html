@@ -110,11 +110,11 @@
                                                             th:text="${student.getName()}">
                                                         </option>
                                                     </select>
-        
                                                     <button class="btn btn-primary btn-sm mx-auto admin-buttons" type="submit"
-                                                        data-toggle="modal" data-target="#myModal">
+                                                        data-toggle="modal">
                                                         Add To Class
                                                     </button>
+
                                                 </form>
                                             </div>
                                             <div class="col-sm-6 col-md-3 my-1 text-center">
@@ -165,8 +165,8 @@
                                                 </div>
                                             </div>
         
-                                            <!-- Confirm student relocation Modal -->
-                                            <div class="modal" id="myModal">
+                                            <!-- Confirm student relocation Modal. Not user at the moment -->
+                                            <div class="modal" id="relocateModal">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -179,8 +179,11 @@
                                                             </p>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                                                                Close
+                                                            <button type="submit" class="btn btn-secondary" data-dismiss="modal">
+                                                                Relocate
+                                                            </button>
+                                                            <button type="cancel" class="btn btn-secondary" data-dismiss="modal">
+                                                                Cancel
                                                             </button>
                                                         </div>
                                                     </div>

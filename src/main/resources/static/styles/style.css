@@ -85,6 +85,18 @@ html{
     color: #fff;
     transition-delay: 0.5;
 }
+.welcome-box {
+    padding: 10px;
+    width: fit-content;
+    vertical-align: middle;
+    text-align: center;
+
+}
+.welcome-text{
+    color: #fff;
+    font-size: 15px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
 .nav-link{
     /* background-color: red; */
 }

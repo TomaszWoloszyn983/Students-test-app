@@ -44,7 +44,7 @@ public class CohortController {
         model.addAttribute("cohorts", cohorts);
         model.addAttribute("cohortForm", new Cohort());
         model.addAttribute("students", students);
-        model.addAttribute("welcomeMessage", "Hello Muties!");
+        model.addAttribute("welcomeMessage", "Hello Admin!");
         model.addAttribute("warningMessage", warningMessage);
         ModelAndView modelAndView = new ModelAndView("cohort/cohortsPage");
         modelAndView.addObject("noClasses", "This is an example message.");
@@ -62,9 +62,9 @@ public class CohortController {
                 model.addAttribute("standardDate", new Date());
                 cohortService.addNewCohort(cohort);
 
-                String message = "Cohort "+ cohort.getName() +" successfully added.";
-                System.out.println(message);
-                model.addAttribute("message", message);
+                warningMessage = "Team "+ cohort.getName() +" successfully created.";
+                System.out.println(warningMessage);
+                model.addAttribute("message", warningMessage);
                 return "redirect:/cohorts/all";
             }catch(IllegalArgumentException e){
                 System.out.println("Parse attempt failed for value");
@@ -93,6 +93,7 @@ public String updateCohort(@PathVariable(value = "cohortId")
         System.out.println("Submitting changes in " + cohortToUpdate.getName());
         cohortService.updateCohort(cohortId, cohort.getName(),
                 cohort.getStartDate());
+        warningMessage = cohortToUpdate.getName() + " successfully updated.";
         return "redirect:/cohorts/all";
     }
 
@@ -104,6 +105,7 @@ public String updateCohort(@PathVariable(value = "cohortId")
             @PathVariable(value = "cohortId") Long cohortId) {
 
         cohortService.updateCohort(cohortId, name, startDate);
+        warningMessage = name + " successfully updated.";
         return "redirect:/cohorts/all";
     }
 
@@ -111,7 +113,7 @@ public String updateCohort(@PathVariable(value = "cohortId")
     public String deleteCohort(@PathVariable("cohortId") Long cohortId){
         this.cohortService.deleteCohort(cohortId);
         System.out.println("Delete Class by id "+cohortId);
-        warningMessage = "Class "+cohortId+ " deleted";
+        warningMessage = "Team has been deleted";
         return "redirect:/cohorts/all";
     }
 
@@ -140,10 +142,12 @@ public String updateCohort(@PathVariable(value = "cohortId")
         model.addAttribute("students", students);
 
         if (newStudent.getCohortsName() == null){
+            System.out.println("\n\nStudent is not a member of any team");
             cohortService.addToCohort(cohortId, studentId);
             studentService.addStudentToCohort(studentId, cohortId);
-            warningMessage = ""+newStudent.getName()+" added to new Group";
+            warningMessage = ""+newStudent.getName()+" added to "+ newStudent.getCohortsName() +" Team";
         }else{
+            System.out.println("Student is already a member of "+newStudent.getCohortsName());
             warningMessage = "Student "+newStudent.getName()+" "
                     +"is already a member of "+newStudent.getCohortsName()+" team!";
         }
@@ -166,7 +170,7 @@ public String updateCohort(@PathVariable(value = "cohortId")
 
         cohortService.removeFromCohort(cohortId, studentId);
         studentService.removeStudentFromCohort(studentId, cohortId);
-        warningMessage = "Student removed from group.";
+        warningMessage = "Student removed from team.";
 
         return "redirect:/cohorts/all";
     }
