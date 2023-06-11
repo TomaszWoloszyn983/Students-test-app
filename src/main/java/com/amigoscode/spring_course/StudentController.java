@@ -19,6 +19,7 @@ import java.util.List;
 public class StudentController {
 
     private final StudentService studentService;
+    String infoMessage = "";
 
     @Autowired
     public StudentController(StudentService studentService){
@@ -47,9 +48,10 @@ public class StudentController {
     @RequestMapping("/allStudents")
     @GetMapping
     public String allStudents(Model model){
-        List<Student> students =  studentService.getStudents();
+        List<Student> students = studentService.getStudents();
         model.addAttribute("students", students);
         model.addAttribute("studentForm", new Student());
+        model.addAttribute("infoMessage", infoMessage);
         return "studentsPage";
     }
 
@@ -98,6 +100,7 @@ public class StudentController {
     public String deleteStudent(@PathVariable("studentId") Long studentId){
         this.studentService.deleteStudent(studentId);
         System.out.println("Student Service. Delete student by id "+studentId);
+        infoMessage = "You have deleted Student from the database!";
         return "redirect:/student/{studentId}/studentDetail";
     }
 
@@ -113,6 +116,7 @@ public class StudentController {
                                 Long studentId, Model model){
             Student studentToUpdate = studentService.findStudentById(studentId);
             model.addAttribute("student", studentToUpdate);
+            infoMessage = studentToUpdate.getName()+"'s data have been updated!";
     return "studentDetail";
     }
 
@@ -139,6 +143,7 @@ public class StudentController {
                 email, date);
         System.out.println("\n\n\n!!!\nData received from modal-box.\nfor a student: "
                 + studentId+"-"+name+" - "+email+" - "+date+"\n!!!\n");
+        infoMessage = name+ "'s data have been updated!";
 
 //        Pamiętaj o dodaniu do notastek wzmianki o adnotacji     @DateTimeFormat(pattern = "yyyy-MM-dd") dodanej do RequestParamsów
         return "redirect:/student/allStudents";

@@ -7,7 +7,7 @@ html{
     background-size: cover;
     /* background-color: rgba(150, 151, 91, 0.856);
     background-blend-mode: color-dodge; */
-    min-height: 750px;
+    min-height: 100vh;
     height: 100vh;
     scroll-behavior: smooth;
     margin: 0;
@@ -125,6 +125,9 @@ html{
     text-decoration: none;
     color: #000;
 }
+.student-links :hover{
+    text-decoration: wavy;
+}
 .my-home-button {
     width: 150px;
     /* margin: auto; */
@@ -180,6 +183,9 @@ form > input {
     width: 450px;
     margin: auto;
     padding: auto;
+}
+.my-button-box{
+
 }
 
 /* Tables */

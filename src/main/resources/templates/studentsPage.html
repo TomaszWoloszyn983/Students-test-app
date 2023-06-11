@@ -21,33 +21,37 @@
             </div>
         
             <!--  Add New Student Form  -->
-            <div class="row px-0 mx-3 border border-dark my-table">
-                <div class="col px-3" sec:authorize="hasRole('ADMIN')">
+            <div class="border border-dark my-table">
+                <div class="row px-0 mx-3 " sec:authorize="hasRole('ADMIN')">
                     <!--/*@thymesVar id="student" type="com.amigoscode.spring_course.Student"*/-->
                     <!--<form action="#" method="post" th:action="@{/addStudents}" th:object="${student}" >-->
-                    <form class="row mx-auto px-auto" action="#" th:action="register" th:method="post" th:object="${studentForm}" >
+                    <form class="offset-d-none col-12 offset-md-3 col-md-6 px-auto text-center" action="#" th:action="register" th:method="post" th:object="${studentForm}" >
                         <legend class="col-12 text-center">Add New Student</legend>
                         <div class="col-md-8">
-                            <div class="row">
-                                <fieldset class="col-12 mx-auto">
+                            <div class="text-center">
+                                <fieldset class="mx-auto">
                                     <label for="name-box" class="my-form-label">Name</label>
                                     <input type="text" id="name-box" th:field="*{name}" name="name">
                                 </fieldset>
-                                <fieldset class="col-12 mx-auto">
+                                <fieldset class="mx-auto">
                                     <label for="email-box" class="my-form-label">Email</label>
                                     <input type="text" id="email-box" th:field="*{email}">
                                 </fieldset>
-                                <fieldset class="col-12 mx-auto">
+                                <fieldset class="mx-auto">
                                     <label for="date-box" class="my-form-label">Date Of Birth</label>
                                     <input type="date" id="date-box" name="date"
                                         th:date="${#temporals.format(localDate, 'yyyy-MM-dd')}"
                                         th:field="*{dob}">
                                 </fieldset>
                             </div>
-                            <div class="row">
-                                <button class="col-4 btn btn-secondary mx-auto my-3 my-form-button" type="submit">Submit</button>
-                                <button class="col-4 btn btn-secondary mx-auto my-3 my-form-button" type="reset"
-                                name="reset" th:value="Reset">Reset</button>
+                            <div class="mx-0 px-0 text-center py-2 my-1">
+                                <button class="btn btn-secondary mx-auto my-3 px-auto my-form-button" type="submit">
+                                    Submit
+                                </button>
+                                <button class="btn btn-secondary mx-auto my-3 px-auto my-form-button" type="reset"
+                                    name="reset" th:value="Reset">
+                                    Reset
+                                </button>
                             </div>
                         </div>
                     </form>
@@ -55,8 +59,8 @@
             </div>
            
             <!--  Message  -->
-            <div class="mx-3">
-                <h3 th:test="${message}">message</h3>
+            <div class="mx-3 text-center text-white">
+                <h3 th:test="${infoMessage}"></h3>
             </div>
 
             <div class="mx-3">
@@ -78,12 +82,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="row px-auto mx-auto border-bottom border-dark my-table-rows hover" th:each="student: ${students}">
+                            <tr class="row px-auto mx-auto border-bottom border-dark my-table-rows hover"
+                                th:each="student : ${students}" th:sort="${student.getName()}">
                                 <td class="col-1 col-md-1">
                                     <span th:text="${student.getId()}"> Id </span>
                                 </td>
                                 <td class="col-4 col-md-3">
-                                    <span th:text="${student.getName()}"> Name </span>
+                                    <!-- <span th:text="${student.getName()}"> Name </span> -->
+                                    <a th:href="@{/student/{id}/studentDetail(id=${student.getId()})}"
+                                        class="col-8 d-inline text-right hover student-links">
+                                    <span  
+                                        th:text="${student.getName()}" class="student-links">Student
+                                    </span>
+                                    </a>
                                 </td>
                                 <td class="col-4 col-md-3">
                                     <span th:text="${student.getEmail()}"> Email </span>
