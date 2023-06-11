@@ -28,7 +28,7 @@
         <main>
             <div class="my-md-5 mx-0">
                 <div class="mt-5 pt-5">
-                    <h1 class="mx-auto py-1 text-white text-center">Classes</h1>
+                    <h1 class="mx-auto py-1 text-white text-center text-white">Classes</h1>
                 </div>
             </div>
     
@@ -36,9 +36,9 @@
             <div>
                 <th scope="col" class="d-none d-md-inline col-md-4"
                     sec:authorize="hasRole('ADMIN')">
-                    <h2 class="text-center mx-auto" th:text="${welcomeMessage}"></h2>
+                    <h2 class="text-center mx-auto text-white" th:text="${welcomeMessage}"></h2>
                 </th>
-                <p class="text-center mx-auto" th:text="${warningMessage}"></p>
+                <p class="text-center mx-auto text-white" th:text="${warningMessage}"></p>
             </div>
             <!-- Check if user is ADMIN -->
             <div class="mx-3">

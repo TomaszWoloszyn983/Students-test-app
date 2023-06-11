@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
+
 @Controller
 @RequestMapping(path = "/cohorts")
 public class CohortController {
@@ -131,25 +132,31 @@ public String updateCohort(@PathVariable(value = "cohortId")
      * @return
      */
     @PostMapping("/addToCohort/{cohortId}")
-    public String addToCohort(
+    public String addToCohort (
             @PathVariable("cohortId") Long cohortId,
             @RequestParam("student") Long studentId,
-            Model model){
-        List<Student> students =  studentService.getStudents();
-        Student newStudent = studentService.findStudentById(studentId);
+            Model model) throws IllegalStateException{
 
-        System.out.println("\n\n!!!\nAdd Student: "+studentId+"\nto class no."+cohortId);
-        model.addAttribute("students", students);
+        try {
+            List<Student> students =  studentService.getStudents();
+            Student newStudent = studentService.findStudentById(studentId);
 
-        if (newStudent.getCohortsName() == null){
-            System.out.println("\n\nStudent is not a member of any team");
-            cohortService.addToCohort(cohortId, studentId);
-            studentService.addStudentToCohort(studentId, cohortId);
-            warningMessage = ""+newStudent.getName()+" added to "+ newStudent.getCohortsName() +" Team";
-        }else{
-            System.out.println("Student is already a member of "+newStudent.getCohortsName());
-            warningMessage = "Student "+newStudent.getName()+" "
-                    +"is already a member of "+newStudent.getCohortsName()+" team!";
+            System.out.println("\n\n!!!\nAdd Student: "+studentId+"\nto class no."+cohortId);
+            model.addAttribute("students", students);
+
+            if (newStudent.getCohortsName() == null) {
+                System.out.println("\n\nStudent is not a member of any team");
+                cohortService.addToCohort(cohortId, studentId);
+                studentService.addStudentToCohort(studentId, cohortId);
+                warningMessage = "" + newStudent.getName() + " added to " + newStudent.getCohortsName() + " Team";
+            } else {
+                System.out.println("Student is already a member of " + newStudent.getCohortsName());
+                warningMessage = "Student " + newStudent.getName() + " "
+                        + "is already a member of " + newStudent.getCohortsName() + " team!";
+            }
+        }catch(IllegalStateException ex){
+            System.out.println("\n\n Illegal State Exception captured!!!  "+ex.getMessage());
+            warningMessage = "Ups. Make sure you have chosen a student to be added to the group";
         }
         return "redirect:/cohorts/all";
     }
