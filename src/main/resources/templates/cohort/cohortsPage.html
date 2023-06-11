@@ -38,7 +38,7 @@
                     sec:authorize="hasRole('ADMIN')">
                     <h2 class="text-center mx-auto text-white" th:text="${welcomeMessage}"></h2>
                 </th>
-                <p class="text-center mx-auto text-white" th:text="${warningMessage}"></p>
+                <p class="text-center mx-auto text-white" id="warningMessage" th:text="${warningMessage}"></p>
             </div>
             <!-- Check if user is ADMIN -->
             <div class="mx-3">
@@ -330,6 +330,15 @@
         <!-- Footer Implemented from index.html -->
         <footer th:insert="index.html :: footer"></footer>
     </div>
+
+    <script>
+        let warMessages = document.getElementById("warningMessage");
+        if (warMessages != null){
+                setTimeout(function(){
+                warMessages.style.display = "none";
+            }, 4000);
+        }
+    </script>
 
 </body>
 </html>
