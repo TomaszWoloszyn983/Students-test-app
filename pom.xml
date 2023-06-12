@@ -40,6 +40,13 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
+<!--Heroku Deployment-->
+		<dependency>
+			<groupId>com.heroku</groupId>
+			<artifactId>webapp-runner</artifactId>
+			<version>9.0.31.0</version>
+		</dependency>
+
 <!--Keycloak-->
 		<dependency>
 			<groupId>org.keycloak</groupId>

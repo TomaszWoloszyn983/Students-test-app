@@ -111,7 +111,7 @@
                                                         </option>
                                                     </select>
                                                     <button class="btn btn-primary btn-sm mx-auto admin-buttons" type="submit"
-                                                        data-toggle="modal">
+                                                        data-toggle="modal" onclick="messageTimeout()">
                                                         Add To Class
                                                     </button>
 
@@ -332,11 +332,12 @@
     </div>
 
     <script>
-        let warMessages = document.getElementById("warningMessage");
-        if (warMessages != null){
+        let warnMessages = document.getElementById("warningMessage");
+        if (warnMessages != null){
+                console.log("Message from Html file.")
                 setTimeout(function(){
-                warMessages.style.display = "none";
-            }, 4000);
+                warnMessages.style.display = "none";
+            }, 3000);
         }
     </script>
 
