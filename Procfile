@@ -1,1 +1,1 @@
-web: java -jar target/spring_course.jar
+web: java -jar target/spring_course-0.0.1-SNAPSHOT.jar
