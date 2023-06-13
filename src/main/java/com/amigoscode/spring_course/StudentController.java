@@ -55,6 +55,16 @@ public class StudentController {
         return "studentsPage";
     }
 
+    @RequestMapping("/students")
+    @GetMapping
+    public String students(Model model){
+        List<Student> students = studentService.findStudentByKeyword("wolverine");
+        model.addAttribute("students", students);
+        model.addAttribute("studentForm", new Student());
+        model.addAttribute("infoMessage", infoMessage);
+        return "studentsPage";
+    }
+
 
     @PostMapping("/register")
     public String registerNewStudent(@ModelAttribute Student student, Model model,

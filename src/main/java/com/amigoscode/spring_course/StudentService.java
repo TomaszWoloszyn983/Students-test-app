@@ -80,13 +80,38 @@ public class StudentService {
     }
 
     public Student findStudentById(Long studentId){
-        System.out.println("Odpalamy service find student by id");
+        System.out.println("Run service: Find student by id");
         Student student = studentRepository.findById(studentId)
                 .orElseThrow(() -> new IllegalStateException(
                         "Student with id "+studentId+" does not exist!"
                 ));
         System.out.println("Student: "+studentId+" found. Name: "+student.getName());
         return student;
+    }
+
+    public List<Student> findStudentByKeyword(String key) throws IllegalStateException{
+        System.out.println("Run service: Find student by keyword");
+        List<Student> students = null;
+
+        if(key != null){
+            try {
+                students = studentRepository.findStudentByKeyword(key);
+            }catch(IllegalStateException isex) {
+                System.out.println("Student with keyword " + key + " does not exist!");
+                System.out.println();
+            }catch(NullPointerException npex){
+                System.out.println("Null Pointer Exception was captured in " +
+                        "StudentService -> findStudentByKeyword function");
+            }catch(Exception ex){
+                System.out.println("Something went wrong " +
+                        "in the StudentService -> findStudentByKeyword function.");
+            }
+        }
+
+//        if(students.isEmpty()){
+//            System.out.println("No Object -  Student were found!");
+//        }
+        return students;
     }
 
 
