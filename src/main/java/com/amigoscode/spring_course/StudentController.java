@@ -1,6 +1,7 @@
 package com.amigoscode.spring_course;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
@@ -57,11 +58,14 @@ public class StudentController {
 
     @RequestMapping("/students")
     @GetMapping
-    public String students(Model model){
-        List<Student> students = studentService.findStudentByKeyword("wolverine");
+    public String students(Model model,
+                           @Param("keyword") String keyword){
+        System.out.println("Initialize searching student by keyword: "+keyword);
+        List<Student> students = studentService.findStudentByKeyword(keyword);
+        System.out.println("Students found: "+students);
         model.addAttribute("students", students);
-        model.addAttribute("studentForm", new Student());
-        model.addAttribute("infoMessage", infoMessage);
+//        model.addAttribute("studentForm", new Student());
+        model.addAttribute("keyword", keyword);
         return "studentsPage";
     }
 

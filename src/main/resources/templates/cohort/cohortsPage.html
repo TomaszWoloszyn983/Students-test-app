@@ -110,11 +110,11 @@
                                                             th:text="${student.getName()}">
                                                         </option>
                                                     </select>
+                                                    &nbsp;
                                                     <button class="btn btn-primary btn-sm mx-auto admin-buttons" type="submit"
                                                         data-toggle="modal" onclick="messageTimeout()">
                                                         Add To Class
                                                     </button>
-
                                                 </form>
                                             </div>
                                             <div class="col-sm-6 col-md-3 my-1 text-center">
@@ -303,7 +303,7 @@
                                                 <tr th:each="student: ${students}">
                                                     <td th:if="${student.getCohort() == cohort}">
                                                         <span 
-                                                        th:text="${student.getName()}">Student
+                                                            th:text="${student.getName()}">Student
                                                         </span>
                                                     </td>
                                                 </tr>

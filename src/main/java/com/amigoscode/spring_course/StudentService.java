@@ -89,13 +89,25 @@ public class StudentService {
         return student;
     }
 
+    /**
+     * Method serves the Student List Search Box.
+     * Takes the input from the search box as a parameter and return
+     * a list of students that contain elements that contain parameters
+     * in its name or email address.
+     *
+     * If the argument is NOT given or it is equals to null, the method
+     * returns all students list.
+     *
+     * @param key
+     * @return
+     * @throws IllegalStateException
+     */
     public List<Student> findStudentByKeyword(String key) throws IllegalStateException{
-        System.out.println("Run service: Find student by keyword");
-        List<Student> students = null;
+        System.out.println("Run service: Find student by keyword: "+key);
 
         if(key != null){
             try {
-                students = studentRepository.findStudentByKeyword(key);
+                return studentRepository.findStudentByKeyword(key);
             }catch(IllegalStateException isex) {
                 System.out.println("Student with keyword " + key + " does not exist!");
                 System.out.println();
@@ -106,12 +118,10 @@ public class StudentService {
                 System.out.println("Something went wrong " +
                         "in the StudentService -> findStudentByKeyword function.");
             }
+        }else{
+            return studentRepository.findAll();
         }
-
-//        if(students.isEmpty()){
-//            System.out.println("No Object -  Student were found!");
-//        }
-        return students;
+        return null;
     }
 
 
