@@ -143,8 +143,8 @@ html{
     
 }
 .login-buttons :hover{
-    color: blue;
-    background-color: #000;
+    color: #000000ad;
+    background-color: #fff23e9c;
     border-width: 1px;
     border-color: blue;
 }

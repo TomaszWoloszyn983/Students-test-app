@@ -49,7 +49,7 @@
                         <a class="float-end btn login-buttons" th:href="@{/student/login}" href="/student/login"
                            sec:authorize="!hasRole('USER')">Login
                         </a>
-                        <a class="float-end btn login-buttons"
+                        <a class="float-end btn btn-outline login-buttons"
                            href="http://localhost:8280/auth/realms/Students/login-actions/registration?client_id=student-client&tab_id=oneeutlzrA0"
                            sec:authorize="!hasRole('USER')">Register
                         </a>
