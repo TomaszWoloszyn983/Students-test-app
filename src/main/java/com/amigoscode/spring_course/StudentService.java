@@ -2,6 +2,10 @@ package com.amigoscode.spring_course;
 
 import com.amigoscode.spring_course.cohort.Cohort;
 import com.amigoscode.spring_course.cohort.CohortRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -102,12 +106,19 @@ public class StudentService {
      * @return
      * @throws IllegalStateException
      */
-    public List<Student> findStudentByKeyword(String key) throws IllegalStateException{
+    public Page<Student> findStudentByKeyword(int pageNumber, String sortField,
+                                              String sortDir, String key)
+                                              throws IllegalStateException{
         System.out.println("Run service: Find student by keyword: "+key);
+
+        Sort sort = Sort.by(sortField);
+        sort = sortDir.equals("asc") ? sort.ascending() : sort.descending();
+
+        Pageable pageable = PageRequest.of(pageNumber - 1, 10, sort);
 
         if(key != null){
             try {
-                return studentRepository.findStudentByKeyword(key);
+                return studentRepository.findStudentByKeyword(key, pageable);
             }catch(IllegalStateException isex) {
                 System.out.println("Student with keyword " + key + " does not exist!");
                 System.out.println();
@@ -119,11 +130,10 @@ public class StudentService {
                         "in the StudentService -> findStudentByKeyword function.");
             }
         }else{
-            return studentRepository.findAll();
+            return studentRepository.findAll(pageable);
         }
         return null;
     }
-
 
     /**
      * Finds cohort by Id.

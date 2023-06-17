@@ -1,6 +1,8 @@
 package com.amigoscode.spring_course;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
+import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -57,14 +59,36 @@ public class StudentController {
     }
 
     @RequestMapping("/students")
+    public String viewStudentPage(Model model){
+        String keyword = null;
+        return students(model, 1 , "name", "asc", keyword);
+    }
+
+    @RequestMapping("/students/page/{pageNumber}")
     @GetMapping
     public String students(Model model,
+                           @PathVariable("pageNumber") int currentPage,
+                           @Param("sortField") String sortField,
+                           @Param("sortDir") String sortDir,
                            @Param("keyword") String keyword){
         System.out.println("Initialize searching student by keyword: "+keyword);
-        List<Student> students = studentService.findStudentByKeyword(keyword);
+
+        Page<Student> page = studentService.findStudentByKeyword(currentPage, sortField,
+                sortDir, keyword);
+        long totalItems = page.getTotalElements();
+        int totalPages = page.getTotalPages();
+        Page<Student> students = studentService.findStudentByKeyword(currentPage, sortField,
+                sortDir, keyword);
+        String reserverSortDir = sortDir.equals("asc") ? "desc" : "asc";
+
         System.out.println("Students found: "+students);
         model.addAttribute("students", students);
-//        model.addAttribute("studentForm", new Student());
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("reserverSortDir", reserverSortDir);
+        model.addAttribute("totalItems", totalItems);
+        model.addAttribute("totalPages", totalPages);
         model.addAttribute("keyword", keyword);
         return "studentsPage";
     }

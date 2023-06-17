@@ -67,7 +67,9 @@
 
             <div class="mx-3">
                 <div class="row mx-0 px-0">
-                    <form class="input-group px-5" th:action="@{/student/students}" method="get">
+                    <form class="input-group px-5" th:action="@{/student/students/page/1}" method="get">
+                        <input type="hidden" name="sortField" th:value="${sortField}">
+                        <input type="hidden" name="sortDir" th:value="${sortDir}">
                         <input type="search" name="keyword" th:name="keyword" th:value="${keyword}" 
                                 class="form-control rounded" placeholder="Search"
                                 aria-label="Search" aria-describedby="search-addon"/>
@@ -219,7 +221,6 @@
                 </div>
             </div>
         </main>
-
 
         <div class="footer-divider"></div>
 
