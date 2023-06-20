@@ -87,11 +87,29 @@
                                 <td class="text-center mx-0 px-0" colspan="2" >No Students in the database</td>
                             </tr> -->
                             <tr class="row px-auto mx-auto">
-                                <th scope="col" class="col-1 col-md-1">#</th>
-                                <th scope="col" class="col-5 col-md-3">Name</th>
-                                <th scope="col" class="col-5 col-md-3">Email</th>
-                                <th scope="col" class="col-1 col-md-1">Age</th>
-                                <th scope="col" class="col-1 col-md-1">Group</th>
+                                <th scope="col" class="col-1 col-md-1">
+                                    <a th:href="@{'/student/students/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir}}">Student ID</a>  
+                                </th>
+                                <th scope="col" class="col-5 col-md-3">
+                                    <a th:href="@{'/student/students/page/' + ${currentPage} + '?sortField=name&sortDir=' + ${reverseSortDir}}">Name</a>
+                                </th>
+                                <th scope="col" class="col-5 col-md-3">
+                                    <a th:href="@{'/student/students/page/' + ${currentPage} + '?sortField=email&sortDir=' + ${reverseSortDir}}">Email</a>
+                                </th>
+                                    <!-- Sorting by age and by group doesn't work propably because there are no such
+                                        method created in the repositories and services 
+                                    -->
+                                <th scope="col" class="col-1 col-md-1">
+                                    <!-- <a th:href="@{'/student/students/page/' + ${currentPage} + '?sortField=age&sortDir=' + ${reverseSortDir}}">Age</a> -->
+                                    <a href="#">Age</a>
+                                </th>
+                                    <!-- Sorting by age and by group doesn't work propably because there are no such
+                                        method created in the repositories and services 
+                                    -->
+                                <th scope="col" class="col-1 col-md-1">
+                                    <!-- <a th:href="@{'/student/students/page/' + ${currentPage} + '?sortField=group&sortDir=' + ${reverseSortDir}}">Group</a> -->
+                                    <a href="#">Group</a>
+                                </th>
                                 <th scope="col" class="d-none d-md-inline col-md-3"
                                     sec:authorize="hasRole('ADMIN')">Functions
                                 </th>
@@ -221,21 +239,23 @@
                                 <div>Total Items: [[${totalItems}]] on [[${totalPages}]] pages</div>
                                 <div class="d-inline col">
                                     <a class="btn btn-info" th:if="${currentPage > 1}"
-                                        th:href="/@{'/page/1'}">First</a>
+                                        th:href="@{'/student/students/page/1'}">First</a>
                                     <span th:unless="${currentPage > 1}">First</span>
                                 </div>
                                 <div class="d-inline col">
                                     <a class="btn btn-info" th:if="${currentPage > 1}"
-                                        th:href="/@{'/page/' + ${currentPage - 1}}">Previous</a>
+                                        th:href="@{'/student/students/page/' + ${currentPage - 1}}">Previous</a>
                                     <span th:unless="${currentPage > 1}">Previous</span>
                                 </div>
                                 <div class="d-inline col">
-                                    <!-- <span th:each="i: ${#numbers.sequence(1, totalPages)}">
-                                        <a th:if="${currentPage != i}" th:href="/@{'/page/' + ${i}}">[[${i}]]</a>
+                                </div>
+                                <!-- <div class="d-inline col" th:each="i : ${#numbers.sequence(1, totalPages)}">
+                                    <div class="d-inline col">
+                                        <a th:if="${currentPage != i}" th:href="@{'/student/students/page/' + ${i}}">[[${i}]]</a>
                                         <span th:unless="${currentPage != i}">[[${i}]]</span>
                                         &nbsp;
-                                    </span> -->
-                                </div>
+                                    </div>  
+                                </div> -->
                                 <div class="d-inline col">
                                     <a class="btn btn-info" th:if="${currentPage < totalPages}" 
                                         th:href="@{'/student/students/page/' + ${currentPage + 1}}">
@@ -243,20 +263,18 @@
                                     </a>
                                     <span th:unless="${currentPage < totalPages}">Next</span>
                                 </div>
-                                <!-- <div class="d-inline col" th:each="i : ${#numbers.sequence(1, totalPages)}">
-                                    <div>
-                                        <a th:if="${currentPage != i}" th:href="/@{'/page/' + ${i}}">[[${i}]]</a>
-                                        <span th:unless="${currentPage != i}">[[${i}]]</span>
-                                        &nbsp;
-                                    </div>
-                                
-                                </div> -->
+                                <div class="d-inline col">
+                                    <a class="btn btn-info" th:if="${currentPage < totalPages}"
+                                        th:href="@{'/student/students/page/' + ${totalPages}}">Last</a>
+                                    <span th:unless="${currentPage < totalPages}">Last</span>
+                                </div>
                             </div>                             
                         </div>
                         <tbody>
                             <!-- Sorting Students by buttons group -->
                             <!-- This nicely works although it's code copied from a tutorial 
-                                 Only sorting by E-mail has to be adjusted
+                                 These button should actually replace the table titles from the 
+                                 table headers.
                             -->
                             <th>
                                 <a th:href="@{'/student/students/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir}}">Student ID</a>
@@ -265,7 +283,7 @@
                                 <a th:href="@{'/student/students/page/' + ${currentPage} + '?sortField=name&sortDir=' + ${reverseSortDir}}">Name</a>
                             </th>
                             <th>
-                                <a th:href="@{'/student/students/page/' + ${currentPage} + '?sortField=brand&sortDir=' + ${reverseSortDir}}">Email</a>
+                                <a th:href="@{'/student/students/page/' + ${currentPage} + '?sortField=email&sortDir=' + ${reverseSortDir}}">Email</a>
                             </th>
 
 

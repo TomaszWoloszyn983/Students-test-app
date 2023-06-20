@@ -110,6 +110,9 @@ public class StudentService {
                                               String sortDir, String key)
                                               throws IllegalStateException{
         System.out.println("Run service: Find student by keyword: "+key);
+        System.out.println("Sort field and directory: "+sortField+", "+sortDir);
+
+
 
         Sort sort = Sort.by(sortField);
         sort = sortDir.equals("asc") ? sort.ascending() : sort.descending();

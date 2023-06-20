@@ -60,7 +60,7 @@ public class StudentController {
 
     @RequestMapping("/students")
     public String viewStudentPage(Model model){
-        String keyword = null;
+        String keyword = "";
         return students(model, 1 , "name", "asc", keyword);
     }
 
@@ -72,6 +72,16 @@ public class StudentController {
                            @Param("sortDir") String sortDir,
                            @Param("keyword") String keyword){
         System.out.println("Initialize searching student by keyword: "+keyword);
+        System.out.println("We are on page "+currentPage);
+
+        if(sortField == null){
+            System.out.println("Emergency assignment variables sortField to default value");
+            sortField = "id";
+        }
+        if(sortDir == null){
+            System.out.println("Emergency assignment variable sortDir to default value");
+            sortDir = "desc";
+        }
 
         Page<Student> page = studentService.findStudentByKeyword(currentPage, sortField,
                 sortDir, keyword);
