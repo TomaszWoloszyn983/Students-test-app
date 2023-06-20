@@ -1,17 +1,8 @@
 package com.amigoscode.spring_course;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.keycloak.adapters.springsecurity.authentication.KeycloakLogoutHandler;
-import org.springframework.web.client.RestTemplate;
-
-import javax.sql.DataSource;
+import java.io.IOException;
 
 
 @SpringBootApplication
@@ -20,37 +11,15 @@ public class SpringCourseApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringCourseApplication.class, args);
 
-			/*
-			The code below create connection to my database using JDBC.
-			Currently the application uses Hibernate to connect to the database.
-			*/
-//		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("context.xml");
-//		DataSource ds = (DataSource)applicationContext.getBean("dataSource");
-//		JdbcTemplate jt = new JdbcTemplate(ds);
-//
-//		jt.execute("create table student (id int, name varchar)");
-//		System.out.println("Nie dodajemy więcej studentów");
-//		jt.execute("insert into student2 (id, name) values (1, 'student_5')");
-//		jt.execute("insert into student2 (id, name) values (2, 'student_4')");
-//		jt.execute("select * from student2 LIMIT 100");
-//
-//
-//		int counter = 0;
-//		Object[] parameters = new Object[] {new Integer(1)};
-//		System.out.println("Parameters length "+parameters.length);
-//		System.out.println("Próbujemy odczytać ");
-//		for(int i=0; i< parameters.length; i++){
-//
-//			System.out.println("Pętla dla counter "+i);
-//			Object o = jt.queryForObject("select '*' from student2 where id=0",
-//					parameters, String.class);
-////			Student [] st = jt.queryForObject("select * from student", Student.class);
-//			System.out.println("Object "+o);
-//			counter++;
-//		}
+		try {
+			// Replace the command with the appropriate command to run your external application
+			Process process = Runtime.getRuntime().exec("D:/Kodowanie/Keycloak/keycloak-14.0.0/bin/standalone.bat");
 
-
-//		System.out.println((String)o);
+			// Optionally, you can wait for the process to complete
+			int exitCode = process.waitFor();
+			System.out.println("External application finished with exit code: " + exitCode);
+		} catch (IOException | InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
-
 }

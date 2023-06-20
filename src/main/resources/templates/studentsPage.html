@@ -211,6 +211,65 @@
                                 </td>
                             </tr>
                         </tbody>
+
+                        <!-- Table navigation buttons -->
+                        <div class="container">
+                            <div class="row mx-0 px-0 d-inline">
+                                <input type="hidden" name="sortField" th:value="${sortField}">
+                                <input type="hidden" name="sortDir" th:value="${sortDir}">
+
+                                <div>Total Items: [[${totalItems}]] on [[${totalPages}]] pages</div>
+                                <div class="d-inline col">
+                                    <a class="btn btn-info" th:if="${currentPage > 1}"
+                                        th:href="/@{'/page/1'}">First</a>
+                                    <span th:unless="${currentPage > 1}">First</span>
+                                </div>
+                                <div class="d-inline col">
+                                    <a class="btn btn-info" th:if="${currentPage > 1}"
+                                        th:href="/@{'/page/' + ${currentPage - 1}}">Previous</a>
+                                    <span th:unless="${currentPage > 1}">Previous</span>
+                                </div>
+                                <div class="d-inline col">
+                                    <!-- <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                                        <a th:if="${currentPage != i}" th:href="/@{'/page/' + ${i}}">[[${i}]]</a>
+                                        <span th:unless="${currentPage != i}">[[${i}]]</span>
+                                        &nbsp;
+                                    </span> -->
+                                </div>
+                                <div class="d-inline col">
+                                    <a class="btn btn-info" th:if="${currentPage < totalPages}" 
+                                        th:href="@{'/student/students/page/' + ${currentPage + 1}}">
+                                        Next
+                                    </a>
+                                    <span th:unless="${currentPage < totalPages}">Next</span>
+                                </div>
+                                <!-- <div class="d-inline col" th:each="i : ${#numbers.sequence(1, totalPages)}">
+                                    <div>
+                                        <a th:if="${currentPage != i}" th:href="/@{'/page/' + ${i}}">[[${i}]]</a>
+                                        <span th:unless="${currentPage != i}">[[${i}]]</span>
+                                        &nbsp;
+                                    </div>
+                                
+                                </div> -->
+                            </div>                             
+                        </div>
+                        <tbody>
+                            <!-- Sorting Students by buttons group -->
+                            <!-- This nicely works although it's code copied from a tutorial 
+                                 Only sorting by E-mail has to be adjusted
+                            -->
+                            <th>
+                                <a th:href="@{'/student/students/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir}}">Student ID</a>
+                            </th>
+                            <th>
+                                <a th:href="@{'/student/students/page/' + ${currentPage} + '?sortField=name&sortDir=' + ${reverseSortDir}}">Name</a>
+                            </th>
+                            <th>
+                                <a th:href="@{'/student/students/page/' + ${currentPage} + '?sortField=brand&sortDir=' + ${reverseSortDir}}">Email</a>
+                            </th>
+
+
+                        </tbody>
                     <!-- </div> -->
                 </table>
                 <div class="text-center text-lg-right mt-2">

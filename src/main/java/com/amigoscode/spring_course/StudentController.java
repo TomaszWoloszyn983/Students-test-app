@@ -79,14 +79,14 @@ public class StudentController {
         int totalPages = page.getTotalPages();
         Page<Student> students = studentService.findStudentByKeyword(currentPage, sortField,
                 sortDir, keyword);
-        String reserverSortDir = sortDir.equals("asc") ? "desc" : "asc";
+        String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
 
         System.out.println("Students found: "+students);
         model.addAttribute("students", students);
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("sortField", sortField);
         model.addAttribute("sortDir", sortDir);
-        model.addAttribute("reserverSortDir", reserverSortDir);
+        model.addAttribute("reverseSortDir", reverseSortDir);
         model.addAttribute("totalItems", totalItems);
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("keyword", keyword);
