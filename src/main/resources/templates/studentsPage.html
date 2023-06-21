@@ -48,6 +48,10 @@
                                 <button class="btn btn-secondary mx-auto my-3 px-auto my-form-button" type="submit">
                                     Submit
                                 </button>
+                                <a class="btn btn-secondary mx-auto my-3 px-auto my-form-button" type="submit"
+                                    th:href="@{student/register}">
+                                    Add
+                                </a>
                                 <button class="btn btn-secondary mx-auto my-3 px-auto my-form-button" type="reset"
                                     name="reset" th:value="Reset">
                                     Reset
@@ -249,13 +253,13 @@
                                 </div>
                                 <div class="d-inline col">
                                 </div>
-                                <!-- <div class="d-inline col" th:each="i : ${#numbers.sequence(1, totalPages)}">
+                                <div class="d-inline col" th:each="i : ${#numbers.sequence(1, totalPages)}">
                                     <div class="d-inline col">
                                         <a th:if="${currentPage != i}" th:href="@{'/student/students/page/' + ${i}}">[[${i}]]</a>
                                         <span th:unless="${currentPage != i}">[[${i}]]</span>
                                         &nbsp;
                                     </div>  
-                                </div> -->
+                                </div>
                                 <div class="d-inline col">
                                     <a class="btn btn-info" th:if="${currentPage < totalPages}" 
                                         th:href="@{'/student/students/page/' + ${currentPage + 1}}">

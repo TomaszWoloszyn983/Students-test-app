@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
@@ -20,6 +21,9 @@ import java.util.List;
 @Controller
 @RequestMapping(path = "/student")
 public class StudentController {
+
+    private static String sortBy = "name";
+    private static String sortDirection = "asc";
 
     private final StudentService studentService;
     String infoMessage = "";
@@ -48,8 +52,7 @@ public class StudentController {
         return "register";
     }
 
-    @RequestMapping("/allStudents")
-    @GetMapping
+
     public String allStudents(Model model){
         List<Student> students = studentService.getStudents();
         model.addAttribute("students", students);
@@ -58,9 +61,13 @@ public class StudentController {
         return "studentsPage";
     }
 
-    @RequestMapping("/students")
+    @RequestMapping({"/students", "/allStudents"})
     public String viewStudentPage(Model model){
         String keyword = "";
+        List<Student> students = studentService.getStudents();
+        model.addAttribute("students", students);
+        model.addAttribute("studentForm", new Student());
+        model.addAttribute("infoMessage", infoMessage);
         return students(model, 1 , "name", "asc", keyword);
     }
 
@@ -76,11 +83,11 @@ public class StudentController {
 
         if(sortField == null){
             System.out.println("Emergency assignment variables sortField to default value");
-            sortField = "id";
+            sortField = sortBy;
         }
         if(sortDir == null){
             System.out.println("Emergency assignment variable sortDir to default value");
-            sortDir = "desc";
+            sortDir = sortDirection;
         }
 
         Page<Student> page = studentService.findStudentByKeyword(currentPage, sortField,
@@ -91,6 +98,13 @@ public class StudentController {
                 sortDir, keyword);
         String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
 
+//      Add new student form elements only for admins
+//        List<Student> students = studentService.getStudents();
+        model.addAttribute("students", students);
+        model.addAttribute("studentForm", new Student());
+        model.addAttribute("infoMessage", infoMessage);
+
+//        Pagination elements
         System.out.println("Students found: "+students);
         model.addAttribute("students", students);
         model.addAttribute("currentPage", currentPage);
@@ -104,7 +118,7 @@ public class StudentController {
     }
 
 
-    @PostMapping("/register")
+    @PostMapping({"/register", "students/page/register"})
     public String registerNewStudent(@ModelAttribute Student student, Model model,
                                      Authentication auth) throws IllegalArgumentException{
         if (auth.getAuthorities().stream().anyMatch(a -> a.getAuthority()
