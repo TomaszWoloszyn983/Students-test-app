@@ -81,22 +81,30 @@ public class StudentController {
         System.out.println("Initialize searching student by keyword: "+keyword);
         System.out.println("We are on page "+currentPage);
 
-        if(sortField == null){
+//        if(sortBy == null){
+//            System.out.println("Emergency assignment variables sortField to default value");
+//            sortBy = sortField;
+//        }
+//        if(sortDirection == null){
+//            System.out.println("Emergency assignment variable sortDir to default value");
+//            sortDirection = sortDir;
+//        }
+        if(sortField != null){
             System.out.println("Emergency assignment variables sortField to default value");
-            sortField = sortBy;
+            sortBy = sortField;
         }
-        if(sortDir == null){
+        if(sortDir != null){
             System.out.println("Emergency assignment variable sortDir to default value");
-            sortDir = sortDirection;
+            sortDirection = sortDir;
         }
 
-        Page<Student> page = studentService.findStudentByKeyword(currentPage, sortField,
-                sortDir, keyword);
+        Page<Student> page = studentService.findStudentByKeyword(currentPage, sortBy,
+                sortDirection, keyword);
         long totalItems = page.getTotalElements();
         int totalPages = page.getTotalPages();
-        Page<Student> students = studentService.findStudentByKeyword(currentPage, sortField,
-                sortDir, keyword);
-        String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
+        Page<Student> students = studentService.findStudentByKeyword(currentPage, sortBy,
+                sortDirection, keyword);
+        String reverseSortDir = sortDirection.equals("asc") ? "desc" : "asc";
 
 //      Add new student form elements only for admins
 //        List<Student> students = studentService.getStudents();
@@ -108,8 +116,8 @@ public class StudentController {
         System.out.println("Students found: "+students);
         model.addAttribute("students", students);
         model.addAttribute("currentPage", currentPage);
-        model.addAttribute("sortField", sortField);
-        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("sortField", sortBy);
+        model.addAttribute("sortDir", sortDirection);
         model.addAttribute("reverseSortDir", reverseSortDir);
         model.addAttribute("totalItems", totalItems);
         model.addAttribute("totalPages", totalPages);
